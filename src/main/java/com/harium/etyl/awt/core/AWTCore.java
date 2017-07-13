@@ -79,13 +79,13 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
 
             windowX = component.getX();
             windowY = component.getY();
+            dropTarget = new DropTarget(component, new AWTDragAndDrop(this));
         }
 
         window = new AWTWindow(windowX, windowY, width, height);
         window.setComponent(component);
 
         gameLoop = new FrameSkippingLoop(this);
-        dropTarget = new DropTarget(component, new AWTDragAndDrop(this));
     }
 
     public void initMonitors(int width, int height) {
