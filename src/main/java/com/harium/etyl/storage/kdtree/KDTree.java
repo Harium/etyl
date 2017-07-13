@@ -89,7 +89,7 @@ public class KDTree<T> implements Serializable {
 	 * Insert a node in a KD-tree.  Uses algorithm translated from 352.ins.c of
 	 *
 	 *   <PRE>
-	 *   &*064;Book{GonnetBaezaYates1991,                                   
+	 *   Book{GonnetBaezaYates1991,
 	 *     author =    {G.H. Gonnet and R. Baeza-Yates},
 	 *     title =     {Handbook of Algorithms and Data Structures},
 	 *     publisher = {Addison-Wesley},

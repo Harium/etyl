@@ -18,12 +18,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.awt.image.VolatileImage;
 
-/**
- *
- * @author yuripourre
- * @license LGPLv3
- *
- */
 
 public class AWTGraphics implements Graphics {
 

@@ -4,12 +4,6 @@ import com.harium.etyl.ui.base.BaseTextField;
 import com.harium.etyl.ui.base.UIView;
 import com.harium.etyl.ui.theme.ThemeManager;
 
-/**
- * 
- * @author yuripourre
- * @license LGPLv3
- *
- */
 
 public class TextField extends UIView {
 

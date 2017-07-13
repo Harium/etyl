@@ -11,12 +11,6 @@ import com.harium.etyl.theme.etyllic.arrow.TextArrow;
 import com.harium.etyl.theme.etyllic.arrow.VerticalArrow;
 import com.harium.etyl.theme.etyllic.arrow.WaitingArrow;
 
-/**
- * 
- * @author yuripourre
- * @license LGPLv3
- *
- */
 
 public class EtyllicArrowTheme extends ArrowThemeImpl {
 

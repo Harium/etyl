@@ -1,11 +1,5 @@
 package com.harium.etyl.theme.etyllic.arrow;
 
-/**
- * 
- * @author yuripourre
- * @license LGPLv3
- *
- */
 
 public class TextArrow extends NormalArrow {
 

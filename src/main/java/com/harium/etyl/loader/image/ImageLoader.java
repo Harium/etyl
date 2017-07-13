@@ -17,12 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- *
- * @author yuripourre
- * @license LGPLv3
- *
- */
 
 public class ImageLoader extends LoaderImpl {
 

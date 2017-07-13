@@ -8,12 +8,6 @@ import com.harium.etyl.ui.theme.ThemeManager;
 import com.harium.etyl.ui.theme.cursor.arrow.MouseArrow;
 import com.harium.etyl.ui.theme.cursor.arrow.PolygonalArrow;
 
-/**
- * 
- * @author yuripourre
- * @license LGPLv3
- *
- */
 
 public class NormalArrow extends PolygonalArrow implements MouseArrow {
 		
