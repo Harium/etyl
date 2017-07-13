@@ -7,30 +7,30 @@ import com.harium.etyl.util.io.IOHelper;
 import java.awt.geom.AffineTransform;
 
 /**
- * 
+ *
  * @author yuripourre
  *
  */
 
 public class StaticLayer extends Layer {
-	
+
 	protected String path = "";
-	
+
 	public StaticLayer() {
 		super();
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 */
 	public StaticLayer(int x, int y) {
 		super(x,y);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param w
@@ -39,9 +39,9 @@ public class StaticLayer extends Layer {
 	public StaticLayer(int x, int y, int w, int h) {
 		super(x,y,w,h);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param w
@@ -50,23 +50,23 @@ public class StaticLayer extends Layer {
 	 */
 	public StaticLayer(int x, int y, int w, int h, String path) {
 		super(x,y);
-		
+
 		this.path = path;
 		load();
-		
+
 		this.w = w;
 		this.h = h;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param path
 	 */
 	public StaticLayer(String path) {
 		this.path = path;
 		load();
 	}
-	
+
 	public StaticLayer(String path, boolean absolute) {
 		this.path = path;
 		StaticLayer loaded = load(absolute);
@@ -78,40 +78,44 @@ public class StaticLayer extends Layer {
 	public String getPath() {
 		return path;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param path
 	 */
 	public void setPath(String path) {
 		this.path = path;
 		load();
 	}
-	
+
+	public void onLoad(String path) {
+		this.path = path;
+	}
+
 	/**
-	 * 
+	 *
 	 * @param w
 	 * @param h
 	 */
 	public void setSize(int w , int h) {
-		this.w = w;
-		this.h = h;
+		setW(w);
+		setH(h);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param layer
 	 */
 	public void cloneLayer(StaticLayer layer) {
 		this.path = layer.path;
-		this.w = layer.w;
-		this.h = layer.h;
+		setW(w);
+		setH(h);
 	}
 
 	public StaticLayer load() {
 		return load(false);
 	}
-	
+
 	public StaticLayer load(boolean absolute) {
 		StaticLayer layer;
 		if (path.startsWith(IOHelper.STREAM_PREFIX)) {
@@ -121,7 +125,12 @@ public class StaticLayer extends Layer {
 		}
 		this.w = layer.w;
 		this.h = layer.h;
+
+		// It is needed to update ImageLayer
+		setW(layer.w);
+		setH(layer.h);
 		setOriginCenter();
+
 		return layer;
 	}
 
