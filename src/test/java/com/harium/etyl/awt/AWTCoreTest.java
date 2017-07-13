@@ -21,8 +21,7 @@ public class AWTCoreTest {
         fakeApplication = createFakeApplication();
         window.setApplication(fakeApplication);
 
-        Frame component = new Frame();
-        innerCore = new AWTCore(component, 800, 600);
+        innerCore = new AWTCore(null, 800, 600);
         innerCore.replaceWindow(window);
 
         // Wait to load application
