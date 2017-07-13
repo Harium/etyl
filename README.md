@@ -1,4 +1,4 @@
-# Etyl
+# Etyl [![Build Status](https://travis-ci.org/Harium/etyl.svg?branch=master)](https://travis-ci.org/Harium/etyl)
 
 Etyl's core for Java Desktop
 
