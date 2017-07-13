@@ -56,6 +56,7 @@
         </repository>
     </distributionManagement>
     <properties>
+        <javadoc.opts>-Xdoclint:none</javadoc.opts>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <gpg.executable>gpg2</gpg.executable>
     </properties>
@@ -94,6 +95,9 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
+                        <configuration>
+                            <additionalparam>${javadoc.opts}</additionalparam>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
