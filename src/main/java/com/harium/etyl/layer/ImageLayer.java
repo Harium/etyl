@@ -276,6 +276,17 @@ public class ImageLayer extends StaticLayer {
         return colideRectPoint(mouse.getX(), mouse.getY());
     }
 
+    /**
+     *
+     * @param layer
+     */
+    @Override
+    public void cloneLayer(StaticLayer layer) {
+        super.cloneLayer(layer);
+        setW(layer.getW());
+        setH(layer.getH());
+    }
+
     public void copy(ImageLayer b) {
         super.copy(b);
 

@@ -108,8 +108,8 @@ public class StaticLayer extends Layer {
 	 */
 	public void cloneLayer(StaticLayer layer) {
 		this.path = layer.path;
-		setW(w);
-		setH(h);
+		this.w = layer.w;
+		this.h = layer.h;
 	}
 
 	public StaticLayer load() {
