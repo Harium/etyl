@@ -5,10 +5,10 @@ import com.harium.etyl.commons.event.KeyEvent;
 import com.harium.etyl.commons.event.MouseEvent;
 import com.harium.etyl.commons.event.MouseState;
 import com.harium.etyl.commons.event.PointerEvent;
-import com.harium.etyl.core.graphics.Graphics;
-import com.harium.etyl.core.input.mouse.MouseStateChanger;
 import com.harium.etyl.commons.layer.GeometricLayer;
 import com.harium.etyl.commons.layer.Layer;
+import com.harium.etyl.core.graphics.Graphics;
+import com.harium.etyl.core.input.mouse.MouseStateChanger;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -50,7 +50,7 @@ public abstract class Resizer<T extends Layer> implements Drawable {
     private double initialW = 0;
     private double initialH = 0;
 
-    private int lastIndex = 0;
+    private int lastIndex = UNKNOWN;
 
     private static final int SHIFT_SPEED = 10;
     private static final int NORMAL_SPEED = 1;
@@ -155,19 +155,23 @@ public abstract class Resizer<T extends Layer> implements Drawable {
 
         changed = false;
 
-        if (!dragged && !moveOnly) {
-            for (int b = 0; b < 9; b++) {
-                if (points[b].colideRectPoint(mx, my)) {
-                    lastIndex = b;
+        if (!dragged) {
+            if (!moveOnly) {
+                for (int b = 0; b < 9; b++) {
+                    if (points[b].colideRectPoint(mx, my)) {
+                        lastIndex = b;
 
-                    mouseStateChanger.changeMouseState(points[b].getState());
-                    changed = true;
+                        mouseStateChanger.changeMouseState(points[b].getState());
+                        changed = true;
 
-                    handleDragEvent(event);
-
-                    break;
+                        handleDragEvent(event);
+                        break;
+                    }
                 }
+            } else {
+                handleDragEvent(event);
             }
+
         }
 
         if (event.isButtonUp(MouseEvent.MOUSE_BUTTON_LEFT)) {
