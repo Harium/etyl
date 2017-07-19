@@ -56,6 +56,11 @@ public class PathHelper {
         return path.substring(0, path.lastIndexOf(separator) + 1);
     }
 
+    public static String filename(String path) {
+        int index = path.lastIndexOf(File.separator);
+        return path.substring(index);
+    }
+
     public static String currentPath() {
         URL location = PathHelper.class.getProtectionDomain().getCodeSource().getLocation();
         String currentDirectory = IOHelper.FILE_PREFIX + location.getPath();
