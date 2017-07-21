@@ -12,10 +12,10 @@ import com.harium.etyl.loader.image.ImageLoader;
 
 public class ImageLayer extends StaticLayer {
 
-    protected int srcX = 0;
-    protected int srcY = 0;
-    protected int srcW = 0;
-    protected int srcH = 0;
+    protected int srcX;
+    protected int srcY;
+    protected int srcW;
+    protected int srcH;
 
     public ImageLayer() {
         super();
