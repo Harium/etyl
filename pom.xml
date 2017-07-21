@@ -24,7 +24,7 @@
         <dependency>
             <groupId>com.harium</groupId>
             <artifactId>etyl-commons</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -34,9 +34,9 @@
         </dependency>
     </dependencies>
     <scm>
-        <connection>scm:git:git://github.com/harium/etyl-sound.git</connection>
-        <developerConnection>scm:git:ssh://github.com:harium/etyl-sound.git</developerConnection>
-        <url>http://github.com/harium/etyl-sound/tree/master</url>
+        <connection>scm:git:git://github.com/harium/etyl.git</connection>
+        <developerConnection>scm:git:ssh://github.com:harium/etyl.git</developerConnection>
+        <url>http://github.com/harium/etyl/tree/master</url>
     </scm>
     <developers>
         <developer>
