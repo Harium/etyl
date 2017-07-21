@@ -119,7 +119,7 @@ public class ImageLoader extends LoaderImpl {
             BufferedImage img = null;
 
             if (reader == null) {
-                System.out.println("Etyllica can't load " + ext + " files.");
+                System.out.println("Etyl can't load " + ext + " files.");
             } else {
                 try {
                     img = reader.loadImage(stream);
@@ -170,7 +170,7 @@ public class ImageLoader extends LoaderImpl {
             BufferedImage img = null;
 
             if (reader == null) {
-                System.out.println("Etyllica can't load " + ext + " files.");
+                System.out.println("Etyl can't load " + ext + " files.");
             } else {
                 try {
                     img = reader.loadImage(dir);

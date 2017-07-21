@@ -7,7 +7,7 @@ import com.harium.etyl.awt.core.input.AWTKeyboard;
 import com.harium.etyl.commons.context.Application;
 import com.harium.etyl.commons.context.Session;
 import com.harium.etyl.commons.event.GUIEvent;
-import com.harium.etyl.core.EtyllicaFrame;
+import com.harium.etyl.core.EtylFrame;
 import com.harium.etyl.core.InnerCore;
 import com.harium.etyl.core.graphics.Monitor;
 import com.harium.etyl.core.loop.FrameSkippingLoop;
@@ -53,7 +53,7 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
 
     private FullScreenWindow fullScreen = null;
 
-    private EtyllicaFrame engine;
+    private EtylFrame engine;
 
     private GameLoop gameLoop;
 
@@ -305,7 +305,7 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
         currentContext().hideCursor();
     }
 
-    public void setEngine(EtyllicaFrame engine) {
+    public void setEngine(EtylFrame engine) {
         this.engine = engine;
     }
 

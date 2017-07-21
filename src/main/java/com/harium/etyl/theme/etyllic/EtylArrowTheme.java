@@ -12,11 +12,11 @@ import com.harium.etyl.theme.etyllic.arrow.VerticalArrow;
 import com.harium.etyl.theme.etyllic.arrow.WaitingArrow;
 
 
-public class EtyllicArrowTheme extends ArrowThemeImpl {
+public class EtylArrowTheme extends ArrowThemeImpl {
 
 	protected int arrowSize = 22;
 	
-	public EtyllicArrowTheme() {
+	public EtylArrowTheme() {
 		
 		normalArrow = new NormalArrow(arrowSize);
 		clickArrow = new NormalArrow(arrowSize);

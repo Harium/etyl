@@ -1,7 +1,7 @@
 package com.harium.etyl.linear;
 
 import com.harium.etyl.commons.collision.CollisionDetector;
-import com.harium.etyl.commons.math.EtyllicaMath;
+import com.harium.etyl.commons.math.EtylMath;
 
 public class Ellipse {
 
@@ -67,8 +67,8 @@ public class Ellipse {
         final double cos = Math.cos(a);
         final double sin = Math.sin(a);
 
-        double p = EtyllicaMath.sqr(cos * (px - center.getX()) + sin * (py - center.getY())) / (w * w);
-        double q = EtyllicaMath.sqr(sin * (px - center.getX()) - cos * (py - center.getY())) / (h * h);
+        double p = EtylMath.sqr(cos * (px - center.getX()) + sin * (py - center.getY())) / (w * w);
+        double q = EtylMath.sqr(sin * (px - center.getX()) - cos * (py - center.getY())) / (h * h);
 
         return (p + q <= 1);
     }

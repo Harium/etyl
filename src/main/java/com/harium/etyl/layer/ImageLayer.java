@@ -1,7 +1,7 @@
 package com.harium.etyl.layer;
 
 import com.harium.etyl.commons.layer.Layer;
-import com.harium.etyl.commons.math.EtyllicaMath;
+import com.harium.etyl.commons.math.EtylMath;
 import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.core.input.mouse.Mouse;
 import com.harium.etyl.loader.image.ImageLoader;
@@ -205,8 +205,8 @@ public class ImageLayer extends StaticLayer {
 
     // Based on code at: http://developer.coronalabs.com/code/checking-if-point-inside-rotated-rectangle
     public boolean colideRotated(int mx, int my) {
-        double sx = EtyllicaMath.mod(scaleX);
-        double sy = EtyllicaMath.mod(scaleY);
+        double sx = EtylMath.mod(scaleX);
+        double sy = EtylMath.mod(scaleY);
 
         int scaledOriginX = (int) (originX * sx);
         int scaledOriginY = (int) (originY * sy);

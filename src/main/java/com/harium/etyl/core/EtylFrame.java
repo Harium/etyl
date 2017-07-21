@@ -4,7 +4,7 @@ import com.harium.etyl.commons.context.Application;
 import com.harium.etyl.commons.event.GUIEvent;
 
 
-public interface EtyllicaFrame {
+public interface EtylFrame {
 
 	public void init();
 	

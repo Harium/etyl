@@ -1,6 +1,6 @@
 package com.harium.etyl.linear;
 
-import com.harium.etyl.commons.math.EtyllicaMath;
+import com.harium.etyl.commons.math.EtylMath;
 
 public class Line2D {
 
@@ -99,7 +99,7 @@ public class Line2D {
 		double y2 = p2.getY();
 		
 		double num = (y2 - y1) * q.getX() - (x2 - x1) * q.getY() + (x2 * y1) - (y2 * x1);
-		num = EtyllicaMath.mod(num);
+		num = EtylMath.mod(num);
 		double distance = num / Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
 		return distance;
 	}

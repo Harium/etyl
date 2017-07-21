@@ -14,8 +14,7 @@ import com.harium.etyl.util.io.IOHelper;
 public class LoaderImpl implements Loader {
 
 	protected URL url;
-	
-	//protected String folder = "http://www.etyllica.com.br/imagens/";
+
 	protected String folder;
 	
 	public void setUrl(String s) {

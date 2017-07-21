@@ -9,7 +9,7 @@ import com.harium.etyl.core.input.mouse.MouseStateChanger;
 import com.harium.etyl.i18n.Language;
 import com.harium.etyl.i18n.LanguageChangerListener;
 import com.harium.etyl.i18n.LanguageModule;
-import com.harium.etyl.theme.etyllic.EtyllicArrowTheme;
+import com.harium.etyl.theme.etyllic.EtylArrowTheme;
 import com.harium.etyl.ui.theme.ArrowDrawer;
 import com.harium.etyl.ui.theme.ArrowTheme;
 import com.harium.etyl.ui.theme.Theme;
@@ -29,7 +29,7 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
 
     public static boolean timerClick = false;
     public ArrowDrawer arrowDrawer = new AWTArrowDrawer();
-    public ArrowTheme arrowTheme = new EtyllicArrowTheme();
+    public ArrowTheme arrowTheme = new EtylArrowTheme();
 
     //Timer click arc
     private int arc = 0;

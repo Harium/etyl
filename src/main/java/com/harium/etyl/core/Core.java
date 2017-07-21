@@ -8,7 +8,7 @@ import com.harium.etyl.commons.context.Application;
 public interface Core {
 	void initMonitors(int width, int height);
 	void moveToCenter();
-	void setEngine(EtyllicaFrame frame);
+	void setEngine(EtylFrame frame);
 	void startEngine();
 	void startCore(Application application);
 	void setPath(String path);

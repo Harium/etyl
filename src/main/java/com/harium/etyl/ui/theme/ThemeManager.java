@@ -2,7 +2,7 @@ package com.harium.etyl.ui.theme;
 
 import com.harium.etyl.ui.theme.listener.ArrowThemeListener;
 import com.harium.etyl.ui.theme.listener.ThemeListener;
-import com.harium.etyl.theme.etyllic.EtyllicArrowTheme;
+import com.harium.etyl.theme.etyllic.EtylArrowTheme;
 import com.harium.etyl.theme.etyllic.EtyllicTheme;
 
 
@@ -21,7 +21,7 @@ public class ThemeManager {
 	public ThemeManager() {
 		super();
 		
-		arrowTheme = new EtyllicArrowTheme();
+		arrowTheme = new EtylArrowTheme();
 		theme = new EtyllicTheme();
 	}
 	
