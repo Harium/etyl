@@ -11,8 +11,19 @@ import java.net.URL;
 
 public class PathHelper {
 
+    private static final String ASSETS_FOLDER = "assets";
+
     public static InputStream loadAsset(String path) throws IOException {
-        return new FileInputStream(new File(currentDirectory() + "assets" + File.separator + path));
+        return new FileInputStream(new File(assetsFolder() + path));
+    }
+
+    public static String[] listAssets(String path) throws IOException {
+        String dir = assetsFolder() + path;
+        return new File(dir).list();
+    }
+
+    private static String assetsFolder() {
+        return currentDirectory() + ASSETS_FOLDER + File.separator;
     }
 
     public static String currentDirectory() {
