@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Arrays;
 
 public class PathHelper {
 
@@ -19,7 +20,9 @@ public class PathHelper {
 
     public static String[] listAssets(String path) throws IOException {
         String dir = assetsFolder() + path;
-        return new File(dir).list();
+        String[] files = new File(dir).list();
+        Arrays.sort(files);
+        return files;
     }
 
     private static String assetsFolder() {
