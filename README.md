@@ -7,8 +7,13 @@ Etyl is a fork of Etyllica
 
 ## Migrating from Etyllica
 ```
-  cd src
-  find ./ -type f -exec sed -i 's/br.com.etyllica/com.harium.etyl/g' {} +
+cd src
+find ./ -type f -exec sed -i 's/br.com.etyllica/com.harium.etyl/g' {} +
+```
+
+## Generating a local jar
+```
+mvn package -Dmaven.test.skip=true
 ```
 
 ## License
