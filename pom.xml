@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.harium</groupId>
     <artifactId>etyl</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <packaging>jar</packaging>
     <name>Etyl</name>
     <description>Etyl's Core</description>
@@ -21,6 +21,11 @@
         </license>
     </licenses>
     <dependencies>
+        <dependency>
+            <groupId>com.harium.etyl</groupId>
+            <artifactId>etyl-gdx</artifactId>
+            <version>1.0</version>
+        </dependency>
         <dependency>
             <groupId>com.harium</groupId>
             <artifactId>etyl-commons</artifactId>
