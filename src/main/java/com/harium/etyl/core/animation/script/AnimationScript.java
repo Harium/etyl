@@ -143,6 +143,14 @@ public abstract class AnimationScript {
 		this.endDelay = endDelay;
 	}
 
+	public long getDuration() {
+		return duration;
+	}
+
+	public int getLoop() {
+		return loop;
+	}
+
 	public OnAnimationFinishListener getListener() {
 		return listener;
 	}

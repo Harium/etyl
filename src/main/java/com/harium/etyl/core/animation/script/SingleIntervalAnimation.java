@@ -45,12 +45,12 @@ public abstract class SingleIntervalAnimation extends LayerAnimation {
 	}
 	
 	public SingleIntervalAnimation from(double value) {
-		startValue = value;
+		setStartValue(value);
 		return this;
 	}
 	
 	public SingleIntervalAnimation to(double value) {
-		endValue = value;
+		setEndValue(value);
 		return this;
 	}
 	
@@ -64,5 +64,21 @@ public abstract class SingleIntervalAnimation extends LayerAnimation {
 		if (target != null) {
 			calculate(0);
 		}
-	}	
+	}
+
+	public double getStartValue() {
+		return startValue;
+	}
+
+	public void setStartValue(double startValue) {
+		this.startValue = startValue;
+	}
+
+	public double getEndValue() {
+		return endValue;
+	}
+
+	public void setEndValue(double endValue) {
+		this.endValue = endValue;
+	}
 }

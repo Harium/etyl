@@ -5,7 +5,8 @@ import com.harium.etyl.commons.layer.Layer;
 public abstract class RepeatedScript extends AnimationScript {
 
 	protected Layer target;
-	
+
+	// It repeats a loop inside the animation
 	protected int repeatTimes = 1;
 		
 	public RepeatedScript(Layer target, long time) {
