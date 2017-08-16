@@ -1,7 +1,6 @@
 package com.harium.etyl.core.animation.script;
 
 import com.harium.etyl.core.animation.Animation;
-import javafx.scene.transform.Rotate;
 import org.junit.Assert;
 import org.junit.Test;
 
