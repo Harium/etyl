@@ -142,4 +142,8 @@ public abstract class Etyl extends JFrame implements EtylFrame {
         }
     }
 
+    protected void enableFullScreen() {
+        core.enableFullScreen();
+    }
+
 }
