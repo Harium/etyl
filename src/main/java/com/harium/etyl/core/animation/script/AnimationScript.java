@@ -76,7 +76,7 @@ public abstract class AnimationScript {
         }
     }
 
-    private boolean animate(long now) {
+    public boolean animate(long now) {
         float factor = factor(now);
 
         if (factor < 1) {
