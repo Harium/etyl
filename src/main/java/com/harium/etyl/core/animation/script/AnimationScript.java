@@ -1,184 +1,189 @@
 package com.harium.etyl.core.animation.script;
 
+import com.harium.etyl.commons.interpolation.Interpolator;
+import com.harium.etyl.core.animation.OnAnimationFinishListener;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.harium.etyl.core.animation.OnAnimationFinishListener;
-import com.harium.etyl.commons.interpolation.Interpolator;
 
 
 public abstract class AnimationScript {
 
-	protected long startedAt = 0;
-	protected long duration = 0;
-	protected long delay = 0;
-	protected int loop = 0;
+    protected long startedAt = 0;
+    protected long duration = 0;
+    protected long delay = 0;
+    protected int loop = 0;
 
-	private boolean started = false;
-	private boolean stopped = false;
-	private boolean referenced = false;
-	
-	protected long endDelay = 0;
+    private boolean started = false;
+    private boolean stopped = false;
+    private boolean referenced = false;
 
-	protected List<AnimationScript> next;
-	
-	public static final int REPEAT_FOREVER = -1;
-	
-	private OnAnimationFinishListener listener;
-	
-	protected Interpolator interpolator = Interpolator.LINEAR;
+    protected long endDelay = 0;
 
-	public AnimationScript(long time) {
-		super();
+    protected List<AnimationScript> next;
 
-		this.duration = time;
-	}
+    public static final int REPEAT_FOREVER = -1;
 
-	public AnimationScript(long delay, long time) {
-		super();
+    private OnAnimationFinishListener listener;
 
-		this.delay = delay;
-		this.duration = time;
-	}
+    protected Interpolator interpolator = Interpolator.LINEAR;
 
-	public AnimationScript() {
-		super();
-	}
+    public AnimationScript(long time) {
+        super();
 
-	public void restart() {
-		started = false;
-		stopped = false;
-	}
+        this.duration = time;
+    }
 
-	public void start(long now) {
-		this.startedAt = now;
-	}
+    public AnimationScript(long delay, long time) {
+        super();
 
-	public void preAnimate(long now) {
+        this.delay = delay;
+        this.duration = time;
+    }
 
-		if(!started) {
-			started = true;
-			stopped = false;
-			startedAt = now;
-		}
+    public AnimationScript() {
+        super();
+    }
 
-		if(started && !stopped) {
+    public void restart() {
+        started = false;
+        stopped = false;
+    }
 
-			long elapsedTime = now-startedAt-delay;
-			
-			if(elapsedTime >= duration) {
-				
-				if(elapsedTime >= duration+endDelay) {
-					stopped = true;
-				}
-				
-			} else {
-				if (now-startedAt >= delay) {
-					this.animate(now);
-				}
-			}
+    public void start(long now) {
+        started = true;
+        stopped = false;
+        this.startedAt = now;
+    }
 
-		}
+    public void tick(long now) {
+        if (!started) {
+            start(now);
+        }
 
-	}
+        if (started && !stopped) {
 
-	public boolean animate(long now) {
-		long timeElapsed = now-startedAt-delay;
-		float factor = (float)timeElapsed/duration;
+            long elapsedTime = now - startedAt - delay;
 
-		if (factor < 1) {
-			calculate(factor);
-		} else {
-			calculate(1);
-			return true;
-		}
-		
-		return false;
-	}
-	
-	public abstract void calculate(double factor);
-	
-	public boolean isStopped() {
-		return stopped;
-	}
+            if (elapsedTime >= duration) {
+                if (elapsedTime >= duration + endDelay) {
+                    stopped = true;
+                }
+            } else if (now - startedAt >= delay) {
+                this.animate(now);
+            }
 
-	public int getRepeat() {
-		return loop;
-	}
+        }
+    }
 
-	public void setRepeat(int repeat) {
-		this.loop = repeat;
-	}
-	
-	public AnimationScript twice() {
-		this.loop = 2;
-		return this;
-	}
-	
-	public AnimationScript loop(int loop) {
-		this.loop = loop;
-		return this;
-	}
-	
-	public List<AnimationScript> getNext() {
-		return next;
-	}
+    private boolean animate(long now) {
+        float factor = factor(now);
 
-	public void addNext(AnimationScript next) {
-		if (this.next == null) {
-			this.next = new ArrayList<AnimationScript>();
-		}
-		this.next.add(next);
-	}
+        if (factor < 1) {
+            calculate(factor);
+        } else if (loop == REPEAT_FOREVER || loop > 0) {
+            calculate(factor - 1);
+            return false;
+        } else {
+            calculate(1);
+            return false;
+        }
 
-	public long getDelay() {
-		return delay;
-	}
+        return true;
+    }
 
-	public void setDelay(long delay) {
-		this.delay = delay;
-	}
-	
-	public void setEndDelay(long endDelay) {
-		this.endDelay = endDelay;
-	}
+    public float factor(long now) {
+        long timeElapsed = now - startedAt - delay;
+        return (float) timeElapsed / duration;
+    }
 
-	public long getDuration() {
-		return duration;
-	}
+    public abstract void calculate(double factor);
 
-	public int getLoop() {
-		return loop;
-	}
+    public boolean isStopped() {
+        return stopped;
+    }
 
-	public OnAnimationFinishListener getListener() {
-		return listener;
-	}
+    public int getRepeat() {
+        return loop;
+    }
 
-	public void setListener(OnAnimationFinishListener listener) {
-		this.listener = listener;
-	}
+    public void setRepeat(int repeat) {
+        this.loop = repeat;
+    }
 
-	public Interpolator getInterpolator() {
-		return interpolator;
-	}
+    public AnimationScript twice() {
+        this.loop = 2;
+        return this;
+    }
 
-	public void setInterpolator(Interpolator interpolator) {
-		this.interpolator = interpolator;
-	}
-	
-	public boolean isReferenced() {
-		return referenced;
-	}
+    public AnimationScript loop(int loop) {
+        this.loop = loop;
+        return this;
+    }
 
-	public void setReferenced(boolean referenced) {
-		this.referenced = referenced;
-	}
+    public List<AnimationScript> getNext() {
+        return next;
+    }
 
-	public void finish(long now) {
-		if(listener==null)
-			return;
-		
-		listener.onAnimationFinish(now);
-	}
+    public void addNext(AnimationScript next) {
+        if (this.next == null) {
+            this.next = new ArrayList<AnimationScript>();
+        }
+        this.next.add(next);
+    }
+
+    public long getDelay() {
+        return delay;
+    }
+
+    public void setDelay(long delay) {
+        this.delay = delay;
+    }
+
+    public void setEndDelay(long endDelay) {
+        this.endDelay = endDelay;
+    }
+
+    public void setDuration(long duration) {
+        this.duration = duration;
+    }
+
+    public long getDuration() {
+        return duration;
+    }
+
+    public int getLoop() {
+        return loop;
+    }
+
+    public OnAnimationFinishListener getListener() {
+        return listener;
+    }
+
+    public void setListener(OnAnimationFinishListener listener) {
+        this.listener = listener;
+    }
+
+    public Interpolator getInterpolator() {
+        return interpolator;
+    }
+
+    public void setInterpolator(Interpolator interpolator) {
+        this.interpolator = interpolator;
+    }
+
+    public boolean isReferenced() {
+        return referenced;
+    }
+
+    public void setReferenced(boolean referenced) {
+        this.referenced = referenced;
+    }
+
+    public void finish(long now) {
+        if (listener == null)
+            return;
+
+        listener.onAnimationFinish(now);
+    }
 }

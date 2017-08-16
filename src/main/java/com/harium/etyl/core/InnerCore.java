@@ -3,7 +3,7 @@ package com.harium.etyl.core;
 import com.harium.etyl.awt.AWTWindow;
 import com.harium.etyl.awt.core.input.AWTController;
 import com.harium.etyl.commons.Updatable;
-import com.harium.etyl.core.animation.AnimationModule;
+import com.harium.etyl.core.animation.Animation;
 import com.harium.etyl.core.animation.script.AnimationScript;
 import com.harium.etyl.core.animation.script.SingleIntervalAnimation;
 import com.harium.etyl.commons.context.Application;
@@ -313,7 +313,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
     }
 
     public void addEffect(GlobalEffect effect) {
-        AnimationModule.getInstance().add(effect.getScript());
+        Animation.getInstance().add(effect.getScript());
         globalScripts.add(effect.getScript());
 
         //TODO add animation

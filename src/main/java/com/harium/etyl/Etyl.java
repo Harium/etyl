@@ -7,7 +7,7 @@ import com.harium.etyl.commons.event.GUIEvent;
 import com.harium.etyl.commons.module.Module;
 import com.harium.etyl.core.Engine;
 import com.harium.etyl.core.EtylFrame;
-import com.harium.etyl.core.animation.AnimationModule;
+import com.harium.etyl.core.animation.Animation;
 import com.harium.etyl.i18n.LanguageModule;
 import com.harium.etyl.loader.Loader;
 import com.harium.etyl.loader.image.ImageLoader;
@@ -82,7 +82,7 @@ public abstract class Etyl extends JFrame implements EtylFrame {
     }
 
     private void addModules() {
-        addModule(AnimationModule.getInstance());
+        addModule(Animation.getInstance());
         addModule(UI.getInstance());
         addModule(LanguageModule.getInstance());
     }

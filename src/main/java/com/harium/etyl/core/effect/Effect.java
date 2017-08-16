@@ -1,6 +1,6 @@
 package com.harium.etyl.core.effect;
 
-import com.harium.etyl.core.animation.AnimationModule;
+import com.harium.etyl.core.animation.Animation;
 import com.harium.etyl.core.animation.script.FrameAnimation;
 import com.harium.etyl.layer.AnimatedLayer;
 
@@ -51,7 +51,7 @@ public class Effect extends AnimatedLayer {
 		setVisible(true);
 		restartAnimation();
 
-		AnimationModule.getInstance().add(script);
+		Animation.getInstance().add(script);
 	}
 	
 }

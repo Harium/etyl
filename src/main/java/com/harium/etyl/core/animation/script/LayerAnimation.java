@@ -1,6 +1,6 @@
 package com.harium.etyl.core.animation.script;
 
-import com.harium.etyl.core.animation.AnimationModule;
+import com.harium.etyl.core.animation.Animation;
 import com.harium.etyl.commons.interpolation.Interpolator;
 import com.harium.etyl.layer.ImageLayer;
 import com.harium.etyl.commons.layer.Layer;
@@ -196,7 +196,7 @@ public class LayerAnimation extends AnimationScript {
 
 		if(next != null) {
 			for(AnimationScript s: next) {
-				AnimationModule.getInstance().add(s);
+				Animation.getInstance().add(s);
 			}
 		}
 	}

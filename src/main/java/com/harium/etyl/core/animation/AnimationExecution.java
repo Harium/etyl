@@ -4,48 +4,88 @@ import com.harium.etyl.core.animation.script.AnimationScript;
 
 public class AnimationExecution {
 
-	private int repeated = 0;
+    private int repeated = 0;
+    private long correction = 0;
+    private boolean started = false;
 
-	private AnimationScript script;
+    private AnimationScript script;
 
-	public AnimationExecution(AnimationScript script) {
-		super();
+    public AnimationExecution(AnimationScript script) {
+        super();
+        this.script = script;
+    }
 
-		this.script = script;
-	}
-	
-	public boolean execute(long now) {
-		
-		if(!script.isStopped()) {
+    public AnimationExecution(AnimationScript script, long correction) {
+        super();
+        this.script = script;
+        this.correction = correction;
+    }
 
-			script.preAnimate(now);
-			
-			return true;			
-		}
+    public boolean execute(long now) {
+        if (!started) {
+            start(now);
+        }
 
-		return false;		
-	}
-	
-	public void repeat() {
-		repeated++;
+        if (!script.isStopped()) {
+            script.tick(now);
+            return true;
+        }
 
-		script.restart();
-	}
+        return false;
+    }
 
-	public int getRepeated() {
-		return repeated;
-	}
+    public void repeat(long now) {
+        calculateCorrection(now);
 
-	public void setRepeated(int repeated) {
-		this.repeated = repeated;
-	}
+        repeated++;
+        script.start(now + correction);
+        //script.restart();
+    }
 
-	public AnimationScript getScript() {
-		return script;
-	}
+    public int getRepeated() {
+        return repeated;
+    }
 
-	public void setScript(AnimationScript script) {
-		this.script = script;
-	}	
+    public void setRepeated(int repeated) {
+        this.repeated = repeated;
+    }
 
+    public long getCorrection() {
+        return correction;
+    }
+
+    public void setCorrection(long correction) {
+        this.correction = correction;
+    }
+
+    public AnimationScript getScript() {
+        return script;
+    }
+
+    public void setScript(AnimationScript script) {
+        this.script = script;
+    }
+
+    public boolean isStarted() {
+        return started;
+    }
+
+    public void start(long now) {
+        script.start(now + correction);
+        correction = 0;
+        started = true;
+    }
+
+    public void restart(long now) {
+        calculateCorrection(now);
+        script.restart();
+        started = false;
+    }
+
+    private void calculateCorrection(long now) {
+        float lastFactor = script.factor(now);
+        lastFactor -= Math.floor(lastFactor);
+        correction = (long) -(script.getDuration() * lastFactor);
+        script.calculate(lastFactor);
+    }
 }

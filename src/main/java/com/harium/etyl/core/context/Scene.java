@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.harium.etyl.commons.Drawable;
 import com.harium.etyl.commons.Updatable;
-import com.harium.etyl.core.animation.AnimationModule;
+import com.harium.etyl.core.animation.Animation;
 import com.harium.etyl.core.animation.script.AnimationScript;
 import com.harium.etyl.commons.particle.Emitter;
 import com.harium.etyl.commons.event.KeyEvent;
@@ -28,7 +28,7 @@ public class Scene implements UIComponent {
 	}
 	
 	public void addAnimation(AnimationScript animation) {
-		AnimationModule.getInstance().add(animation);
+		Animation.getInstance().add(animation);
 	}
 	
 	public void addEmitter(Emitter emitter) {
