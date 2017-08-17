@@ -56,13 +56,16 @@ public abstract class AnimationScript {
         this.startedAt = now;
     }
 
+    /**
+     * Method to update the animation
+     * @param now - the time in milliseconds
+     */
     public void tick(long now) {
         if (!started) {
             start(now);
         }
 
         if (started && !stopped) {
-
             long elapsedTime = now - startedAt - delay;
 
             if (elapsedTime >= duration) {
@@ -72,10 +75,14 @@ public abstract class AnimationScript {
             } else if (now - startedAt >= delay) {
                 this.animate(now);
             }
-
         }
     }
 
+    /**
+     * Method to effectively animate
+     * @param now - the time in milliseconds
+     * @return animation is ended
+     */
     public boolean animate(long now) {
         float factor = factor(now);
 
@@ -83,13 +90,13 @@ public abstract class AnimationScript {
             calculate(factor);
         } else if (loop == REPEAT_FOREVER || loop > 0) {
             calculate(factor - 1);
-            return false;
+            return true;
         } else {
             calculate(1);
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     public float factor(long now) {
