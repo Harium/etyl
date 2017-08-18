@@ -2,8 +2,11 @@ package com.harium.etyl.core;
 
 import java.awt.Graphics;
 
+import com.harium.etyl.commons.context.Context;
+import com.harium.etyl.commons.event.GUIEvent;
 import com.harium.etyl.commons.module.Module;
 import com.harium.etyl.commons.context.Application;
+import com.harium.etyl.core.input.HIDController;
 
 public interface Core {
 	void initMonitors(int width, int height);
@@ -21,4 +24,8 @@ public interface Core {
 	void setFps(int fps);
 
 	void addModule(Module module);
+	Context getCurrentContext();
+	HIDController getControl();
+
+	void updateSuperEvent(GUIEvent event);
 }

@@ -21,8 +21,6 @@ import java.awt.image.VolatileImage;
 
 public class AWTGraphics implements Graphics {
 
-	private VolatileImage vimg;
-
 	protected Graphics2D screen;
 
 	private int width;
@@ -34,6 +32,7 @@ public class AWTGraphics implements Graphics {
 
 	//Identity matrix
 	private static final AffineTransform RESET_TRANSFORM = AffineTransform.getScaleInstance(1, 1);
+	private float fps = 0;
 
 	public AWTGraphics(int width, int height) {
 		super();
@@ -45,6 +44,20 @@ public class AWTGraphics implements Graphics {
 	public AWTGraphics(BufferedImage image) {
 		super();
 		setImage(image);
+	}
+
+	public void setFps(float fps) {
+		this.fps = fps;
+	}
+
+	public float getFps() {
+		return fps;
+	}
+
+	public void setScreen(Graphics2D screen) {
+		this.screen = screen;
+		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		this.screen.setColor(shadowColor);
 	}
 
 	public void setFastImage(BufferedImage image) {
@@ -59,27 +72,11 @@ public class AWTGraphics implements Graphics {
 
 	public void setImage(BufferedImage image) {
 		setFastImage(image);
-
-		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		this.screen.setColor(shadowColor);
-	}
-
-	public void setVolatileImage(VolatileImage vimg) {
-
-		this.vimg = vimg;
-		this.width = vimg.getWidth();
-		this.height = vimg.getHeight();
-
-		this.screen = vimg.createGraphics();
-		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		this.screen.setColor(shadowColor);
+		setScreen(this.screen);
 	}
 
 	public void resetImage() {
-		if(vimg == null)
-			return;
-
-		this.screen = vimg.createGraphics();
+		this.screen = (Graphics2D) screen.create();
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		this.screen.setColor(shadowColor);
 	}
@@ -104,7 +101,6 @@ public class AWTGraphics implements Graphics {
 	 * @param h
 	 */
 	public void drawString(String text, int x, int y, int w, int h) {
-
 		int dx = centralizeTextX(text, x, w);
 		int dy = centralizeTextY(text, y, h);
 
@@ -1091,19 +1087,6 @@ public class AWTGraphics implements Graphics {
 
 	public FontMetrics getFontMetrics() {
 		return screen.getFontMetrics();
-	}
-
-	/*public void setGraphics(GLGraphics2D graphics) {		
-		this.screen = graphics;
-		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-	}*/
-
-	public BufferedImage getBimg() {
-		return vimg.getSnapshot();
-	}
-
-	public VolatileImage getVimg() {
-		return vimg;
 	}
 
 	/*

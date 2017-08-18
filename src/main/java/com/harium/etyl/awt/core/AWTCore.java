@@ -7,47 +7,35 @@ import com.harium.etyl.awt.core.input.AWTKeyboard;
 import com.harium.etyl.commons.context.Application;
 import com.harium.etyl.commons.context.Session;
 import com.harium.etyl.commons.event.GUIEvent;
+import com.harium.etyl.core.BaseCore;
 import com.harium.etyl.core.EtylFrame;
-import com.harium.etyl.core.InnerCore;
 import com.harium.etyl.core.graphics.Monitor;
 import com.harium.etyl.core.loop.FrameSkippingLoop;
 import com.harium.etyl.core.loop.GameLoop;
 import com.harium.etyl.effects.GenericFullScreenEffect;
-import com.harium.etyl.loader.Loader;
-import com.harium.etyl.util.io.IOHelper;
 
 import java.awt.*;
 import java.awt.dnd.DropTarget;
 import java.awt.event.ComponentEvent;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.VolatileImage;
-import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * AWTCore is an InnerCore based on AWT
+ * AWTCore is a BaseCore based on AWT
  *
  * @author yuripourre
  */
-public class AWTCore extends InnerCore implements Runnable, java.awt.event.ComponentListener {
+public class AWTCore extends BaseCore implements Runnable, java.awt.event.ComponentListener {
 
     public static final String COMPONENT = "COMPONENT";
 
-    private int width;
-    private int height;
-
-    private Set<Loader> loaders;
-
     private GraphicsConfiguration configuration;
 
-    private java.awt.Component component;
-
-    private AWTWindow window;
+    private Component component;
 
     private VolatileImage volatileImage;
-
-    private String path = "";
 
     private AWTGraphics graphic;
 
@@ -57,16 +45,12 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
 
     private GameLoop gameLoop;
 
-    private boolean locked = false;
-
-    private DropTarget dropTarget;
+    private boolean locked = true;
 
     public AWTCore(Component component, int width, int height) {
         super(width, height);
 
         this.component = component;
-        this.width = width;
-        this.height = height;
 
         int windowX = 0, windowY = 0;
 
@@ -79,7 +63,8 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
 
             windowX = component.getX();
             windowY = component.getY();
-            dropTarget = new DropTarget(component, new AWTDragAndDrop(this));
+
+            enableDragAndDrop();
         }
 
         window = new AWTWindow(windowX, windowY, width, height);
@@ -120,36 +105,29 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
         component.setLocation(x, y);
     }
 
-    private void initGraphics(int width, int height) {
+    private void enableDragAndDrop() {
+        new DropTarget(component, new AWTDragAndDrop(this));
+    }
 
+    private void initGraphics(int width, int height) {
         locked = true;
 
         this.graphic = new AWTGraphics(width, height);
-
         defineSize(width, height);
 
         locked = false;
     }
 
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-
-        //For Windows
-        String s = IOHelper.fixPath(path);
-
-        this.path = s;
-    }
-
-    public void initDefault() {
-
-        for (Loader loader : loaders) {
-            loader.setUrl(path);
-            loader.initLoader();
+    public void updateSuperEvent(GUIEvent event) {
+        if (event == GUIEvent.ENABLE_FULL_SCREEN) {
+            enableFullScreen();
+        } else if (event == GUIEvent.DISABLE_FULL_SCREEN) {
+            disableFullScreen();
+        } else if (event == GUIEvent.REQUEST_FOCUS) {
+            if (!component.hasFocus()) {
+                component.requestFocus();
+            }
         }
-
     }
 
     public void enableFullScreen() {
@@ -172,7 +150,8 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
     }
 
     public void disableFullScreen() {
-        FullScreenHelper.disableFullScreen(this);
+        fullScreen.dispose();
+        FullScreenHelper.disableFullScreen();
         setFullScreenEnable(false);
     }
 
@@ -181,7 +160,7 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
         application.setSession(session);
 
         this.window.setApplication(application);
-        replaceWindow(window);
+        reload(application);
 
         component.setFocusTraversalKeysEnabled(false);
         component.setFocusable(true);
@@ -189,6 +168,7 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
 
         hideDefaultCursor(component);
 
+        // Define Listeners
         component.addMouseMotionListener(getMouse());
         component.addMouseWheelListener(getMouse());
         component.addMouseListener(getMouse());
@@ -202,7 +182,6 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
     }
 
     private VolatileImage createBackBuffer(int width, int height, int transparency) {
-
         return configuration.createCompatibleVolatileImage(width, height, transparency);
     }
 
@@ -214,9 +193,8 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
 
         if (volatileImage != null) {
             //graphic.setBufferedImage(volatileImage.getSnapshot());
-            graphic.setVolatileImage(volatileImage);
+            graphic.setScreen(volatileImage.createGraphics());
         }
-
     }
 
     public void validateVolatileImage() {
@@ -226,7 +204,7 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
         // This means the device doesn't match up to this hardware accelerated image.
         if (valCode == VolatileImage.IMAGE_INCOMPATIBLE) {
             volatileImage = createBackBuffer(width, height); // recreate the hardware accelerated image.
-            graphic.setVolatileImage(volatileImage);
+            graphic.setScreen(volatileImage.createGraphics());
         }
 
     }
@@ -242,7 +220,6 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
     }
 
     public void paint(Graphics g) {
-
         if (locked)
             return;
 
@@ -256,13 +233,13 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
         //volatileImg.getGraphics().drawImage(desktop.getApplication().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
         //volatileImg.getGraphics().drawImage(grafico.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 
-        if (graphic.getVimg() == null)
+        if (volatileImage == null)
             return;
 
         if (!isFullScreenEnable()) {
-            g.drawImage(graphic.getVimg(), (int) window.getContext().getX(), (int) window.getContext().getY(), component);
+            g.drawImage(volatileImage, window.getContext().getX(), window.getContext().getY(), component);
         } else {
-            fullScreen.draw(graphic.getVimg());
+            fullScreen.draw(volatileImage);
         }
 
         g.dispose();
@@ -284,10 +261,6 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
         this.height = h;
     }
 
-    public void setLoaders(Set<Loader> loaders) {
-        this.loaders = loaders;
-    }
-
     public void update(double delta) throws Exception {
 
         long now = System.currentTimeMillis();
@@ -302,7 +275,7 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
     }
 
     public void hideCursor() {
-        currentContext().hideCursor();
+        getCurrentContext().hideCursor();
     }
 
     public void setEngine(EtylFrame engine) {
@@ -337,12 +310,6 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
     }
 
     @Override
-    public void setFps(int fps) {
-        //System.out.println("frames: " + fps);
-        super.setFps(fps);
-    }
-
-    @Override
     public void componentHidden(ComponentEvent event) {
         // TODO Auto-generated method stub
     }
@@ -354,7 +321,6 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
 
     @Override
     public void componentResized(ComponentEvent event) {
-
         Component component = event.getComponent();
 
         Rectangle bounds = component.getBounds();
@@ -379,5 +345,4 @@ public class AWTCore extends InnerCore implements Runnable, java.awt.event.Compo
     public FullScreenWindow getFullScreenWindow() {
         return fullScreen;
     }
-
 }

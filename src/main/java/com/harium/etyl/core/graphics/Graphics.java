@@ -31,6 +31,10 @@ public interface Graphics extends TextGraphics {
 
 	public void setImage(BufferedImage image);
 
+	public void setFps(float fps);
+
+	public float getFps();
+
 	public void resetImage();
 
 	public int getWidth();
@@ -472,12 +476,10 @@ public interface Graphics extends TextGraphics {
 	 */
 	public void fill(Shape shape);
 
-	/*public void setGraphics(GLGraphics2D graphics) {		
+	/*public void setGraphics(GLGraphics2D graphics) {
 		this.screen = graphics;
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 	}*/
-
-	public BufferedImage getBimg();
 
 	/*
 	 * 

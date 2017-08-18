@@ -12,18 +12,19 @@ import java.io.IOException;
 import java.util.List;
 
 import com.harium.etyl.commons.context.Context;
+import com.harium.etyl.core.Core;
 
 public class AWTDragAndDrop implements DropTargetListener {
 
-	AWTCore core;
+	Core core;
 	
-	public AWTDragAndDrop(AWTCore core) {
+	public AWTDragAndDrop(Core core) {
 		this.core = core;
 	}
 	
 	@Override
 	public void dragEnter(DropTargetDragEvent dtde) {
-		Context context = core.currentContext();
+		Context context = core.getCurrentContext();
 		context.dragEnter();
 	}
 
@@ -41,7 +42,7 @@ public class AWTDragAndDrop implements DropTargetListener {
 
 	@Override
 	public void dragExit(DropTargetEvent dte) {
-		Context context = core.currentContext();
+		Context context = core.getCurrentContext();
 		context.dragExit();
 	}
 
@@ -55,7 +56,7 @@ public class AWTDragAndDrop implements DropTargetListener {
 			if (data.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
 				List<File> list = (List<File>) data.getTransferData(DataFlavor.javaFileListFlavor);
 				
-				Context context = core.currentContext();
+				Context context = core.getCurrentContext();
 				int mx = (int) evt.getLocation().getX();
 				int my = (int) evt.getLocation().getY();
 				context.dropFiles(mx, my, list);

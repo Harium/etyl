@@ -8,7 +8,7 @@ import java.awt.Toolkit;
 import java.awt.image.MemoryImageSource;
 
 import com.harium.etyl.awt.core.input.AWTKeyboard;
-import com.harium.etyl.core.InnerCore;
+import com.harium.etyl.core.Core;
 import com.harium.etyl.core.graphics.Monitor;
 import com.harium.etyl.core.input.keyboard.Keyboard;
 import com.harium.etyl.core.input.mouse.Mouse;
@@ -23,12 +23,12 @@ public class FullScreenWindow extends Frame {
 	
 	private static final long serialVersionUID = -5176767672500250086L;
 	
-	private InnerCore core;
+	private Core core;
 	
 	private int w;
 	private int h;
 		
-	public FullScreenWindow(InnerCore core, Monitor selectedMonitor) {
+	public FullScreenWindow(Core core, Monitor selectedMonitor) {
 		this.core = core;
 		
 		this.w = selectedMonitor.getW();

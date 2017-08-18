@@ -22,21 +22,26 @@ import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.core.graphics.Monitor;
 import com.harium.etyl.core.input.keyboard.Keyboard;
 import com.harium.etyl.core.input.mouse.Mouse;
+import com.harium.etyl.loader.Loader;
+import com.harium.etyl.util.io.IOHelper;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author yuripourre
  */
 
-public abstract class InnerCore implements Core, KeyEventListener, Updatable, LoaderListener<Context> {
+public abstract class BaseCore implements Core, KeyEventListener, Updatable, LoaderListener<Context> {
 
     private static final int TITLE_BAR_HEIGHT = 50;
 
+    protected int width;
+    protected int height;
+
+    protected String path = "";
+
     //External Windows
-    private AWTWindow window = null;
+    protected AWTWindow window = null;
 
     protected AWTController control;
 
@@ -45,13 +50,14 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
 
     //private List<KeyEvent> joyEvents;
 
+    private boolean firstLoad = true;
     private boolean firstDraw = true;
 
     private boolean fullScreenEnable = false;
 
     private boolean fixEventPosition = false;
 
-    private int fps = 0;
+    protected int fps = 0;
 
     //FullScreen Stuff
     private boolean enableFullScreen = false;
@@ -75,8 +81,12 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
 
     private ModuleHandler modules = new ModuleHandler();
 
-    public InnerCore(int w, int h) {
+    protected List<Loader> loaders = new ArrayList<>();
+
+    public BaseCore(int w, int h) {
         super();
+        this.width = w;
+        this.height = h;
 
         control = new AWTController(this);
 
@@ -92,7 +102,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
 
     public void update(long now) {
 
-        if (!currentContext().isLoaded()) {
+        if (!getCurrentContext().isLoaded()) {
             return;
         }
 
@@ -102,7 +112,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
 
         modules.update(now);
 
-        Context application = currentContext();
+        Context application = getCurrentContext();
 
         updateApplication(application, now);
 
@@ -158,7 +168,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
 
     public void resizeApplication(int w, int h) {
 
-        Context application = currentContext();
+        Context application = getCurrentContext();
 
         application.resize(w, h);
 
@@ -235,7 +245,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
     @Override
     public void updateJoystickEvent(KeyEvent event) {
 
-        Context context = currentContext();
+        Context context = getCurrentContext();
 
         //Debug Joystick Commands
         //System.out.println("UpdateJoystick "+event.getKey());
@@ -254,7 +264,6 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
         updateWindowEvent(event, window);
     }
 
-
     private void updateWindowEvent(PointerEvent event, AWTWindow window) {
 
         GUIEvent frameEvent = updateFrameEvents(event);
@@ -267,11 +276,11 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
 
     public void draw(Graphics g) {
         if (firstDraw) {
-            currentContext().initGraphics(g);
+            getCurrentContext().initGraphics(g);
             firstDraw = false;
         }
 
-        drawContext(currentContext(), g);
+        drawContext(getCurrentContext(), g);
 
         //Draw Handlers
         modules.draw(g);
@@ -286,6 +295,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
             g.fillRect(0, 0, context.getW(), context.getH());
         }
 
+        g.setFps(fps);
         context.draw(g);
 
         //Draw Components
@@ -445,7 +455,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
     }
 
     public void changeApplication() {
-        Context currentApplication = currentContext();
+        Context currentApplication = getCurrentContext();
         // Remove Handlers
         modules.dispose(currentApplication);
         currentApplication.dispose();
@@ -459,11 +469,11 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
         reload(nextApplication);
     }
 
-    public Context currentContext() {
+    public Context getCurrentContext() {
         return window.getContext();
     }
 
-    private void reload(Context application) {
+    protected void reload(Context application) {
         if (application == null) {
             System.err.println(ErrorMessages.APPLICATION_NULL);
             return;
@@ -479,7 +489,7 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
 
     @Override
     public void updateKeyEvent(KeyEvent event) {
-        Context context = currentContext();
+        Context context = getCurrentContext();
 
         handleApplicationKeyEvents(context, event);
 
@@ -524,6 +534,25 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
         context.setLoaded(true);
     }
 
+    public void initLoaders() {
+        for (Loader loader : loaders) {
+            loader.setUrl(path);
+            loader.initLoader();
+        }
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+
+        //For Windows
+        String s = IOHelper.fixPath(path);
+
+        this.path = s;
+    }
+
     protected Session buildSession() {
         return new Session();
     }
@@ -562,6 +591,18 @@ public abstract class InnerCore implements Core, KeyEventListener, Updatable, Lo
 
     public boolean isRunning() {
         return running;
+    }
+
+    public List<Loader> getLoaders() {
+        return loaders;
+    }
+
+    public void setLoaders(List<Loader> loaders) {
+        this.loaders = loaders;
+    }
+
+    public void addLoader(Loader loader) {
+        loaders.add(loader);
     }
 
 }

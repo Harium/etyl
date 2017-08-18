@@ -1,15 +1,15 @@
-package com.harium.etyl;
+package com.harium.etyl.applet;
 
 import com.harium.etyl.awt.core.AWTCore;
-import com.harium.etyl.awt.engine.AWTEngine;
 import com.harium.etyl.commons.context.Application;
 import com.harium.etyl.commons.event.GUIEvent;
 import com.harium.etyl.commons.module.Module;
-import com.harium.etyl.core.Engine;
 import com.harium.etyl.core.EtylFrame;
 import com.harium.etyl.core.animation.Animation;
 import com.harium.etyl.i18n.LanguageModule;
+import com.harium.etyl.loader.FontLoader;
 import com.harium.etyl.loader.Loader;
+import com.harium.etyl.loader.image.ImageLoader;
 import com.harium.etyl.ui.UI;
 import com.harium.etyl.util.PathHelper;
 
@@ -22,7 +22,6 @@ public abstract class EtylApplet extends Applet implements EtylFrame {
     private static final long serialVersionUID = 4588303747276461888L;
 
     private AWTCore core;
-    private Engine engine;
 
     protected int w = 640;
     protected int h = 480;
@@ -58,9 +57,7 @@ public abstract class EtylApplet extends Applet implements EtylFrame {
     }
 
     private void initCore() {
-        engine = new AWTEngine(this, w, h);
-
-        core = engine.getCore();
+        core = new AWTCore(this, w, h);
         core.setEngine(this);
     }
 
@@ -98,7 +95,11 @@ public abstract class EtylApplet extends Applet implements EtylFrame {
 
     protected void setPath(String path) {
         core.setPath(path);
-        engine.init();
+        if (core.getLoaders().isEmpty()) {
+            addLoader(ImageLoader.getInstance());
+            addLoader(FontLoader.getInstance());
+        }
+        core.initLoaders();
     }
 
     @Override
@@ -116,16 +117,16 @@ public abstract class EtylApplet extends Applet implements EtylFrame {
     }
 
     public void addLoader(Loader loader) {
-        engine.addLoader(loader);
+        core.addLoader(loader);
     }
 
     protected void hideCursor() {
-        engine.hideCursor();
+        core.hideCursor();
     }
 
     @Override
     public void updateSuperEvent(GUIEvent event) {
-        engine.updateSuperEvent(event);
+        core.updateSuperEvent(event);
     }
 
 }
