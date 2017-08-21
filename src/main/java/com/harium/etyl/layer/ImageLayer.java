@@ -243,7 +243,12 @@ public class ImageLayer extends StaticLayer {
         }
 
         if (opacity < 0xff) {
-            g.setOpacity(opacity);
+            if (opacity > 0) {
+                g.setOpacity(opacity);
+            } else {
+                // Do not draw if opacity is zero
+                return;
+            }
         }
 
         g.setTransform(getTransform(offsetX, offsetY));
