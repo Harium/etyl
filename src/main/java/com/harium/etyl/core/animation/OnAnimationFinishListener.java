@@ -2,6 +2,6 @@ package com.harium.etyl.core.animation;
 
 public interface OnAnimationFinishListener {
 
-	public void onAnimationFinish(long now);
-	
+    void onAnimationFinish(long now);
+
 }

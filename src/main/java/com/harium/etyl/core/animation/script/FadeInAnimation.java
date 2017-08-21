@@ -4,12 +4,7 @@ import com.harium.etyl.commons.layer.Layer;
 
 
 public class FadeInAnimation extends OpacityAnimation {
-	
-	{
-		startValue = 0;
-		endValue = 255;
-	}
-	
+
 	public FadeInAnimation(Layer target) {
 		super(target);
 	}
@@ -32,7 +27,9 @@ public class FadeInAnimation extends OpacityAnimation {
 	
 	@Override
 	public void onStart() {
-		target.setOpacity((int) startValue);
+		startValue = 0;
+		endValue = Layer.MAX_OPACITY;
+		target.setOpacity(0);
 	}
 
 }

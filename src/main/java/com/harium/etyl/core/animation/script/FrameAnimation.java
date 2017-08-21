@@ -1,5 +1,6 @@
 package com.harium.etyl.core.animation.script;
 
+import com.harium.etyl.core.animation.Animation;
 import com.harium.etyl.layer.AnimatedLayer;
 
 public class FrameAnimation extends SingleIntervalAnimation {
@@ -14,7 +15,7 @@ public class FrameAnimation extends SingleIntervalAnimation {
 		super(target.getSpeed()*target.getFrames());
 		
 		setTarget(target);
-		this.loop = REPEAT_FOREVER;
+		this.loop = Animation.REPEAT_FOREVER;
 	}
 	
 	public void setTarget(AnimatedLayer target) {

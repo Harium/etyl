@@ -22,8 +22,6 @@ public abstract class AnimationScript {
 
     protected List<AnimationScript> next;
 
-    public static final int REPEAT_FOREVER = -1;
-
     private OnAnimationFinishListener listener;
 
     protected Interpolator interpolator = Interpolator.LINEAR;

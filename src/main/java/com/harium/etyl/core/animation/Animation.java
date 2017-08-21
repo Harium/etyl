@@ -15,6 +15,8 @@ import java.util.List;
 
 public class Animation implements Module {
 
+    public static final int REPEAT_FOREVER = -1;
+
     private static Animation instance;
 
     private List<AnimationExecution> scripts = new ArrayList<AnimationExecution>();
@@ -58,7 +60,7 @@ public class Animation implements Module {
     private boolean repeatLogic(AnimationExecution execution, long now) {
         AnimationScript script = execution.getScript();
 
-        if (script.getRepeat() == AnimationScript.REPEAT_FOREVER) {
+        if (script.getRepeat() == REPEAT_FOREVER) {
             execution.restart(now);
             // Keep the object in the list
             return false;
