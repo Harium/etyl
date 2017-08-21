@@ -192,7 +192,6 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
         volatileImage = createBackBuffer(width, height);
 
         if (volatileImage != null) {
-            //graphic.setBufferedImage(volatileImage.getSnapshot());
             graphic.setScreen(volatileImage.createGraphics());
         }
     }
@@ -223,15 +222,9 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
         if (locked)
             return;
 
-        //GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        //GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
-
         validateVolatileImage();
 
         draw(graphic);
-
-        //volatileImg.getGraphics().drawImage(desktop.getApplication().getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
-        //volatileImg.getGraphics().drawImage(grafico.getBimg(), desktop.getApplication().getX(), desktop.getApplication().getY(), this);
 
         if (volatileImage == null)
             return;
