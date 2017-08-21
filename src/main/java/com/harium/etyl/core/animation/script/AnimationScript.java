@@ -1,6 +1,7 @@
 package com.harium.etyl.core.animation.script;
 
 import com.harium.etyl.commons.interpolation.Interpolator;
+import com.harium.etyl.core.animation.Animation;
 import com.harium.etyl.core.animation.OnAnimationFinishListener;
 
 import java.util.ArrayList;
@@ -86,7 +87,7 @@ public abstract class AnimationScript {
 
         if (factor < 1) {
             calculate(factor);
-        } else if (loop == REPEAT_FOREVER || loop > 0) {
+        } else if (loop == Animation.REPEAT_FOREVER || loop > 0) {
             calculate(factor - 1);
             return true;
         } else {

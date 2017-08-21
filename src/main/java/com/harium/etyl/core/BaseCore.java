@@ -524,7 +524,6 @@ public abstract class BaseCore implements Core, KeyEventListener, Updatable, Loa
 
     public void setFps(int fps) {
         this.fps = fps;
-        this.window.getContext().setFps(fps);
     }
 
     @Override
