@@ -217,7 +217,4 @@ public class LayerAnimation extends AnimationScript {
         }
     }
 
-    public void onStart() {
-    }
-
 }

@@ -192,4 +192,7 @@ public abstract class AnimationScript {
 
         listener.onAnimationFinish(now);
     }
+
+    public void onStart() {
+    }
 }
