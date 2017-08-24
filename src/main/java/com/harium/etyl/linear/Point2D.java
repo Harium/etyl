@@ -1,6 +1,5 @@
 package com.harium.etyl.linear;
 
-
 /**
  * @author yuripourre
  */
