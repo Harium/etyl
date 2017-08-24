@@ -3,6 +3,9 @@ package com.harium.etyl.linear;
 import com.harium.etyl.commons.Drawable;
 import com.harium.etyl.core.graphics.Graphics;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Polygon
  * Forked from: http://algs4.cs.princeton.edu/91primitives/Polygon.java.html
@@ -150,6 +153,19 @@ public class Polygon implements Drawable {
                 if (ccw == -1) winding--;
         }
         return winding != 0;
+    }
+
+    /**
+     * Generates a mutable list with copies of points
+     *
+     * @return a copy of the points as a list
+     */
+    public List<Point2D> asList() {
+        List<Point2D> list = new ArrayList<Point2D>();
+        for (int i = 0; i < size; i++) {
+            list.add(new Point2D(array[i]));
+        }
+        return list;
     }
 
     public String toString() {
