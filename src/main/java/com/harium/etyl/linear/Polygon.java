@@ -18,6 +18,10 @@ public class Polygon implements Drawable {
 
     public Polygon() {
         super();
+        reset();
+    }
+
+    public void reset() {
         size = 0;
         array = new Point2D[4];
     }
