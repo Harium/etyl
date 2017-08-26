@@ -186,13 +186,13 @@ public abstract class AnimationScript {
         this.referenced = referenced;
     }
 
-    public void finish(long now) {
+    public void onFinish(long now) {
         if (listener == null)
             return;
 
         listener.onAnimationFinish(now);
     }
 
-    public void onStart() {
+    public void onStart(long now) {
     }
 }

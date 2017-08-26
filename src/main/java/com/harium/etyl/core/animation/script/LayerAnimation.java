@@ -3,6 +3,7 @@ package com.harium.etyl.core.animation.script;
 import com.harium.etyl.commons.interpolation.Interpolator;
 import com.harium.etyl.commons.layer.Layer;
 import com.harium.etyl.core.animation.Animation;
+import com.harium.etyl.core.animation.script.complex.VerticalShakeScript;
 import com.harium.etyl.layer.ImageLayer;
 
 public class LayerAnimation extends AnimationScript {
@@ -176,6 +177,13 @@ public class LayerAnimation extends AnimationScript {
         return script;
     }
 
+    public VerticalShakeScript shakeVertical(long duration) {
+        VerticalShakeScript script = new VerticalShakeScript(target, duration);
+        concatenate(script);
+
+        return script;
+    }
+
     private void setupRoot(LayerAnimation script) {
         script.root = getRoot();
     }
@@ -208,7 +216,7 @@ public class LayerAnimation extends AnimationScript {
     }
 
     private void startChildren() {
-        onStart();
+        onStart(0);
 
         if (next != null) {
             for (AnimationScript s : next) {

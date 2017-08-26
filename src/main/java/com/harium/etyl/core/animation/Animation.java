@@ -93,7 +93,7 @@ public class Animation implements Module {
     }
 
     private void notifyFinish(AnimationScript script, long now) {
-        script.finish(now);
+        script.onFinish(now);
     }
 
     public void add(AnimationScript script) {
