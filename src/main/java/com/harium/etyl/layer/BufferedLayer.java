@@ -56,6 +56,10 @@ public class BufferedLayer extends ImageLayer {
         this(0, 0, path);
     }
 
+    public BufferedLayer(String path, boolean absolute) {
+        this(0, 0, path, absolute);
+    }
+
     /**
      * @param x
      * @param y
@@ -384,6 +388,14 @@ public class BufferedLayer extends ImageLayer {
         DataBufferByte dataBuffer = new DataBufferByte(imageData, imageData.length);
         originalBuffer.setData(Raster.createRaster(originalBuffer.getSampleModel(), dataBuffer, null));
         resetImage();
+    }
+
+    public int getWidth() {
+        return buffer.getWidth();
+    }
+
+    public int getHeight() {
+        return buffer.getHeight();
     }
 
 }
