@@ -592,6 +592,10 @@ public abstract class BaseCore implements Core, KeyEventListener, Updatable, Loa
         return running;
     }
 
+    public Session getSession() {
+        return session;
+    }
+
     public List<Loader> getLoaders() {
         return loaders;
     }
