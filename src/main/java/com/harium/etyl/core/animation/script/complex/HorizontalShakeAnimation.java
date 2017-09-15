@@ -2,22 +2,23 @@ package com.harium.etyl.core.animation.script.complex;
 
 import com.harium.etyl.commons.layer.Layer;
 
-public class VerticalShakeScript extends ShakeScript {
+public class HorizontalShakeAnimation extends ShakeAnimation {
 
-    private int initialY = 0;
+    private int initialX = 0;
 
-    public VerticalShakeScript(Layer target) {
+    public HorizontalShakeAnimation(Layer target) {
         super(target);
         repeatTimes = 2;
     }
 
-    public VerticalShakeScript(Layer target, long time) {
+    public HorizontalShakeAnimation(Layer target, long time) {
         super(target, time);
         repeatTimes = 2;
     }
 
     @Override
     public void calculate(double factor) {
+
         double division = 1 / (double) repeatTimes;
 
         int interval = (int) (factor / division);
@@ -31,26 +32,29 @@ public class VerticalShakeScript extends ShakeScript {
             slice = 1 - slice;
         }
 
-        double startValue = initialY - strength;
-        double endValue = initialY + strength;
+        double startValue = initialX - strength;
+
+        double endValue = initialX + strength;
+
         double value = startValue + (endValue - startValue) * slice;
 
-        target.setY((int) value);
+        target.setX((int) value);
     }
 
     @Override
     public void onStart(long now) {
         super.onStart(now);
         if (startValue == UNDEFINED) {
-            startValue = target.getY();
+            startValue = target.getX();
         }
-        initialY = startValue;
+        initialX = target.getX();
     }
 
     @Override
     public void onFinish(long now) {
         super.onFinish(now);
-        initialY = startValue;
+        initialX = startValue;
     }
+
 
 }

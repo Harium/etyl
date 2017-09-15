@@ -10,6 +10,8 @@ import java.util.List;
 
 public abstract class AnimationScript {
 
+    protected static final int UNDEFINED = -1;
+
     protected long startedAt = 0;
     protected long duration = 0;
     protected long delay = 0;
@@ -53,6 +55,11 @@ public abstract class AnimationScript {
         started = true;
         stopped = false;
         this.startedAt = now;
+    }
+
+    public void stop() {
+        started = true;
+        stopped = true;
     }
 
     /**
@@ -105,16 +112,19 @@ public abstract class AnimationScript {
 
     public abstract void calculate(double factor);
 
-    public boolean isStopped() {
-        return stopped;
+    public AnimationScript startAt(long delay) {
+        this.delay = delay;
+        return this;
     }
 
-    public int getRepeat() {
-        return loop;
+    public AnimationScript during(long duration) {
+        this.duration = duration;
+        return this;
     }
 
-    public void setRepeat(int repeat) {
-        this.loop = repeat;
+    public AnimationScript interpolate(Interpolator interpolator) {
+        this.interpolator = interpolator;
+        return this;
     }
 
     public AnimationScript twice() {
@@ -125,6 +135,18 @@ public abstract class AnimationScript {
     public AnimationScript loop(int loop) {
         this.loop = loop;
         return this;
+    }
+
+    public boolean isStopped() {
+        return stopped;
+    }
+
+    public int getRepeat() {
+        return loop;
+    }
+
+    public void setRepeat(int repeat) {
+        this.loop = repeat;
     }
 
     public List<AnimationScript> getNext() {

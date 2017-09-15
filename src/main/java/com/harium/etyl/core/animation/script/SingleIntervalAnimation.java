@@ -25,7 +25,6 @@ public abstract class SingleIntervalAnimation extends LayerAnimation {
 
     public SingleIntervalAnimation(Layer target, long delay, long time) {
         super(delay, time);
-
         setTarget(target);
     }
 
@@ -39,8 +38,8 @@ public abstract class SingleIntervalAnimation extends LayerAnimation {
      * This method override is needed
      */
     @Override
-    public SingleIntervalAnimation during(long time) {
-        super.during(time);
+    public SingleIntervalAnimation during(long duration) {
+        super.during(duration);
         return this;
     }
 

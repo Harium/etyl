@@ -3,7 +3,7 @@ package com.harium.etyl.core.animation.script;
 import com.harium.etyl.commons.interpolation.Interpolator;
 import com.harium.etyl.commons.layer.Layer;
 import com.harium.etyl.core.animation.Animation;
-import com.harium.etyl.core.animation.script.complex.VerticalShakeScript;
+import com.harium.etyl.core.animation.script.complex.VerticalShakeAnimation;
 import com.harium.etyl.layer.ImageLayer;
 
 public class LayerAnimation extends AnimationScript {
@@ -51,18 +51,21 @@ public class LayerAnimation extends AnimationScript {
         // TODO Auto-generated method stub
     }
 
-    public LayerAnimation startAt(long delayValue) {
-        this.delay = delayValue;
+    @Override
+    public LayerAnimation startAt(long delay) {
+        super.startAt(delay);
         return this;
     }
 
-    public LayerAnimation during(long time) {
-        this.duration = time;
+    @Override
+    public LayerAnimation during(long duration) {
+        super.during(duration);
         return this;
     }
 
+    @Override
     public LayerAnimation interpolate(Interpolator interpolator) {
-        this.interpolator = interpolator;
+        super.interpolate(interpolator);
         return this;
     }
 
@@ -78,29 +81,29 @@ public class LayerAnimation extends AnimationScript {
         return this;
     }
 
-    public MovementScript move(long time) {
-        MovementScript script = new MovementScript(target, time);
+    public MovementAnimation move(long time) {
+        MovementAnimation script = new MovementAnimation(target, time);
         concatenate(script);
 
         return script;
     }
 
-    public MovementScript move() {
-        MovementScript script = new MovementScript(target);
+    public MovementAnimation move() {
+        MovementAnimation script = new MovementAnimation(target);
         concatenate(script);
 
         return script;
     }
 
-    public HorizontalMovementScript moveX(int duration) {
-        HorizontalMovementScript script = new HorizontalMovementScript(target, duration);
+    public HorizontalAnimation moveX(int duration) {
+        HorizontalAnimation script = new HorizontalAnimation(target, duration);
         concatenate(script);
 
         return script;
     }
 
-    public VerticalMovementScript moveY(int duration) {
-        VerticalMovementScript script = new VerticalMovementScript(target, duration);
+    public VerticalAnimation moveY(int duration) {
+        VerticalAnimation script = new VerticalAnimation(target, duration);
         concatenate(script);
 
         return script;
@@ -177,8 +180,8 @@ public class LayerAnimation extends AnimationScript {
         return script;
     }
 
-    public VerticalShakeScript shakeVertical(long duration) {
-        VerticalShakeScript script = new VerticalShakeScript(target, duration);
+    public VerticalShakeAnimation shakeVertical(long duration) {
+        VerticalShakeAnimation script = new VerticalShakeAnimation(target, duration);
         concatenate(script);
 
         return script;
@@ -205,6 +208,14 @@ public class LayerAnimation extends AnimationScript {
         return this;
     }
 
+    public LayerAnimation then() {
+        LayerAnimation animation = new DummyAnimation(getLayer());
+        animation.root = this;
+        animation.delay = duration;
+        addNext(animation);
+        return animation;
+    }
+
     public LayerAnimation then(LayerAnimation script) {
         addNext(script);
         return this;
@@ -215,7 +226,7 @@ public class LayerAnimation extends AnimationScript {
         return this;
     }
 
-    private void startChildren() {
+    protected void startChildren() {
         onStart(0);
 
         if (next != null) {

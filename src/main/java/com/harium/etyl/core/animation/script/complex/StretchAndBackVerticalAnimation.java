@@ -3,21 +3,21 @@ package com.harium.etyl.core.animation.script.complex;
 import com.harium.etyl.commons.layer.Layer;
 import com.harium.etyl.core.animation.script.StretchVerticalAnimation;
 
-public class StretchAndBackVertical extends StretchVerticalAnimation {
+public class StretchAndBackVerticalAnimation extends StretchVerticalAnimation {
 
     private StretchVerticalAnimation backToNormal;
 
-    public StretchAndBackVertical(long time) {
+    public StretchAndBackVerticalAnimation(long time) {
         super(time);
         init();
     }
 
-    public StretchAndBackVertical(long delay, long time) {
+    public StretchAndBackVerticalAnimation(long delay, long time) {
         super(delay, time);
         init();
     }
 
-    public StretchAndBackVertical(Layer target, long time) {
+    public StretchAndBackVerticalAnimation(Layer target, long time) {
         super(target, time);
         init();
     }

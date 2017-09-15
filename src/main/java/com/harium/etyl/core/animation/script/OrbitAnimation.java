@@ -25,8 +25,8 @@ public class OrbitAnimation extends SingleIntervalAnimation {
     }
 
     @Override
-    public OrbitAnimation during(long time) {
-        super.during(time);
+    public OrbitAnimation during(long duration) {
+        super.during(duration);
         return this;
     }
 
