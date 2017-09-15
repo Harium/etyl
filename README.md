@@ -5,7 +5,7 @@ Etyl's core for Java Desktop
 ## Maven
 ```
 <dependency>
-    <groupId>com.harium</groupId>
+    <groupId>com.harium.etyl</groupId>
     <artifactId>etyl</artifactId>
     <version>1.1.0</version>
 </dependency>
