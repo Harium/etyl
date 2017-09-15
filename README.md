@@ -2,8 +2,22 @@
 
 Etyl's core for Java Desktop
 
-Etyl is a fork of Etyllica
+## Maven
+```
+<dependency>
+    <groupId>com.harium</groupId>
+    <artifactId>etyl</artifactId>
+    <version>1.1.0</version>
+</dependency>
+```
 
+## Generating a local jar
+```
+mvn package -Dmaven.test.skip=true
+```
+
+# Legacy
+Etyl is a fork of Etyllica
 
 ## Migrating from Etyllica
 ```
@@ -11,10 +25,6 @@ cd src
 find ./ -type f -exec sed -i 's/br.com.etyllica/com.harium.etyl/g' {} +
 ```
 
-## Generating a local jar
-```
-mvn package -Dmaven.test.skip=true
-```
 
 ## License
 You can choose between LGPL or Commercial license.
