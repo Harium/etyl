@@ -94,6 +94,7 @@ public class Animation implements Module {
 
     private void notifyFinish(AnimationScript script, long now) {
         script.onFinish(now);
+        script.stop();
     }
 
     public void add(AnimationScript script) {

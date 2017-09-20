@@ -181,8 +181,22 @@ public class LayerAnimation extends AnimationScript {
         return script;
     }
 
+    public VerticalShakeAnimation shakeVertical() {
+        VerticalShakeAnimation script = new VerticalShakeAnimation(target);
+        concatenate(script);
+
+        return script;
+    }
+
     public VerticalShakeAnimation shakeVertical(long duration) {
         VerticalShakeAnimation script = new VerticalShakeAnimation(target, duration);
+        concatenate(script);
+
+        return script;
+    }
+
+    public HorizontalShakeAnimation shakeHorizontal() {
+        HorizontalShakeAnimation script = new HorizontalShakeAnimation(target);
         concatenate(script);
 
         return script;

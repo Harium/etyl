@@ -54,7 +54,7 @@ public class HorizontalShakeAnimation extends ShakeAnimation {
     public void onFinish(long now) {
         super.onFinish(now);
         initialX = startValue;
+        target.setX(startValue);
     }
-
 
 }

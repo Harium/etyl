@@ -51,6 +51,7 @@ public class VerticalShakeAnimation extends ShakeAnimation {
     public void onFinish(long now) {
         super.onFinish(now);
         initialY = startValue;
+        target.setY(startValue);
     }
 
 }
