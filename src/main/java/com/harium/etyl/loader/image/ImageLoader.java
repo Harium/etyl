@@ -152,7 +152,7 @@ public class ImageLoader extends LoaderImpl {
                 }
             } else {
 
-                if (!fullPath.startsWith(IOHelper.FILE_PREFIX)) {
+                if (!isHttpContext() && !fullPath.startsWith(IOHelper.FILE_PREFIX)) {
                     fullPath = IOHelper.FILE_PREFIX + fullPath;
                 }
 
@@ -173,10 +173,10 @@ public class ImageLoader extends LoaderImpl {
                 System.out.println("Etyl can't load " + ext + " files.");
             } else {
                 try {
-                    img = reader.loadImage(dir);
+                    img = reader.loadImage(dir.openStream());
                     images.put(fullPath, img);
                     if (img == null) {
-                        System.err.println("Image " + fullPath + " not found.");
+                        System.err.println("Error on load: " + fullPath);
                     }
                 } catch (IOException e) {
                     System.err.println("Image " + fullPath + " not found.");
