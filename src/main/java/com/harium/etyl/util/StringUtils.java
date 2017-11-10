@@ -5,9 +5,7 @@ import java.io.File;
 public class StringUtils {
 
 	public static final String NEW_LINE = "\n";
-	public static final String WHITE_SPACE = " ";
-	public static final String WINDOWS_SPACING = "%20";
-	
+
 	public static int countOccurrences(String text, char match) {
 		int count = 0;
 		for(int i=0;i<text.length();i++) {
