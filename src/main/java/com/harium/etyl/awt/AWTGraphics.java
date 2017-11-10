@@ -16,7 +16,6 @@ import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
-import java.awt.image.VolatileImage;
 
 
 public class AWTGraphics implements Graphics {

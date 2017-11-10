@@ -1,9 +1,9 @@
 package com.harium.etyl.awt;
 
 import java.awt.BasicStroke;
-import java.awt.Color;
 
 import com.harium.etyl.commons.event.MouseState;
+import com.harium.etyl.commons.graphics.Color;
 import com.harium.etyl.ui.theme.ArrowDrawer;
 import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.ui.theme.ArrowTheme;

@@ -1,10 +1,11 @@
 package com.harium.etyl.ui.selection;
 
 import com.harium.etyl.awt.stroke.DashedStroke;
+import com.harium.etyl.commons.graphics.Color;
 import com.harium.etyl.core.input.mouse.MouseStateChanger;
 import com.harium.etyl.commons.layer.Layer;
+import java.awt.BasicStroke;
 
-import java.awt.*;
 
 public class BaseResizer<T extends Layer> extends Resizer<T> {
 
@@ -21,7 +22,7 @@ public class BaseResizer<T extends Layer> extends Resizer<T> {
         if (!isSelected())
             return;
 
-        g.setColor(java.awt.Color.BLACK);
+        g.setColor(Color.BLACK);
         g.setStroke(dash);
         drawScaledRect(g, selected);
 

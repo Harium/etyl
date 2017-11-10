@@ -2,14 +2,13 @@ package com.harium.etyl.ui.label;
 
 import com.harium.etyl.commons.event.GUIEvent;
 import com.harium.etyl.commons.event.KeyEvent;
+import com.harium.etyl.commons.graphics.Color;
 import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.ui.Label;
 import com.harium.etyl.ui.theme.Theme;
 import com.harium.etyl.ui.theme.ThemeManager;
 import com.harium.etyl.commons.layer.GeometricLayer;
 import com.harium.etyl.layer.TextLayer;
-
-import java.awt.*;
 
 /**
  * @author yuripourre

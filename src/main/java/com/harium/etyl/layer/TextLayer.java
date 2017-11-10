@@ -1,7 +1,6 @@
 package com.harium.etyl.layer;
 
 import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Shape;
 import java.awt.font.FontRenderContext;
@@ -9,6 +8,7 @@ import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 
+import com.harium.etyl.commons.graphics.Color;
 import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.loader.FontLoader;
 
@@ -196,8 +196,6 @@ public class TextLayer extends ImageLayer {
 
 		this.h = (int)size;
 		this.w = (int)Math.ceil(bounds.getWidth());
-
-
 	}
 
 	public void setBorder(boolean border) {
