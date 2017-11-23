@@ -10,10 +10,7 @@ import com.harium.etyl.commons.layer.Layer;
 import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.core.input.mouse.MouseStateChanger;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 public abstract class Resizer<T extends Layer> implements Drawable {
@@ -208,7 +205,11 @@ public abstract class Resizer<T extends Layer> implements Drawable {
 
     protected void checkSelection(int mx, int my) {
         selectedIndex = UNKNOWN;
-        for (Entry<Integer, T> entry : layers.entrySet()) {
+
+        Iterator<Entry<Integer, T>> iterator = layers.entrySet().iterator();
+
+        while (iterator.hasNext()) {
+            Entry<Integer, T> entry = iterator.next();
             T component = entry.getValue();
             if (component.onMouse(mx, my)) {
                 overlay.copy(component);
@@ -408,7 +409,10 @@ public abstract class Resizer<T extends Layer> implements Drawable {
     }
 
     public int getId(T layer) {
-        for (Entry<Integer, T> entry : layers.entrySet()) {
+        Iterator<Entry<Integer, T>> iterator = layers.entrySet().iterator();
+
+        while (iterator.hasNext()) {
+            Entry<Integer, T> entry = iterator.next();
             if (entry.getValue().equals(layer)) {
                 return entry.getKey();
             }
