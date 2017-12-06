@@ -387,8 +387,6 @@ public class AWTGraphics implements Graphics {
 		return centralizeTextX(text, 0, width);
 	}
 
-
-
 	private int centralizeTextX(String text, int x, int w) {
 		int textWidth = textWidth(text);
 

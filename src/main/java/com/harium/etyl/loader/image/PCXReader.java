@@ -51,8 +51,7 @@ public class PCXReader implements ImageReader {
 
 	@Override
 	public BufferedImage loadImage(URL url) throws IOException {
-		InputStream f = url.openStream();
-		return loadImage(f);
+		return loadImage(url.openStream());
 	}
 
 	@Override
