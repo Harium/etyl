@@ -21,6 +21,9 @@ public class AWTReader implements ImageReader {
     }
 
     public static BufferedImage convertImage(BufferedImage original) {
+        if (BufferedImage.TYPE_INT_ARGB == original.getType()) {
+            return original;
+        }
         BufferedImage converted = new BufferedImage(original.getWidth(), original.getHeight(), BufferedImage.TYPE_INT_ARGB);
         converted.getGraphics().drawImage(original, 0, 0, null);
         return converted;
