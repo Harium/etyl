@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import com.harium.etyl.linear.Triangle2;
+import com.harium.etyl.geometry.Triangle2;
 
 import com.badlogic.gdx.math.Vector2;
 

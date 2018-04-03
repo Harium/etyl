@@ -105,9 +105,7 @@ public class AnimatedLayer extends ImageLayer {
     }
 
     public void animate(long now) {
-
         if (stopped) {
-
             startedAt = now;
             changedAt = now;
 
@@ -115,7 +113,6 @@ public class AnimatedLayer extends ImageLayer {
         }
 
         if (now >= changedAt + speed) {
-
             changedAt = now;
 
             boolean hasNextFrame = nextFrame();
@@ -125,9 +122,7 @@ public class AnimatedLayer extends ImageLayer {
             if (!hasNextFrame) {
                 notifyAnimationFinishListener(now);
             }
-
         }
-
     }
 
     //Notify Listener about the end of animation

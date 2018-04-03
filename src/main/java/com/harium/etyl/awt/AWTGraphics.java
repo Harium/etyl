@@ -6,8 +6,8 @@ import com.harium.etyl.awt.helper.TransformHelper;
 import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.commons.layer.GeometricLayer;
 import com.harium.etyl.commons.layer.Layer;
-import com.harium.etyl.linear.Line2D;
-import com.harium.etyl.linear.Point2D;
+import com.harium.etyl.geometry.Line2;
+import com.harium.etyl.geometry.Point2D;
 import com.harium.etyl.commons.math.Vector2i;
 
 import java.awt.*;
@@ -763,8 +763,8 @@ public class AWTGraphics implements Graphics {
 	 * @param line
 	 */
 	@Override
-	public void drawLine(Line2D line) {
-		this.drawLine(line.getP1(), line.getP2());
+	public void drawLine(Line2 line) {
+		this.drawLine(line.getP1().x, line.getP1().y, line.getP2().x, line.getP2().y);
 	}
 
 	/**

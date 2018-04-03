@@ -1,7 +1,7 @@
 package com.harium.etyl.util;
 
-import com.harium.etyl.linear.Point2D;
-import com.harium.etyl.linear.Point3D;
+import com.harium.etyl.geometry.Point2D;
+import com.harium.etyl.geometry.Point3D;
 
 public class PointUtils {
 	
@@ -36,13 +36,5 @@ public class PointUtils {
 
 		return c;
 	}
-	
-	public static double angle(double px, double py, double qx, double qy) {
-		double deltaX = px - qx;
-		double deltaY = py - qy;
 
-		double angleInDegrees = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
-		return angleInDegrees;
-	}
-	
 }

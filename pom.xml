@@ -37,6 +37,11 @@
             <version>1.0.0</version>
         </dependency>
         <dependency>
+            <groupId>com.harium.etyl</groupId>
+            <artifactId>etyl-geometry</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
             <groupId>com.harium</groupId>
             <artifactId>etyl-commons</artifactId>
             <version>1.0.8</version>

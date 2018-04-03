@@ -1,7 +1,7 @@
 package com.harium.etyl.animation.pivot;
 
 import com.harium.etyl.layer.ImageLayer;
-import com.harium.etyl.linear.Point2D;
+import com.harium.etyl.geometry.Point2D;
 
 import java.util.*;
 import java.util.Map.Entry;

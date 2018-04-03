@@ -13,8 +13,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
 import com.harium.etyl.awt.camera.Camera;
-import com.harium.etyl.linear.Line2D;
-import com.harium.etyl.linear.Point2D;
+import com.harium.etyl.geometry.Line2;
+import com.harium.etyl.geometry.Point2D;
 import com.harium.etyl.commons.math.Vector2i;
 import com.harium.etyl.commons.layer.GeometricLayer;
 import com.harium.etyl.commons.layer.Layer;
@@ -222,7 +222,7 @@ public interface Graphics extends TextGraphics {
 	 * 
 	 * @param line
 	 */
-	public void drawLine(Line2D line);
+	public void drawLine(Line2 line);
 
 	/**
 	 * @param xPoints
