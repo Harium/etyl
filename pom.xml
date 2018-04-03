@@ -38,7 +38,7 @@
         </dependency>
         <dependency>
             <groupId>com.harium.etyl</groupId>
-            <artifactId>etyl-geometry</artifactId>
+            <artifactId>geometry</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
