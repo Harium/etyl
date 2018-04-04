@@ -1,4 +1,4 @@
-package com.harium.etyl.drawer;
+package com.harium.etyl.geometry.drawer;
 
 import com.badlogic.gdx.math.Vector2;
 import com.harium.etyl.core.graphics.Graphics;
