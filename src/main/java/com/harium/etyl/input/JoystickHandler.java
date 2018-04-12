@@ -102,13 +102,13 @@ public class JoystickHandler extends LoaderImpl implements Updatable, Runnable {
     }
 
     private void notifyListener() {
+        Iterator<KeyEvent> eventIterator = joystickEvents.listIterator();
 
-        for (KeyEvent event : joystickEvents) {
+        while (eventIterator.hasNext()) {
+            KeyEvent event = eventIterator.next();
             listener.updateJoystickEvent(event);
+            eventIterator.remove();
         }
-
-        joystickEvents.clear();
-
     }
 
     private void listen(Integer id) {

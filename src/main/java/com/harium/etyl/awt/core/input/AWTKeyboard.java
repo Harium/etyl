@@ -1,9 +1,7 @@
 package com.harium.etyl.awt.core.input;
 
 import java.awt.event.KeyListener;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import com.harium.etyl.commons.event.KeyEvent;
 import com.harium.etyl.commons.event.KeyEventListener;
@@ -21,13 +19,13 @@ import com.harium.etyl.util.concurrency.ConcurrentSet;
 public class AWTKeyboard implements KeyListener, Keyboard {
 
 	private KeyEventListener listener;
-	
-	private ConcurrentList<KeyEvent> keyEvents = new ConcurrentList<KeyEvent>();
+
+	private List<KeyEvent> keyEvents = new ArrayList<>();
 
 	private Map<Integer, Boolean> keys = new HashMap<Integer, Boolean>();
 	private Map<Integer, KeyState> keyStates = new HashMap<Integer, KeyState>();
 
-	private ConcurrentSet<Integer> changed = new ConcurrentSet<Integer>();
+	private Set<Integer> changed = new HashSet<>();
 
 	public AWTKeyboard(KeyEventListener listener) {
 		super();
@@ -38,14 +36,12 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 	public void init() {}
 
 	public void update(long now) {
-		
-		Set<Integer> changedCopy = changed.lock();
+		Iterator<Integer> changedIterator = changed.iterator();
 
-		for(Integer key: changedCopy) {
-
+		while (changedIterator.hasNext()) {
+			Integer key = changedIterator.next();
 			KeyState keyState = getState(key);
-
-			boolean pressed = keys.get(key); 
+			boolean pressed = keys.get(key);
 			
 			if (pressed) {
 
@@ -64,14 +60,12 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 					keyStates.put(key, KeyState.RELEASED);
 					addKeyEvent(new KeyEvent(key, KeyState.RELEASED));
 
-					changed.remove(key);
+					changedIterator.remove();
 				}
 			}
 		}
 
 		poll(listener);
-		
-		changed.unlock();
 	}
 
 	private KeyState getState(Integer key) {
@@ -84,16 +78,17 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 	}
 
 	public void poll(KeyEventListener listener) {
-		
-		for (KeyEvent event: keyEvents.lock()) {
+		Iterator<KeyEvent> eventIterator = keyEvents.listIterator();
+
+		while (eventIterator.hasNext()) {
+			KeyEvent event = eventIterator.next();
 			if (event == null) {
 				System.err.println("AWTKeyboard ERROR!");
 				continue;
 			}
 			listener.updateKeyEvent(event);
+			eventIterator.remove();
 		}
-
-		keyEvents.unlock();
 	}
 
 	public void keyPressed( java.awt.event.KeyEvent ke ) {
@@ -144,7 +139,7 @@ public class AWTKeyboard implements KeyListener, Keyboard {
 	}
 
 	public boolean hasPendingEvent() {
-		return changed.getSet().size() > 0;
+		return !changed.isEmpty();
 	}
 	
 	private void addKeyEvent(KeyEvent event) {

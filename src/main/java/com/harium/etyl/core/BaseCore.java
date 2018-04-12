@@ -4,7 +4,6 @@ import com.harium.etyl.awt.AWTWindow;
 import com.harium.etyl.awt.core.input.AWTController;
 import com.harium.etyl.commons.Updatable;
 import com.harium.etyl.core.animation.Animation;
-import com.harium.etyl.core.animation.script.AnimationScript;
 import com.harium.etyl.core.animation.script.SingleIntervalAnimation;
 import com.harium.etyl.commons.context.Application;
 import com.harium.etyl.commons.context.Context;
@@ -130,9 +129,10 @@ public abstract class BaseCore implements Core, KeyEventListener, Updatable, Loa
     }
 
     private void updateInput(Context application, long now) {
-        Deque<PointerEvent> events = getMouse().getEvents();
-        while (!events.isEmpty()) {
-            PointerEvent event = events.pop();
+        Iterator<PointerEvent> eventIterator = getMouse().getEvents().listIterator();
+
+        while (eventIterator.hasNext()) {
+            PointerEvent event = eventIterator.next();
             application.updateMouse(event);
             updatePointerEvent(event);
         }
@@ -187,10 +187,7 @@ public abstract class BaseCore implements Core, KeyEventListener, Updatable, Loa
 
             context.setLastUpdate(now);
 
-            //Update Components
-            for (UIComponent component : context.getComponents()) {
-                component.update(now);
-            }
+            updateComponents(context, now);
 
         } else if (now - context.getLastUpdate() >= context.getUpdateInterval()) {
 
@@ -204,12 +201,18 @@ public abstract class BaseCore implements Core, KeyEventListener, Updatable, Loa
 
             context.setLastUpdate(now);
 
-            for (UIComponent component : context.getComponents()) {
-                component.update(now);
-            }
+            updateComponents(context, now);
         }
 
         return true;
+    }
+
+    private void updateComponents(Context context, long now) {
+        Iterator<UIComponent> componentIterator = context.getComponents().listIterator();
+        while (componentIterator.hasNext()) {
+            UIComponent component = componentIterator.next();
+            component.update(now);
+        }
     }
 
     private void updateActiveWindow(long now) {
@@ -305,20 +308,16 @@ public abstract class BaseCore implements Core, KeyEventListener, Updatable, Loa
     }
 
     private void drawGlobalEffects(Graphics g) {
+        Iterator<SingleIntervalAnimation> scriptIterator = globalScripts.listIterator();
 
-        List<AnimationScript> remove = new ArrayList<AnimationScript>();
-
-        for (SingleIntervalAnimation script : globalScripts) {
+        while (scriptIterator.hasNext()) {
+            SingleIntervalAnimation script = scriptIterator.next();
 
             if (!script.isStopped()) {
                 script.getTarget().draw(g);
             } else {
-                remove.add(script);
+                scriptIterator.remove();
             }
-        }
-
-        for (AnimationScript script : remove) {
-            globalScripts.remove(script);
         }
     }
 

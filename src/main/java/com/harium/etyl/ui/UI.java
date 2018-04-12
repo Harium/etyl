@@ -17,6 +17,7 @@ import com.harium.etyl.ui.theme.ThemeManager;
 import com.harium.etyl.ui.theme.listener.ThemeListener;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class UI implements Module, ThemeListener, MouseStateChanger {
@@ -69,27 +70,47 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     }
 
     public void updateGui(List<View> components) {
-        for (GUIEvent event : guiEvents) {
-            for (View component : components) {
-                updateGuiComponent(component, event);
-            }
-        }
+        Iterator<GUIEvent> eventIterator = guiEvents.listIterator();
 
-        guiEvents.clear();
+        while (eventIterator.hasNext()) {
+            GUIEvent event = eventIterator.next();
+
+            dispatchEvent(event, components);
+            // Better than clear (avoid clear unhandled events)
+            eventIterator.remove();
+        }
     }
 
-    private void updateGuiComponent(View component, GUIEvent event) {
+    @Override
+    public void updateGuiEvent(GUIEvent event) {
+        dispatchEvent(event, views);
+    }
+
+    public void dispatchEvent(GUIEvent event, List<View> views) {
+        Iterator<View> componentIterator = views.listIterator();
+
+        while (componentIterator.hasNext()) {
+            View component = componentIterator.next();
+            dispatchEvent(event, component);
+        }
+    }
+
+    private void dispatchEvent(GUIEvent event, View component) {
         component.updateEvent(event);
 
-        for (View child : views) {
-            updateGuiComponent(child, event);
+        Iterator<View> viewIterator = component.views.listIterator();
+        while (viewIterator.hasNext()) {
+            View child = viewIterator.next();
+            dispatchEvent(event, child);
         }
     }
 
     public void updateMouseViews(PointerEvent event, List<View> views) {
         updatingEvents = true;
-        for (View view : views) {
 
+        Iterator<View> viewIterator = views.listIterator();
+        while (viewIterator.hasNext()) {
+            View view = viewIterator.next();
             boolean wasMouseOver = view.isMouseOver();
             //Update View
             updateEvent(view, view.updateMouse(event));
@@ -313,7 +334,10 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     }
 
     public void drawUIViews(Graphics g) {
-        for (View child : views) {
+        Iterator<View> componentIterator = views.listIterator();
+
+        while (componentIterator.hasNext()) {
+            View child = componentIterator.next();
             child.drawWithChildren(g);
         }
     }
@@ -344,13 +368,6 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
                     updateEvent(focus, focusEvent);
                 }
             }
-        }
-    }
-
-    @Override
-    public void updateGuiEvent(GUIEvent event) {
-        for (View component : views) {
-            updateGuiComponent(component, event);
         }
     }
 
