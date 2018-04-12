@@ -36,7 +36,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 	protected int dragX = 0;
 	protected int dragY = 0;
 
-	private List<PointerEvent> events = new ArrayList<>(8);
+	private Deque<PointerEvent> events = new ArrayDeque<>(8);
 	
 	public Mouse(int x, int y) {
 		super();
@@ -215,7 +215,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 		events.add(new PointerEvent(MouseEvent.MOUSE_NONE, PointerState.MOVE, x, y));
 	}
 
-	public List<PointerEvent> getEvents() {
+	public Deque<PointerEvent> getEvents() {
 		return events;
 	}
 

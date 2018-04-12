@@ -129,10 +129,10 @@ public abstract class BaseCore implements Core, KeyEventListener, Updatable, Loa
     }
 
     private void updateInput(Context application, long now) {
-        Iterator<PointerEvent> eventIterator = getMouse().getEvents().listIterator();
+        Deque<PointerEvent> events = getMouse().getEvents();
 
-        while (eventIterator.hasNext()) {
-            PointerEvent event = eventIterator.next();
+        while (!events.isEmpty()) {
+            PointerEvent event = events.pop();
             application.updateMouse(event);
             updatePointerEvent(event);
         }
@@ -257,7 +257,6 @@ public abstract class BaseCore implements Core, KeyEventListener, Updatable, Loa
     }
 
     public void updatePointerEvent(PointerEvent event) {
-
         if (fixEventPosition) {
             fixEventPosition(event);
         }
@@ -268,13 +267,11 @@ public abstract class BaseCore implements Core, KeyEventListener, Updatable, Loa
     }
 
     private void updateWindowEvent(PointerEvent event, AWTWindow window) {
-
         GUIEvent frameEvent = updateFrameEvents(event);
 
         if (frameEvent != GUIEvent.NONE) {
             superEvent = frameEvent;
         }
-
     }
 
     public void draw(Graphics g) {

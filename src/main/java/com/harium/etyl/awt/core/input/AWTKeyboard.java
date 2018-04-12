@@ -1,151 +1,145 @@
 package com.harium.etyl.awt.core.input;
 
-import java.awt.event.KeyListener;
-import java.util.*;
-
 import com.harium.etyl.commons.event.KeyEvent;
 import com.harium.etyl.commons.event.KeyEventListener;
 import com.harium.etyl.commons.event.KeyState;
 import com.harium.etyl.core.input.keyboard.Keyboard;
-import com.harium.etyl.util.concurrency.ConcurrentList;
-import com.harium.etyl.util.concurrency.ConcurrentSet;
+
+import java.awt.event.KeyListener;
+import java.util.*;
 
 /**
- *
  * @author yuripourre
- *
  */
 
 public class AWTKeyboard implements KeyListener, Keyboard {
 
-	private KeyEventListener listener;
+    private KeyEventListener listener;
 
-	private List<KeyEvent> keyEvents = new ArrayList<>();
+    private Deque<KeyEvent> keyEvents = new ArrayDeque<>();
 
-	private Map<Integer, Boolean> keys = new HashMap<Integer, Boolean>();
-	private Map<Integer, KeyState> keyStates = new HashMap<Integer, KeyState>();
+    private Map<Integer, Boolean> keys = new HashMap<Integer, Boolean>();
+    private Map<Integer, KeyState> keyStates = new HashMap<Integer, KeyState>();
 
-	private Set<Integer> changed = new HashSet<>();
+    private Set<Integer> changed = new HashSet<>();
 
-	public AWTKeyboard(KeyEventListener listener) {
-		super();
-		this.listener = listener;
-	}
+    public AWTKeyboard(KeyEventListener listener) {
+        super();
+        this.listener = listener;
+    }
 
-	@Override
-	public void init() {}
+    @Override
+    public void init() {
+    }
 
-	public void update(long now) {
-		Iterator<Integer> changedIterator = changed.iterator();
+    public void update(long now) {
+        Iterator<Integer> changedIterator = changed.iterator();
 
-		while (changedIterator.hasNext()) {
-			Integer key = changedIterator.next();
-			KeyState keyState = getState(key);
-			boolean pressed = keys.get(key);
-			
-			if (pressed) {
+        while (changedIterator.hasNext()) {
+            Integer key = changedIterator.next();
+            KeyState keyState = getState(key);
+            boolean pressed = keys.get(key);
 
-				if (keyState == KeyState.RELEASED) {
-					keyStates.put(key,KeyState.ONCE);
-					addKeyEvent(new KeyEvent(key, KeyState.PRESSED));
-				} else if (keyState != KeyState.PRESSED) {
-					keyStates.put(key, KeyState.PRESSED);
-				}
+            if (pressed) {
 
-			} else {
+                if (keyState == KeyState.RELEASED) {
+                    keyStates.put(key, KeyState.ONCE);
+                    addKeyEvent(new KeyEvent(key, KeyState.PRESSED));
+                } else if (keyState != KeyState.PRESSED) {
+                    keyStates.put(key, KeyState.PRESSED);
+                }
 
-				if ((keyState == KeyState.ONCE) || (keyState == KeyState.PRESSED)) {
-					keyStates.put(key,KeyState.FIRST_RELEASED);
-				} else if (keyState == KeyState.FIRST_RELEASED) {
-					keyStates.put(key, KeyState.RELEASED);
-					addKeyEvent(new KeyEvent(key, KeyState.RELEASED));
+            } else {
 
-					changedIterator.remove();
-				}
-			}
-		}
+                if ((keyState == KeyState.ONCE) || (keyState == KeyState.PRESSED)) {
+                    keyStates.put(key, KeyState.FIRST_RELEASED);
+                } else if (keyState == KeyState.FIRST_RELEASED) {
+                    keyStates.put(key, KeyState.RELEASED);
+                    addKeyEvent(new KeyEvent(key, KeyState.RELEASED));
 
-		poll(listener);
-	}
+                    changedIterator.remove();
+                }
+            }
+        }
 
-	private KeyState getState(Integer key) {
-		KeyState state = keyStates.get(key);
-		if (state == null) {
-			state = KeyState.RELEASED;
-		}
-			
-		return state;
-	}
+        poll(listener);
+    }
 
-	public void poll(KeyEventListener listener) {
-		Iterator<KeyEvent> eventIterator = keyEvents.listIterator();
+    private KeyState getState(Integer key) {
+        KeyState state = keyStates.get(key);
+        if (state == null) {
+            state = KeyState.RELEASED;
+        }
 
-		while (eventIterator.hasNext()) {
-			KeyEvent event = eventIterator.next();
-			if (event == null) {
-				System.err.println("AWTKeyboard ERROR!");
-				continue;
-			}
-			listener.updateKeyEvent(event);
-			eventIterator.remove();
-		}
-	}
+        return state;
+    }
 
-	public void keyPressed( java.awt.event.KeyEvent ke ) {
+    public void poll(KeyEventListener listener) {
+        while (!keyEvents.isEmpty()) {
+            KeyEvent event = keyEvents.pop();
+            if (event == null) {
+                System.err.println("AWTKeyboard ERROR!");
+                continue;
+            }
+            listener.updateKeyEvent(event);
+        }
+    }
 
-		int code = getKeyFromEvent(ke);
+    public void keyPressed(java.awt.event.KeyEvent ke) {
 
-		keys.put(code, true);
+        int code = getKeyFromEvent(ke);
 
-		changed.add(code);
+        keys.put(code, true);
 
-		ke.consume();
-	}
+        changed.add(code);
 
-	public void keyReleased( java.awt.event.KeyEvent ke ) {
+        ke.consume();
+    }
 
-		int code = getKeyFromEvent(ke);
+    public void keyReleased(java.awt.event.KeyEvent ke) {
 
-		keys.put(code, false);
+        int code = getKeyFromEvent(ke);
 
-		changed.add(code);
+        keys.put(code, false);
 
-		ke.consume();
-	}
+        changed.add(code);
 
-	@Override
-	public void keyTyped( java.awt.event.KeyEvent ke) {
+        ke.consume();
+    }
 
-		int code = getKeyFromEvent(ke);
+    @Override
+    public void keyTyped(java.awt.event.KeyEvent ke) {
 
-		char c = ke.getKeyChar();
+        int code = getKeyFromEvent(ke);
 
-		//TODO Fix typed
-		if ( c != KeyEvent.CHAR_UNDEFINED ) {
-			addKeyEvent(new KeyEvent(code, c, KeyState.TYPED));
-		}
+        char c = ke.getKeyChar();
 
-		ke.consume();
-	}
+        //TODO Fix typed
+        if (c != KeyEvent.CHAR_UNDEFINED) {
+            addKeyEvent(new KeyEvent(code, c, KeyState.TYPED));
+        }
 
-	private int getKeyFromEvent(java.awt.event.KeyEvent ke) {
-		int code = ke.getKeyCode();
+        ke.consume();
+    }
 
-		if (ke.getKeyLocation() != java.awt.event.KeyEvent.KEY_LOCATION_STANDARD) {
-			code += ke.getKeyLocation()*100;
-		}
+    private int getKeyFromEvent(java.awt.event.KeyEvent ke) {
+        int code = ke.getKeyCode();
 
-		return code;
-	}
+        if (ke.getKeyLocation() != java.awt.event.KeyEvent.KEY_LOCATION_STANDARD) {
+            code += ke.getKeyLocation() * 100;
+        }
 
-	public boolean hasPendingEvent() {
-		return !changed.isEmpty();
-	}
-	
-	private void addKeyEvent(KeyEvent event) {
-		long now = System.currentTimeMillis();
-		event.setTimestamp(now);
-		keyEvents.add(event);
-	}
+        return code;
+    }
+
+    public boolean hasPendingEvent() {
+        return !changed.isEmpty();
+    }
+
+    private void addKeyEvent(KeyEvent event) {
+        long now = System.currentTimeMillis();
+        event.setTimestamp(now);
+        keyEvents.add(event);
+    }
 
 }
