@@ -2,7 +2,7 @@
 
 Etyl is the newest version of [Etyllica](https://github.com/etyllica/etyllica) (a 2D Game Engine made in Java).
 
-The project was modified to be a framework over AWT or LibGDX, so you can run the exactly *SAME* code in Desktop or Android (and possibly HTML5 and iOS in the future, thanks to LibGDX).
+The project was modified to handle multiples backends (choose between AWT or LibGDX), now you can run the exactly *SAME* code in Desktop or Android (and possibly HTML5 and iOS in the future, thanks to LibGDX).
 
 ## How to start
 
@@ -21,6 +21,47 @@ The project was modified to be a framework over AWT or LibGDX, so you can run th
 
 ## Local jar
 Can't use maven? No problem, [build a local jar](https://github.com/Harium/etyl/wiki/Building-a-local-jar).
+
+## Minimal Working Example
+```
+import com.harium.etyl.Etyl;
+import com.harium.etyl.commons.context.Application;
+import com.harium.etyl.commons.graphics.Color;
+import com.harium.etyl.core.graphics.Graphics;
+
+public class Main extends Etyl {
+
+    public Main() {
+        super(800, 600);
+    }
+
+    public static void main(String[] args) {
+        Main app = new Main();
+        app.setTitle("Etyl");
+        app.init();
+    }
+
+    @Override
+    public Application startApplication() {
+        return new HelloWorld(w, h);
+    }
+
+    public class HelloWorld extends Application {
+        public HelloWorld(int w, int h) {
+            super(w, h);
+        }
+
+        @Override
+        public void load() {}
+
+        @Override
+        public void draw(Graphics g) {
+            g.setColor(Color.GREEN_ETYL);
+            g.fillRect(0, 0, w, h);
+        }
+    }
+}
+```
 
 ## Contact
 Do you have a request? Need some help?
