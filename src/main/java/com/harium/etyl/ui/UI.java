@@ -7,7 +7,7 @@ import com.harium.etyl.commons.module.Module;
 import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.core.input.mouse.MouseStateChanger;
 import com.harium.etyl.i18n.Language;
-import com.harium.etyl.i18n.LanguageChangerListener;
+import com.harium.etyl.i18n.LanguageChangeListener;
 import com.harium.etyl.i18n.LanguageModule;
 import com.harium.etyl.theme.etyllic.EtylArrowTheme;
 import com.harium.etyl.ui.theme.ArrowDrawer;
@@ -51,7 +51,6 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
 
     public static List<GUIEvent> guiEvents = new ArrayList<GUIEvent>();
     private static List<View> views = new ArrayList<View>();
-    private static List<LanguageChangerListener> listeners = new ArrayList<LanguageChangerListener>();
 
     private UI() {
         super();
@@ -452,23 +451,11 @@ public class UI implements Module, ThemeListener, MouseStateChanger {
     public static void changeLanguage(Language language) {
         LanguageModule.getInstance().changeLanguage(language);
         guiEvents.add(GUIEvent.LANGUAGE_CHANGED);
-
-        for (LanguageChangerListener listener : listeners) {
-            listener.changeLanguage(language);
-        }
     }
 
     @Override
     public void changeMouseState(MouseState state) {
         arrowDrawer.changeState(state);
-    }
-
-    public static void addListener(LanguageChangerListener listener) {
-        listeners.add(listener);
-    }
-
-    public static void removeListener(LanguageChangerListener listener) {
-        listeners.remove(listener);
     }
 
     public View getMouseOver() {

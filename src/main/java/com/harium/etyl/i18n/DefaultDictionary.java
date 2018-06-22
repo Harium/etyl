@@ -15,13 +15,13 @@ public class DefaultDictionary extends Dictionary {
 	
 	private void populateVocabulary() {
 		Map<String,String> usVocabulary = new HashMap<String,String>();
-		usVocabulary.put(MESSAGE_FULLSCREEN, "Press ESC to exit Fullscreen.");
+		usVocabulary.put(MESSAGE_FULLSCREEN, "Press ESC to exit fullscreen.");
 		
 		Map<String,String> brVocabulary = new HashMap<String,String>();
-		brVocabulary.put(MESSAGE_FULLSCREEN, "Pressione ESC para sair da Tela Cheia.");
+		brVocabulary.put(MESSAGE_FULLSCREEN, "Pressione ESC para sair da tela cheia.");
 		
-		vocabularies.put(Language.ENGLISH_US, usVocabulary);
-		vocabularies.put(Language.PORTUGUESE_BRAZIL, brVocabulary);
+		sentences.put(Language.ENGLISH_US, usVocabulary);
+		sentences.put(Language.PORTUGUESE_BRAZIL, brVocabulary);
 	}
 
 }
