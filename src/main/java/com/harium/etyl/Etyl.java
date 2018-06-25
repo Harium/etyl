@@ -26,6 +26,7 @@ public abstract class Etyl extends JFrame implements EtylFrame {
     protected int w = 640;
     protected int h = 480;
     protected String icon = "";
+    protected boolean customCursor = false;
 
     private Application application;
 
@@ -64,6 +65,11 @@ public abstract class Etyl extends JFrame implements EtylFrame {
     private void initCore() {
         core = new AWTCore(this, w, h);
         core.setEngine(this);
+        if (customCursor) {
+            core.hideCursor();
+        } else {
+            core.showCursor();
+        }
     }
 
     private void startCore() {
@@ -121,10 +127,6 @@ public abstract class Etyl extends JFrame implements EtylFrame {
 
     public void addLoader(Loader loader) {
         core.addLoader(loader);
-    }
-
-    protected void hideCursor() {
-        core.hideCursor();
     }
 
     @Override

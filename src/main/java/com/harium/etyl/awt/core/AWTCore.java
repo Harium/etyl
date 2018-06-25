@@ -46,6 +46,7 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
     private GameLoop gameLoop;
 
     private boolean locked = true;
+    private boolean hideCursor = true;
 
     public AWTCore(Component component, int width, int height) {
         super(width, height);
@@ -74,7 +75,6 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
     }
 
     public void initMonitors(int width, int height) {
-
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice[] devices = ge.getScreenDevices();
 
@@ -166,7 +166,14 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
         component.setFocusable(true);
         component.requestFocus();
 
-        hideDefaultCursor(component);
+        // Avoid hide default cursor
+        if (hideCursor) {
+            hideDefaultCursor(component);
+            application.showCursor();
+        } else {
+            // Hide custom cursor
+            application.hideCursor();
+        }
 
         // Define Listeners
         component.addMouseMotionListener(getMouse());
@@ -186,7 +193,6 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
     }
 
     public void defineSize(int width, int height) {
-
         component.setSize(width, height);
 
         volatileImage = createBackBuffer(width, height);
@@ -197,7 +203,6 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
     }
 
     public void validateVolatileImage() {
-
         int valCode = volatileImage.validate(configuration);
 
         // This means the device doesn't match up to this hardware accelerated image.
@@ -205,11 +210,9 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
             volatileImage = createBackBuffer(width, height); // recreate the hardware accelerated image.
             graphic.setScreen(volatileImage.createGraphics());
         }
-
     }
 
     public static void hideDefaultCursor(Component component) {
-
         int[] pixels = new int[16 * 16];
 
         Cursor transparentCursor = Toolkit.getDefaultToolkit().createCustomCursor(
@@ -219,15 +222,18 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
     }
 
     public void paint(Graphics g) {
-        if (locked)
+        if (locked) {
             return;
+        }
 
         validateVolatileImage();
 
         draw(graphic);
 
-        if (volatileImage == null)
+        // TODO Avoid check for null
+        if (volatileImage == null) {
             return;
+        }
 
         if (!isFullScreenEnable()) {
             g.drawImage(volatileImage, window.getContext().getX(), window.getContext().getY(), component);
@@ -268,7 +274,7 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
     }
 
     public void hideCursor() {
-        getCurrentContext().hideCursor();
+        hideCursor = true;
     }
 
     public void setEngine(EtylFrame engine) {
@@ -337,5 +343,9 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
 
     public FullScreenWindow getFullScreenWindow() {
         return fullScreen;
+    }
+
+    public void showCursor() {
+        hideCursor = false;
     }
 }

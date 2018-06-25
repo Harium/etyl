@@ -151,7 +151,6 @@ public abstract class BaseCore implements Core, KeyEventListener, Updatable, Loa
     }
 
     private void handleFullScreen() {
-
         if (enableFullScreen) {
             enableFullScreen = false;
 
@@ -163,7 +162,6 @@ public abstract class BaseCore implements Core, KeyEventListener, Updatable, Loa
 
             superEvent = GUIEvent.DISABLE_FULL_SCREEN;
         }
-
     }
 
     public void resizeApplication(int w, int h) {
