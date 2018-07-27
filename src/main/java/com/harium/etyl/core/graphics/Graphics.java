@@ -19,27 +19,22 @@ import com.harium.etyl.commons.math.Vector2i;
 import com.harium.etyl.commons.layer.GeometricLayer;
 import com.harium.etyl.commons.layer.Layer;
 
-/**
- * 
- * @author yuripourre
- *
- */
 
 public interface Graphics extends TextGraphics {
 
-	public void setFastImage(BufferedImage image);
+	void setFastImage(BufferedImage image);
 
-	public void setImage(BufferedImage image);
+	void setImage(BufferedImage image);
 
-	public void setFps(float fps);
+	void setFps(float fps);
 
-	public float getFps();
+	float getFps();
 
-	public void resetImage();
+	void resetImage();
 
-	public int getWidth();
+	int getWidth();
 	
-	public int getHeight();
+	int getHeight();
 	
 	/**
 	 * 
@@ -54,29 +49,36 @@ public interface Graphics extends TextGraphics {
 	 * @param sy2
 	 * @param observer
 	 */
-	public void drawImage (Image img, int dx1, int dy1,int dx2, int dy2, int sx1 , int sy1, int sx2, int sy2, ImageObserver observer);
+	void drawImage (Image img, int dx1, int dy1,int dx2, int dy2, int sx1 , int sy1, int sx2, int sy2, ImageObserver observer);
 
-	public void drawImage (Image img, float dx1, float dy1, float dx2, float dy2, float sx1 , float sy1, float sx2, float sy2, ImageObserver observer);
+	void drawImage (Image img, float dx1, float dy1, float dx2, float dy2, float sx1 , float sy1, float sx2, float sy2, ImageObserver observer);
 
-	public Graphics2D getGraphics();
+	Graphics2D getGraphics();
 
-	/**
-	 * 
-	 * @param layer
-	 */
-	public void drawRect(GeometricLayer layer);
-
-	/**
-	 * 
-	 * @param layer
-	 */
-	public void drawRect(Layer layer);
+    /**
+     * Method to draw a single pixel
+     * @param x
+     * @param y
+     */
+	void putPixel(int x, int y);
 
 	/**
 	 * 
 	 * @param layer
 	 */
-	public void fillOval(GeometricLayer layer);
+	void drawRect(GeometricLayer layer);
+
+	/**
+	 * 
+	 * @param layer
+	 */
+	void drawRect(Layer layer);
+
+	/**
+	 * 
+	 * @param layer
+	 */
+	void fillOval(GeometricLayer layer);
 
 	/**
 	 * 
@@ -84,84 +86,84 @@ public interface Graphics extends TextGraphics {
 	 * @param startAngle
 	 * @param arcAngle
 	 */
-	public void fillArc(GeometricLayer layer, int startAngle, int arcAngle);
+	void fillArc(GeometricLayer layer, int startAngle, int arcAngle);
 
 	/**
 	 * 
 	 * @param width
 	 */
-	public void setLineWidth(float width);
+	void setLineWidth(float width);
 
-	public AffineTransform getTransform();
-
-	/**
-	 * 
-	 * @param tx
-	 */
-	public void setTransform(AffineTransform tx);
+	AffineTransform getTransform();
 
 	/**
 	 * 
 	 * @param tx
 	 */
-	public void transform(AffineTransform tx);
+	void setTransform(AffineTransform tx);
 
-	public void resetTransform();
+	/**
+	 * 
+	 * @param tx
+	 */
+	void transform(AffineTransform tx);
+
+	void resetTransform();
 
 	/**
 	 * Set basic stroke with width 1f 
 	 */
-	public void resetStroke();
+	void resetStroke();
 
 	/**
 	 * 
 	 * @param stroke
 	 */
-	public void setStroke(Stroke stroke);
+	void setStroke(Stroke stroke);
 
 	/**
 	 * 
 	 * @param color
 	 */
-	public void setColor(int color) ;
+	void setColor(int color) ;
 
 	/**
 	 * 
 	 * @param color
 	 */
-	public void setColor(Color color);
+	void setColor(Color color);
 
-	public void setColor(com.harium.etyl.commons.graphics.Color color);
+	void setColor(com.harium.etyl.commons.graphics.Color color);
 
 	/**
 	 * 
 	 * @param percent
 	 */
-	public void setAlpha(int percent);
+	void setAlpha(int percent);
 	
-	public void resetAlpha();
+	void resetAlpha();
 
-	public void setComposite(AlphaComposite composite);
+	void setComposite(AlphaComposite composite);
 
-	public void setClearAlpha(int percent);
+	void setClearAlpha(int percent);
 
 	/**
 	 * 
 	 * @param opacity
 	 */
-	public void setOpacity(int opacity);
+	void setOpacity(int opacity);
 
-	public void resetOpacity();
+	void resetOpacity();
 
 	/**
 	 * Method to prepare graphics to draw images ONLY
 	 */
-	public void beginImageBatch();
+	void beginImageBatch();
 	
 	/**
 	 * Method to end images ONLY mode
 	 */
-	public void endImageBatch();
+	void endImageBatch();
 	
 	/**
 	 * 
@@ -169,7 +171,7 @@ public interface Graphics extends TextGraphics {
 	 * @param x
 	 * @param y
 	 */
-	public void drawImage(Image img, int x, int y);
+	void drawImage(Image img, int x, int y);
 
 	/**
 	 * 
@@ -180,7 +182,7 @@ public interface Graphics extends TextGraphics {
 	 * @param startAngle
 	 * @param arcAngle
 	 */
-	public void drawArc(int x, int y, int w, int h, int startAngle, int arcAngle);
+	void drawArc(int x, int y, int w, int h, int startAngle, int arcAngle);
 
 	/**
 	 * 
@@ -191,7 +193,7 @@ public interface Graphics extends TextGraphics {
 	 * @param startAngle
 	 * @param arcAngle
 	 */
-	public void drawArc(float x, float y, float w, float h, int startAngle, int arcAngle);
+	void drawArc(float x, float y, float w, float h, int startAngle, int arcAngle);
 
 	/**
 	 * 
@@ -200,7 +202,7 @@ public interface Graphics extends TextGraphics {
 	 * @param x2
 	 * @param y2
 	 */
-	public void drawLine(int x1,int y1,int x2,int y2);
+	void drawLine(int x1,int y1,int x2,int y2);
 
 	/**
 	 * 
@@ -209,56 +211,47 @@ public interface Graphics extends TextGraphics {
 	 * @param x2
 	 * @param y2
 	 */
-	public void drawLine(float x1,float y1,float x2,float y2);
+	void drawLine(float x1,float y1,float x2,float y2);
 
 	/**
 	 * 
 	 * @param p
 	 * @param q
 	 */
-	public void drawLine(Point2D p, Point2D q);
+	void drawLine(Point2D p, Point2D q);
 	
 	/**
 	 * 
 	 * @param line
 	 */
-	public void drawLine(Line2 line);
+	void drawLine(Line2 line);
 
 	/**
 	 * @param xPoints
 	 * @param yPoints
 	 * @param nPoints
 	 */
-	public void drawPolygon(int[] xPoints, int[] yPoints, int nPoints);
+	void drawPolygon(int[] xPoints, int[] yPoints, int nPoints);
 	
 	/**
 	 * 
 	 * @param polygon
 	 */
-	public void drawPolygon(Polygon polygon);
+	void drawPolygon(Polygon polygon);
 
 	/**
 	 * 
 	 * @param polygon
 	 */
-	public void fillPolygon(Polygon polygon);
+	void fillPolygon(Polygon polygon);
 
 	/**
 	 * 
 	 * @param layer
 	 */
-	public void fillRect(GeometricLayer layer);
+	void fillRect(GeometricLayer layer);
 
-	public void fillRect(Layer layer);
-
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param w
-	 * @param h
-	 */
-	public void fillRect(int x, int y, int w, int h);
+	void fillRect(Layer layer);
 
 	/**
 	 * 
@@ -267,8 +260,7 @@ public interface Graphics extends TextGraphics {
 	 * @param w
 	 * @param h
 	 */
-	public void fillRect(float x, float y, float w, float h);
-
+	void fillRect(int x, int y, int w, int h);
 
 	/**
 	 * 
@@ -276,9 +268,9 @@ public interface Graphics extends TextGraphics {
 	 * @param y
 	 * @param w
 	 * @param h
-	 * @param raised
 	 */
-	public void fill3DRect(int x, int y, int w, int h, boolean raised);
+	void fillRect(float x, float y, float w, float h);
+
 
 	/**
 	 * 
@@ -288,7 +280,17 @@ public interface Graphics extends TextGraphics {
 	 * @param h
 	 * @param raised
 	 */
-	public void fill3DRect(float x, float y, float w, float h, boolean raised);
+	void fill3DRect(int x, int y, int w, int h, boolean raised);
+
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param raised
+	 */
+	void fill3DRect(float x, float y, float w, float h, boolean raised);
 
 	/**
 	 * 
@@ -299,7 +301,7 @@ public interface Graphics extends TextGraphics {
 	 * @param startAngle
 	 * @param arcAngle
 	 */
-	public void fillArc(int x, int y, int w, int h, int startAngle, int arcAngle);
+	void fillArc(int x, int y, int w, int h, int startAngle, int arcAngle);
 
 	/**
 	 * 
@@ -310,7 +312,7 @@ public interface Graphics extends TextGraphics {
 	 * @param startAngle
 	 * @param arcAngle
 	 */
-	public void fillArc(float x, float y, float w, float h, int startAngle, int arcAngle);
+	void fillArc(float x, float y, float w, float h, int startAngle, int arcAngle);
 
 	/**
 	 * 
@@ -319,7 +321,7 @@ public interface Graphics extends TextGraphics {
 	 * @param w
 	 * @param h
 	 */
-	public void drawRect(int x, int y, int w, int h);
+	void drawRect(int x, int y, int w, int h);
 
 	/**
 	 * 
@@ -328,7 +330,7 @@ public interface Graphics extends TextGraphics {
 	 * @param w
 	 * @param h
 	 */
-	public void drawRect(double x, double y, double w, double h);
+	void drawRect(double x, double y, double w, double h);
 
 	/**
 	 * 
@@ -339,7 +341,7 @@ public interface Graphics extends TextGraphics {
 	 * @param arcWidth
 	 * @param arcHeight
 	 */
-	public void drawRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight);
+	void drawRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight);
 
 	/**
 	 * 
@@ -350,7 +352,7 @@ public interface Graphics extends TextGraphics {
 	 * @param arcWidth
 	 * @param arcHeight
 	 */
-	public void fillRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight);
+	void fillRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight);
 
 	/**
 	 * 
@@ -359,7 +361,7 @@ public interface Graphics extends TextGraphics {
 	 * @param w
 	 * @param h
 	 */
-	public void drawOval(int x, int y, int w, int h);
+	void drawOval(int x, int y, int w, int h);
 
 	/**
 	 * 
@@ -368,7 +370,7 @@ public interface Graphics extends TextGraphics {
 	 * @param w
 	 * @param h
 	 */
-	public void drawOval(float x, float y, float w, float h);
+	void drawOval(float x, float y, float w, float h);
 
 	/**
 	 * 
@@ -376,7 +378,7 @@ public interface Graphics extends TextGraphics {
 	 * @param cy
 	 * @param radius
 	 */
-	public void drawCircle(int cx, int cy, int radius);
+	void drawCircle(int cx, int cy, int radius);
 
 	/**
 	 * 
@@ -384,7 +386,7 @@ public interface Graphics extends TextGraphics {
 	 * @param cy
 	 * @param radius
 	 */
-	public void drawCircle(float cx, float cy, float radius);
+	void drawCircle(float cx, float cy, float radius);
 
 	/**
 	 * 
@@ -392,14 +394,14 @@ public interface Graphics extends TextGraphics {
 	 * @param cy
 	 * @param radius
 	 */
-	public void drawCircle(double cx, double cy, double radius);
+	void drawCircle(double cx, double cy, double radius);
 
 	/**
 	 * 
 	 * @param point
 	 * @param radius
 	 */
-	public void drawCircle(Point2D point, int radius);
+	void drawCircle(Point2D point, int radius);
 
 	/**
 	 * 
@@ -407,7 +409,7 @@ public interface Graphics extends TextGraphics {
 	 * @param cy
 	 * @param radius
 	 */
-	public void fillCircle(int cx, int cy, int radius);
+	void fillCircle(int cx, int cy, int radius);
 
 	/**
 	 * 
@@ -415,7 +417,7 @@ public interface Graphics extends TextGraphics {
 	 * @param cy
 	 * @param radius
 	 */
-	public void fillCircle(float cx, float cy, float radius);
+	void fillCircle(float cx, float cy, float radius);
 
 	/**
 	 * 
@@ -423,21 +425,21 @@ public interface Graphics extends TextGraphics {
 	 * @param cy
 	 * @param radius
 	 */
-	public void fillCircle(double cx, double cy, double radius);
+	void fillCircle(double cx, double cy, double radius);
 
 	/**
 	 * 
 	 * @param point
 	 * @param radius
 	 */
-	public void fillCircle(Point2D point, int radius);
+	void fillCircle(Point2D point, int radius);
 	
 	/**
 	 * 
 	 * @param point
 	 * @param radius
 	 */
-	public void fillCircle(Vector2i point, int radius);
+	void fillCircle(Vector2i point, int radius);
 
 	/**
 	 * 
@@ -446,7 +448,7 @@ public interface Graphics extends TextGraphics {
 	 * @param w
 	 * @param h
 	 */
-	public void fillOval(int x, int y, int w, int h);
+	void fillOval(int x, int y, int w, int h);
 
 	/**
 	 * 
@@ -455,28 +457,28 @@ public interface Graphics extends TextGraphics {
 	 * @param w
 	 * @param h
 	 */
-	public void fillOval(float x, float y, float w, float h);
+	void fillOval(float x, float y, float w, float h);
 
 	/**
 	 * @param xPoints
 	 * @param yPoints
 	 * @param nPoints
 	 */
-	public void fillPolygon(int[] xPoints, int[] yPoints, int nPoints);
+	void fillPolygon(int[] xPoints, int[] yPoints, int nPoints);
 
 	/**
 	 * 
 	 * @param shape
 	 */
-	public void draw(Shape shape);
+	void draw(Shape shape);
 
 	/**
 	 * 
 	 * @param shape
 	 */
-	public void fill(Shape shape);
+	void fill(Shape shape);
 
-	/*public void setGraphics(GLGraphics2D graphics) {
+	/*void setGraphics(GLGraphics2D graphics) {
 		this.screen = graphics;
 		this.screen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 	}*/
@@ -491,52 +493,52 @@ public interface Graphics extends TextGraphics {
 	 * @param offset
 	 * @param scansize
 
-	public void setRGB(int startX, int startY, int w, int h, int[] rgbArray, int offset, int scansize) {
+	void setRGB(int startX, int startY, int w, int h, int[] rgbArray, int offset, int scansize) {
 		vimg..setRGB(startX, startY, w, h, rgbArray, offset, scansize);
 	}*/
 
-	public void drawImage(BufferedImage image, int x, int y);
+	void drawImage(BufferedImage image, int x, int y);
 
-	public void drawImage(BufferedImage image, float x, float y);
-
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 */
-	public void translate(int x, int y);
+	void drawImage(BufferedImage image, float x, float y);
 
 	/**
 	 * 
 	 * @param x
 	 * @param y
 	 */
-	public void translate(double x, double y);
+	void translate(int x, int y);
 
-	public void rotate(double angle);
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
+	void translate(double x, double y);
 
-	public void setBackground(Color color);
+	void rotate(double angle);
 
-	public void clearRect(int x, int y, int width, int height);
+	void setBackground(Color color);
 
-	public void setPaint(Paint paint);
+	void clearRect(int x, int y, int width, int height);
 
-	public void resetPaint();
+	void setPaint(Paint paint);
+
+	void resetPaint();
 	
-	public void setShadowColor(Color shadowColor);
+	void setShadowColor(Color shadowColor);
 	
-	public void dispose();
+	void dispose();
 
-	public void setCamera(Camera camera);
+	void setCamera(Camera camera);
 
-	public void resetCamera(Camera camera);
+	void resetCamera(Camera camera);
 
-	public void drawArrow(Point2D p, Point2D q, int arrowSize);
+	void drawArrow(Point2D p, Point2D q, int arrowSize);
 	
-	public void drawArrow(Point2D p, Point2D q);
+	void drawArrow(Point2D p, Point2D q);
 
-	public void setClip(int x, int y, int w, int h);
+	void setClip(int x, int y, int w, int h);
 	
-	public void resetClip();
+	void resetClip();
 	
 }

@@ -503,6 +503,11 @@ public class AWTGraphics implements Graphics {
 		return screen;
 	}
 
+	@Override
+	public void putPixel(int x, int y) {
+		screen.fillRect(x, y, 1, 1);
+	}
+
 	/**
 	 *
 	 * @param layer
