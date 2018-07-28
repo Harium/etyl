@@ -1,9 +1,9 @@
 package com.harium.etyl.ui.selection;
 
 import com.harium.etyl.commons.graphics.Color;
+import com.harium.etyl.commons.graphics.stroke.DashedStroke;
 import com.harium.etyl.commons.layer.Layer;
 import com.harium.etyl.core.graphics.Graphics;
-import com.harium.etyl.core.graphics.stroke.DashedStroke;
 import com.harium.etyl.core.input.mouse.MouseStateChanger;
 
 
