@@ -7,7 +7,6 @@ import com.harium.etyl.commons.module.Module;
 import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.core.input.mouse.MouseStateChanger;
 import com.harium.etyl.i18n.Language;
-import com.harium.etyl.i18n.LanguageChangeListener;
 import com.harium.etyl.i18n.LanguageModule;
 import com.harium.etyl.theme.etyllic.EtylArrowTheme;
 import com.harium.etyl.ui.theme.ArrowDrawer;

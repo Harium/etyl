@@ -22,7 +22,7 @@ public class ColorAnimation extends AnimationScript {
 	}
 	
 	@Override
-	public void calculate(double factor) {
+	public void calculate(float factor) {
 		
 		double redValue = initialColor.getRed()+(endColor.getRed()-initialColor.getRed())*factor;
 		

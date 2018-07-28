@@ -39,7 +39,6 @@ public class ColoredTextPanel extends View {
         g.setColor(backgroundcolor);
         g.fillRect(left(), top(), width(), height());
 
-        g.setLineWidth(1f);
         g.setFont(g.getFont().deriveFont(fontSize));
 
         for (int i = 0; i < h / fontSize; i++) {
@@ -62,10 +61,10 @@ public class ColoredTextPanel extends View {
             g.drawString(text, left(), top() + (int) (fontSize + (i * fontSize + spacing)));
         }
 
-        g.setLineWidth(borderWidth);
+        g.getGraphics().setStroke(new BasicStroke(borderWidth));
         g.setColor(bordercolor);
         g.drawRect(left(), top(), width(), height());
-        g.setLineWidth(1f);
+        g.getGraphics().setStroke(new BasicStroke(1f));
     }
 
     @Override

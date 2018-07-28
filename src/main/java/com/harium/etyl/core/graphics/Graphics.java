@@ -7,7 +7,6 @@ import java.awt.Image;
 import java.awt.Paint;
 import java.awt.Polygon;
 import java.awt.Shape;
-import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
@@ -88,12 +87,6 @@ public interface Graphics extends TextGraphics {
 	 */
 	void fillArc(GeometricLayer layer, int startAngle, int arcAngle);
 
-	/**
-	 * 
-	 * @param width
-	 */
-	void setLineWidth(float width);
-
 	AffineTransform getTransform();
 
 	/**
@@ -109,17 +102,6 @@ public interface Graphics extends TextGraphics {
 	void transform(AffineTransform tx);
 
 	void resetTransform();
-
-	/**
-	 * Set basic stroke with width 1f 
-	 */
-	void resetStroke();
-
-	/**
-	 * 
-	 * @param stroke
-	 */
-	void setStroke(Stroke stroke);
 
 	/**
 	 * 
@@ -540,5 +522,5 @@ public interface Graphics extends TextGraphics {
 	void setClip(int x, int y, int w, int h);
 	
 	void resetClip();
-	
+
 }

@@ -1,241 +1,238 @@
 package com.harium.etyl.layer;
 
-import java.awt.BasicStroke;
-import java.awt.Font;
-import java.awt.Shape;
+import com.harium.etyl.commons.graphics.Color;
+import com.harium.etyl.core.graphics.Graphics;
+import com.harium.etyl.loader.FontLoader;
+
+import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 
-import com.harium.etyl.commons.graphics.Color;
-import com.harium.etyl.core.graphics.Graphics;
-import com.harium.etyl.loader.FontLoader;
-
 /**
- * 
  * @author yuripourre
- *
  */
 
 public class TextLayer extends ImageLayer {
 
-	private String text;
+    private String text;
 
-	private int style = Font.PLAIN;
+    private int style = Font.PLAIN;
 
-	private float size = 16;
+    private float size = 16;
 
-	private Font font = null;
+    private Font font = null;
 
-	private String fontName = "";
+    private String fontName = "";
 
-	private Color color = Color.BLACK;
+    private Color color = Color.BLACK;
 
-	private Color borderColor = Color.GRAY;
+    private Color borderColor = Color.GRAY;
 
-	private boolean border = false;
+    private boolean border = false;
 
-	private float borderWidth = 4f;
+    private float borderWidth = 4f;
 
-	private boolean antiAliased = true;
+    private boolean antiAliased = true;
 
-	private boolean fractionalMetrics = false;
+    private boolean fractionalMetrics = false;
 
-	public TextLayer(String text) {
-		this(0,0,text);
-	}
+    public TextLayer(String text) {
+        this(0, 0, text);
+    }
 
-	public TextLayer(int x, int y, String text) {
-		super(x,y);
+    public TextLayer(int x, int y, String text) {
+        super(x, y);
 
-		setText(text);
-	}
+        setText(text);
+    }
 
-	public int getStyle() {
-		return style;
-	}
+    public int getStyle() {
+        return style;
+    }
 
-	public void setStyle(int style) {
-		this.style = style;
-	}
+    public void setStyle(int style) {
+        this.style = style;
+    }
 
-	public float getSize() {
-		return size;
-	}
+    public float getSize() {
+        return size;
+    }
 
-	public void setSize(float size) {
-		this.size = size;
-	}
+    public void setSize(float size) {
+        this.size = size;
+    }
 
-	public String getFontName() {
-		return fontName;
-	}
+    public String getFontName() {
+        return fontName;
+    }
 
-	public void setFontName(String fontName) {
-		this.fontName = fontName;
-		this.font = FontLoader.getInstance().loadFont(fontName).getFont().deriveFont(style, size);
-	}
+    public void setFontName(String fontName) {
+        this.fontName = fontName;
+        this.font = FontLoader.getInstance().loadFont(fontName).getFont().deriveFont(style, size);
+    }
 
-	@Override
-	public void simpleDraw(Graphics g, int x, int y) {
+    @Override
+    public void simpleDraw(Graphics g, int x, int y) {
 
-		if (font == null) {
-			font = g.getFont().deriveFont(style, size);
-		}
+        if (font == null) {
+            font = g.getFont().deriveFont(style, size);
+        }
 
-		g.setFont(font);
-		
-		if (!border) {
-			g.setColor(color);
-			g.drawString(text, x, y);
-		} else {
+        g.setFont(font);
 
-			FontRenderContext frc = new FontRenderContext(null, antiAliased, fractionalMetrics);
-			
-			TextLayout layout = new TextLayout(text, font, frc);
+        if (!border) {
+            g.setColor(color);
+            g.drawString(text, x, y);
+        } else {
 
-			Shape sha = layout.getOutline(AffineTransform.getTranslateInstance(x,y));
+            FontRenderContext frc = new FontRenderContext(null, antiAliased, fractionalMetrics);
 
-			g.setStroke(new BasicStroke(borderWidth));
+            TextLayout layout = new TextLayout(text, font, frc);
 
-			g.setColor(borderColor);
-			g.draw(sha);
+            Shape sha = layout.getOutline(AffineTransform.getTranslateInstance(x, y));
 
-			g.setColor(color);
-			g.fill(sha);
-		}
+            g.getGraphics().setStroke(new BasicStroke(borderWidth));
 
-	}
+            g.setColor(borderColor);
+            g.draw(sha);
 
-	@Override
-	public AffineTransform getTransform() {
-		
-		if(font == null)
-			return AffineTransform.getScaleInstance(1, 1);
-		
-		
-		AffineTransform transform = new AffineTransform();
+            g.setColor(color);
+            g.fill(sha);
+            g.getGraphics().setStroke(new BasicStroke(1));
+        }
 
-		FontRenderContext frc = new FontRenderContext(null, antiAliased, fractionalMetrics);
+    }
 
-		TextLayout layout = new TextLayout(text, font, frc);
+    @Override
+    public AffineTransform getTransform() {
 
-		Rectangle2D bounds = layout.getBounds();
+        if (font == null)
+            return AffineTransform.getScaleInstance(1, 1);
 
-		float height = size;
-		float width = (float) Math.ceil(bounds.getWidth());
 
-		if(angle != 0) {
-			transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle),x+w/2, y+h/2));
-		}
+        AffineTransform transform = new AffineTransform();
 
-		if(scaleX != 1 || scaleY != 1) {
+        FontRenderContext frc = new FontRenderContext(null, antiAliased, fractionalMetrics);
 
-			double sw = width*scaleX;
-			double sh = height*scaleY;
+        TextLayout layout = new TextLayout(text, font, frc);
 
-			double dx = sw/2-width/2;
-			double dy = sh/2-height/2;
+        Rectangle2D bounds = layout.getBounds();
 
-			transform.translate(x-width/2-dx, y-height/2+dy);
+        float height = size;
+        float width = (float) Math.ceil(bounds.getWidth());
 
-			AffineTransform tr2 = new AffineTransform();
+        if (angle != 0) {
+            transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle), x + w / 2, y + h / 2));
+        }
 
-			tr2.translate(width/2, height/2);
-			tr2.scale(scaleX, scaleY);
-			tr2.translate(-x, -y);
+        if (scaleX != 1 || scaleY != 1) {
 
-			transform.concatenate(tr2);
+            double sw = width * scaleX;
+            double sh = height * scaleY;
 
-		}
+            double dx = sw / 2 - width / 2;
+            double dy = sh / 2 - height / 2;
 
-		return transform;
-	}
+            transform.translate(x - width / 2 - dx, y - height / 2 + dy);
 
-	public void setColor(int r, int g, int b) {
-		color = new Color(r%256,g%256,b%256);
-	}
+            AffineTransform tr2 = new AffineTransform();
 
-	public Color getBorderColor() {
-		return borderColor;
-	}
+            tr2.translate(width / 2, height / 2);
+            tr2.scale(scaleX, scaleY);
+            tr2.translate(-x, -y);
 
-	public void setBorderColor(Color borderColor) {
-		this.borderColor = borderColor;
-	}
+            transform.concatenate(tr2);
 
-	public Color getColor() {
-		return color;
-	}
+        }
 
-	public void setText(String text) {
-		if(!text.isEmpty()) {
-			this.text = text;
-			computeBoundingBox();
-		}else{
-			this.text = " ";
-		}
-	}
+        return transform;
+    }
 
-	private void computeBoundingBox() {
+    public void setColor(int r, int g, int b) {
+        color = new Color(r % 256, g % 256, b % 256);
+    }
 
-		Font font;
+    public Color getBorderColor() {
+        return borderColor;
+    }
 
-		if(this.font!=null) {
-			font = this.font;
-		}else{
-			font = new Font(Font.DIALOG, Font.PLAIN, (int)size);
-		}
+    public void setBorderColor(Color borderColor) {
+        this.borderColor = borderColor;
+    }
 
-		//Compute Bounding box
-		FontRenderContext frc = new FontRenderContext(null, antiAliased, fractionalMetrics);
-		TextLayout layout = new TextLayout(text, font, frc);
+    public Color getColor() {
+        return color;
+    }
 
-		Rectangle2D bounds = layout.getBounds();
+    public void setText(String text) {
+        if (!text.isEmpty()) {
+            this.text = text;
+            computeBoundingBox();
+        } else {
+            this.text = " ";
+        }
+    }
 
-		this.h = (int)size;
-		this.w = (int)Math.ceil(bounds.getWidth());
-	}
+    private void computeBoundingBox() {
 
-	public void setBorder(boolean border) {
-		this.border = border;
-	}
+        Font font;
 
-	public void setColor(Color color) {
-		this.color = color;
-	}
+        if (this.font != null) {
+            font = this.font;
+        } else {
+            font = new Font(Font.DIALOG, Font.PLAIN, (int) size);
+        }
 
-	public boolean isBorder() {
-		return border;
-	}
+        //Compute Bounding box
+        FontRenderContext frc = new FontRenderContext(null, antiAliased, fractionalMetrics);
+        TextLayout layout = new TextLayout(text, font, frc);
 
-	public String getText() {
-		return text;
-	}
+        Rectangle2D bounds = layout.getBounds();
 
-	public boolean isAntiAliased() {
-		return antiAliased;
-	}
+        this.h = (int) size;
+        this.w = (int) Math.ceil(bounds.getWidth());
+    }
 
-	public void setAntiAliased(boolean antiAliased) {
-		this.antiAliased = antiAliased;
-	}
+    public void setBorder(boolean border) {
+        this.border = border;
+    }
 
-	public boolean isFractionalMetrics() {
-		return fractionalMetrics;
-	}
+    public void setColor(Color color) {
+        this.color = color;
+    }
 
-	public void setFractionalMetrics(boolean fractionalMetrics) {
-		this.fractionalMetrics = fractionalMetrics;
-	}
+    public boolean isBorder() {
+        return border;
+    }
 
-	public float getBorderWidth() {
-		return borderWidth;
-	}
+    public String getText() {
+        return text;
+    }
 
-	public void setBorderWidth(float borderWidth) {
-		this.borderWidth = borderWidth;
-	}
+    public boolean isAntiAliased() {
+        return antiAliased;
+    }
+
+    public void setAntiAliased(boolean antiAliased) {
+        this.antiAliased = antiAliased;
+    }
+
+    public boolean isFractionalMetrics() {
+        return fractionalMetrics;
+    }
+
+    public void setFractionalMetrics(boolean fractionalMetrics) {
+        this.fractionalMetrics = fractionalMetrics;
+    }
+
+    public float getBorderWidth() {
+        return borderWidth;
+    }
+
+    public void setBorderWidth(float borderWidth) {
+        this.borderWidth = borderWidth;
+    }
 
 }
