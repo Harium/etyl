@@ -1,6 +1,6 @@
 package com.harium.etyl.ui.panel;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,11 +56,10 @@ public class TextPanel extends View{
 		g.setColor(backgroundcolor);
 		g.fillRect(x,y,w,h);
 		
-		g.setLineWidth(borderWidth);
+		g.getGraphics().setStroke(new BasicStroke(borderWidth));
 		g.setColor(bordercolor);
 		g.drawRect(x,y,w,h);
-		
-		g.setLineWidth(1f);
+		g.getGraphics().setStroke(new BasicStroke(1f));
 
 		int i=0;
 		

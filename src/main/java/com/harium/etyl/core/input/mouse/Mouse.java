@@ -10,6 +10,8 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.util.*;
 
+import static java.awt.event.MouseEvent.BUTTON1;
+
 /**
  * @author yuripourre
  */
@@ -30,7 +32,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
         this.x = x;
         this.y = y;
 
-        dragged.put(java.awt.event.MouseEvent.BUTTON1, new DragEvent());
+        dragged.put(BUTTON1, new DragEvent());
         dragged.put(java.awt.event.MouseEvent.BUTTON2, new DragEvent());
         dragged.put(java.awt.event.MouseEvent.BUTTON3, new DragEvent());
     }
@@ -76,7 +78,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
         MouseEvent key = MouseEvent.MOUSE_NONE;
 
         switch (button) {
-            case java.awt.event.MouseEvent.BUTTON1:
+            case BUTTON1:
                 key = MouseEvent.MOUSE_BUTTON_LEFT;
                 break;
             case java.awt.event.MouseEvent.BUTTON2:
@@ -162,7 +164,12 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
 
     @Override
     public void mouseDragged(java.awt.event.MouseEvent me) {
-        DragEvent event = dragged.get(me.getButton());
+        int button = me.getButton();
+        if (button==0) {
+            button = BUTTON1;
+        }
+
+        DragEvent event = dragged.get(button);
         event.x = me.getX();
         event.y = me.getY();
 

@@ -1,10 +1,9 @@
 package com.harium.etyl.ui;
 
-import java.awt.Color;
-
 import com.harium.etyl.commons.event.KeyEvent;
 import com.harium.etyl.commons.event.PointerEvent;
 import com.harium.etyl.commons.event.GUIEvent;
+import com.harium.etyl.commons.graphics.Color;
 import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.layer.BufferedLayer;
 

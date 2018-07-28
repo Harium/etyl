@@ -1,7 +1,5 @@
 package com.harium.etyl.awt;
 
-import java.awt.BasicStroke;
-
 import com.harium.etyl.commons.event.MouseState;
 import com.harium.etyl.commons.graphics.Color;
 import com.harium.etyl.ui.theme.ArrowDrawer;
@@ -9,14 +7,16 @@ import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.ui.theme.ArrowTheme;
 import com.harium.etyl.ui.theme.cursor.arrow.MouseArrow;
 
+import java.awt.*;
+
 public class AWTArrowDrawer implements ArrowDrawer {
 
 	private int x = 0;
 	private int y = 0;
 
-	private static final BasicStroke strokeOne = new BasicStroke(1F);
-	private static final BasicStroke strokeThree = new BasicStroke(3F);
-	private static final BasicStroke strokeFive = new BasicStroke(5F);
+	private static final BasicStroke strokeOne = new BasicStroke(1);
+	private static final BasicStroke strokeThree = new BasicStroke(3);
+	private static final BasicStroke strokeFive = new BasicStroke(5);
 
 	protected ArrowTheme arrowTheme;
 
@@ -32,14 +32,14 @@ public class AWTArrowDrawer implements ArrowDrawer {
 	}
 
 	public void draw(Graphics g) {
-		g.setStroke(strokeOne);
+		g.getGraphics().setStroke(strokeOne);
 		arrow.draw(g);
 	}	
 
 	public void drawTimerArc(Graphics g, int arc) {
 
 		g.setColor(Color.WHITE);
-		g.setStroke(strokeFive);  // set stroke width of 5
+		g.getGraphics().setStroke(strokeFive);  // set stroke width of 5
 
 		int radius = 26;
 
