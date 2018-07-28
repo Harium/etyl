@@ -10,7 +10,6 @@ import com.harium.etyl.i18n.LanguageModule;
 import com.harium.etyl.loader.FontLoader;
 import com.harium.etyl.loader.Loader;
 import com.harium.etyl.loader.image.ImageLoader;
-import com.harium.etyl.ui.UI;
 import com.harium.etyl.util.PathHelper;
 
 import javax.swing.*;
@@ -85,7 +84,6 @@ public abstract class Etyl extends JFrame implements EtylFrame {
 
     private void addModules() {
         addModule(Animation.getInstance());
-        addModule(UI.getInstance());
         addModule(LanguageModule.getInstance());
     }
 
