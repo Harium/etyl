@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.harium.etyl</groupId>
     <artifactId>etyl</artifactId>
-    <version>1.3.5</version>
+    <version>1.3.7</version>
     <packaging>jar</packaging>
     <name>Etyl</name>
     <description>Etyl's Core</description>
@@ -29,12 +29,12 @@
         <dependency>
             <groupId>com.harium.etyl</groupId>
             <artifactId>commons</artifactId>
-            <version>[1.2.1,)</version>
+            <version>[1.2.2,)</version>
         </dependency>
         <dependency>
             <groupId>com.harium.etyl</groupId>
             <artifactId>animation</artifactId>
-            <version>[1.3.3,)</version>
+            <version>[1.3.5,)</version>
         </dependency>
         <dependency>
             <groupId>com.harium.etyl</groupId>
@@ -49,7 +49,7 @@
         <dependency>
             <groupId>com.harium.etyl</groupId>
             <artifactId>geometry</artifactId>
-            <version>[1.0.0,)</version>
+            <version>[1.0.3,)</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
