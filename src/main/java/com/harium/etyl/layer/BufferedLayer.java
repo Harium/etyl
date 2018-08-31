@@ -336,9 +336,9 @@ public class BufferedLayer extends ImageLayer {
         return buffer;
     }
 
-    public boolean colideAlphaPoint(int px, int py) {
+    public boolean collideAlphaPoint(int px, int py) {
 
-        if (this.colideRectPoint(px, py)) {
+        if (this.collideRectPoint(px, py)) {
 
             int mx = px - x;
 
@@ -358,7 +358,7 @@ public class BufferedLayer extends ImageLayer {
     }
 
     public Color getColor(int px, int py) {
-        if (this.colideRectPoint(px, py)) {
+        if (this.collideRectPoint(px, py)) {
             int mx = px - x;
             int my = py - y;
 

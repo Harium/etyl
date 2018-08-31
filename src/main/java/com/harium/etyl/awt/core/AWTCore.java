@@ -136,7 +136,7 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
         Point p = this.component.getLocation();
 
         for (Monitor monitor : monitors) {
-            if (monitor.colideRectPoint(p.x, p.y)) {
+            if (monitor.collideRectPoint(p.x, p.y)) {
                 selectedMonitor = monitor;
             }
         }

@@ -195,16 +195,16 @@ public class ImageLayer extends StaticLayer {
         this.srcH = h;
     }
 
-    public boolean colideRetangular(int bx, int by, int bw, int bh) {
-        return colideRectRect(bx, by, bw, bh);
+    public boolean collideRetangular(int bx, int by, int bw, int bh) {
+        return collideRectRect(bx, by, bw, bh);
     }
 
-    public boolean colideRetangular(Layer b) {
-        return colideRetangular(b.getX(), b.getY(), b.getW(), b.getH());
+    public boolean collideRetangular(Layer b) {
+        return collideRetangular(b.getX(), b.getY(), b.getW(), b.getH());
     }
 
     // Based on code at: http://developer.coronalabs.com/code/checking-if-point-inside-rotated-rectangle
-    public boolean colideRotated(int mx, int my) {
+    public boolean collideRotated(int mx, int my) {
         double sx = EtylMath.mod(scaleX);
         double sy = EtylMath.mod(scaleY);
 
@@ -278,7 +278,7 @@ public class ImageLayer extends StaticLayer {
     }
 
     public boolean onMouse(Mouse mouse) {
-        return colideRectPoint(mouse.getX(), mouse.getY());
+        return collideRectPoint(mouse.getX(), mouse.getY());
     }
 
     /**
