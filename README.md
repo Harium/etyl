@@ -63,6 +63,15 @@ public class Main extends Etyl {
 }
 ```
 
+## Related projects
+- [Etyl GDX](https://github.com/Harium/etyl-gdx) - A GDX backend to etyl
+- [Etyl Animation](https://github.com/Harium/etyl-animation) - Animation Module
+- [Etyl UI](https://github.com/Harium/etyl-ui) - UI Module
+- [Etyl Sound](https://github.com/Harium/etyl-sound) - Sound Module
+- [Etyl i18n](https://github.com/Harium/etyl-i18n) - Internacionalization Module
+- [Etyl Spriter](https://github.com/Harium/etyl-spriter) - Spriter Module
+- [Etyl Ruby](https://github.com/Harium/etyl-ruby) - JRuby Module
+
 ## Contact
 Do you have a request? Need some help?
 
