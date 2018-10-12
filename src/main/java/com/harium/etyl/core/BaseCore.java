@@ -56,7 +56,7 @@ public abstract class BaseCore implements Core, KeyEventListener, Updatable, Loa
 
     private boolean fixEventPosition = false;
 
-    protected int fps = 0;
+    protected float fps = 0;
 
     //FullScreen Stuff
     private boolean enableFullScreen = false;
@@ -512,11 +512,11 @@ public abstract class BaseCore implements Core, KeyEventListener, Updatable, Loa
         return superEvent;
     }
 
-    public int getFps() {
+    public float getFps() {
         return fps;
     }
 
-    public void setFps(int fps) {
+    public void setFps(float fps) {
         this.fps = fps;
     }
 

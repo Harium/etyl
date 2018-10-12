@@ -227,7 +227,6 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
         }
 
         validateVolatileImage();
-
         draw(graphic);
 
         // TODO Avoid check for null
@@ -261,7 +260,6 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
     }
 
     public void update(double delta) throws Exception {
-
         long now = System.currentTimeMillis();
 
         update(now);

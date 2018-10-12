@@ -21,7 +21,7 @@ public interface Core {
 	void update(double delta) throws Exception;
 	void render();
 	boolean isRunning();
-	void setFps(int fps);
+	void setFps(float fps);
 
 	void addModule(Module module);
 	Context getCurrentContext();

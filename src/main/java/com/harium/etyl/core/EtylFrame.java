@@ -6,12 +6,12 @@ import com.harium.etyl.commons.event.GUIEvent;
 
 public interface EtylFrame {
 
-	public void init();
+	void init();
 	
-	public void draw();
+	void draw();
 	
-	public Application startApplication();
+	Application startApplication();
 	
-	public void updateSuperEvent(GUIEvent event);
+	void updateSuperEvent(GUIEvent event);
 	
 }

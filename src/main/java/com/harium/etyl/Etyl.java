@@ -12,9 +12,10 @@ import com.harium.etyl.loader.Loader;
 import com.harium.etyl.loader.image.ImageLoader;
 import com.harium.etyl.util.PathHelper;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import java.awt.Graphics;
 import java.net.URL;
+
 
 public abstract class Etyl extends JFrame implements EtylFrame {
 
@@ -111,15 +112,18 @@ public abstract class Etyl extends JFrame implements EtylFrame {
 
     @Override
     public void paint(Graphics g) {
+        //System.out.println("paint()");
         core.paint(g);
     }
 
     @Override
     public void update(Graphics g) {
+        //System.out.println("update()");
         paint(g);
     }
 
     public void draw() {
+        //System.out.println("draw()");
         repaint();
     }
 
@@ -146,4 +150,8 @@ public abstract class Etyl extends JFrame implements EtylFrame {
         core.enableFullScreen();
     }
 
+    @Override
+    public boolean isDoubleBuffered() {
+        return true;
+    }
 }
