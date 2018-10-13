@@ -17,6 +17,7 @@ import com.harium.etyl.effects.GenericFullScreenEffect;
 import java.awt.*;
 import java.awt.dnd.DropTarget;
 import java.awt.event.ComponentEvent;
+import java.awt.image.BufferStrategy;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.VolatileImage;
 import java.util.concurrent.ExecutorService;
@@ -35,7 +36,7 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
 
     private Component component;
 
-    private VolatileImage volatileImage;
+    //private VolatileImage volatileImage;
 
     private AWTGraphics graphic;
 
@@ -195,11 +196,11 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
     public void defineSize(int width, int height) {
         component.setSize(width, height);
 
-        volatileImage = createBackBuffer(width, height);
+        /*volatileImage = createBackBuffer(width, height);
 
         if (volatileImage != null) {
             graphic.setScreen(volatileImage.createGraphics());
-        }
+        }*/
     }
 
     public void validateVolatileImage() {
@@ -263,12 +264,12 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
         long now = System.currentTimeMillis();
 
         update(now);
-
         updateEngine(delta);
     }
 
     public void render() {
-        engine.draw();
+        this.paint(graphic.getScreen());
+        //engine.draw();
     }
 
     public void hideCursor() {
@@ -289,6 +290,8 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
     @Override
     public void run() {
         try {
+            BufferStrategy strategy = engine.getBufferStrategy();
+            graphic.setScreen((Graphics2D) strategy.getDrawGraphics());
             gameLoop.loop();
         } catch (Exception e) {
             e.printStackTrace();
@@ -346,4 +349,5 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
     public void showCursor() {
         hideCursor = false;
     }
+
 }

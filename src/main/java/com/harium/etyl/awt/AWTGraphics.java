@@ -1129,4 +1129,7 @@ public class AWTGraphics implements Graphics {
 
     }
 
+    public Graphics2D getScreen() {
+        return screen;
+    }
 }

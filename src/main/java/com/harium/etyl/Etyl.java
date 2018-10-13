@@ -14,6 +14,7 @@ import com.harium.etyl.util.PathHelper;
 
 import javax.swing.JFrame;
 import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
 import java.net.URL;
 
 
@@ -110,22 +111,22 @@ public abstract class Etyl extends JFrame implements EtylFrame {
         return core.getPath();
     }
 
-    @Override
+    /*@Override
     public void paint(Graphics g) {
         //System.out.println("paint()");
         core.paint(g);
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void update(Graphics g) {
         //System.out.println("update()");
         paint(g);
-    }
+    }*/
 
-    public void draw() {
+    /*public void draw() {
         //System.out.println("draw()");
         repaint();
-    }
+    }*/
 
     public void addLoader(Loader loader) {
         core.addLoader(loader);
@@ -150,8 +151,7 @@ public abstract class Etyl extends JFrame implements EtylFrame {
         core.enableFullScreen();
     }
 
-    @Override
-    public boolean isDoubleBuffered() {
-        return true;
+    public BufferStrategy getBufferStrategy() {
+        return super.getBufferStrategy();
     }
 }
