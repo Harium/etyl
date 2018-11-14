@@ -146,4 +146,13 @@ public abstract class Etyl extends JFrame implements EtylFrame {
         core.enableFullScreen();
     }
 
+    /**
+     * Be careful, to close the application you must call System.exit(0) by your own
+     */
+    protected void enableKioskMode() {
+        boolean kioskMode = true;
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        core.enableFullScreen(kioskMode);
+    }
+
 }

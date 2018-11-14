@@ -130,7 +130,7 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
         }
     }
 
-    public void enableFullScreen() {
+    public void enableFullScreen(boolean kioskMode) {
         Monitor selectedMonitor = monitors.get(0);
 
         Point p = this.component.getLocation();
@@ -142,11 +142,15 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
         }
 
         if (!isFullScreenEnable()) {
-            fullScreen = FullScreenHelper.enableFullScreen(this, selectedMonitor);
+            fullScreen = FullScreenHelper.enableFullScreen(this, selectedMonitor, kioskMode);
             setFullScreenEnable(true);
         }
 
         addEffect(new GenericFullScreenEffect(0, 0, this.width, height));
+    }
+
+    public void enableFullScreen() {
+        enableFullScreen(false);
     }
 
     public void disableFullScreen() {

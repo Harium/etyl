@@ -8,22 +8,29 @@ import java.awt.*;
 
 public class FullScreenHelper {
 
-	public static FullScreenWindow enableFullScreen(Core core, Monitor selectedMonitor) {
-		GraphicsDevice gd = selectedMonitor.getDevice();
-		
-		FullScreenWindow frame = new FullScreenWindow(core, selectedMonitor);
+    public static FullScreenWindow enableFullScreen(Core core, Monitor selectedMonitor) {
+        return enableFullScreen(core, selectedMonitor);
+    }
 
-		gd.setFullScreenWindow(frame);
-		frame.setVisible(true);
+    public static FullScreenWindow enableFullScreen(Core core, Monitor selectedMonitor, boolean kioskMode) {
+        GraphicsDevice gd = selectedMonitor.getDevice();
 
-		return frame;
-	}
+        FullScreenWindow frame = new FullScreenWindow(core, selectedMonitor);
 
-	public static void disableFullScreen() {
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		GraphicsDevice gs = ge.getDefaultScreenDevice();
+        gd.setFullScreenWindow(frame);
+        frame.setVisible(true);
+        if (kioskMode) {
+            frame.setAlwaysOnTop(true);
+        }
 
-		gs.setFullScreenWindow(null);
-	}
+        return frame;
+    }
+
+    public static void disableFullScreen() {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gs = ge.getDefaultScreenDevice();
+
+        gs.setFullScreenWindow(null);
+    }
 
 }
