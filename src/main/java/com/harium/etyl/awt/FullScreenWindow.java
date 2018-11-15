@@ -6,6 +6,7 @@ import com.harium.etyl.core.graphics.Monitor;
 import com.harium.etyl.core.input.keyboard.Keyboard;
 import com.harium.etyl.core.input.mouse.Mouse;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.MemoryImageSource;
 
@@ -17,6 +18,8 @@ public class FullScreenWindow extends Frame {
 
     private static final long serialVersionUID = -5176767672500250086L;
 
+    private DisplayMode displayMode;
+    private Monitor monitor;
     private Core core;
 
     private int w;
@@ -24,21 +27,26 @@ public class FullScreenWindow extends Frame {
 
     public FullScreenWindow(Core core, Monitor selectedMonitor) {
         this.core = core;
+        this.monitor = selectedMonitor;
+        this.displayMode = selectedMonitor.getDevice().getDisplayMode();
 
         this.w = selectedMonitor.getW();
         this.h = selectedMonitor.getH();
-
-        this.setBounds(selectedMonitor.getX(), selectedMonitor.getY(), selectedMonitor.getW(), selectedMonitor.getH());
 
         //These configurations are needed in some cases
         setUndecorated(true);
         setResizable(true);
 
-        hideDefaultCursor();
+        if (core.isHideCursor()) {
+            hideDefaultCursor();
+        }
 
-        setVisible(true);
         setAlwaysOnTop(true);
         setListeners();
+
+        setBounds(selectedMonitor.getX(), selectedMonitor.getY(), selectedMonitor.getW(), selectedMonitor.getH());
+
+        setVisible(true);
     }
 
     private void setListeners() {
@@ -70,4 +78,11 @@ public class FullScreenWindow extends Frame {
         //core.showCursor();
     }
 
+    public Monitor getMonitor() {
+        return monitor;
+    }
+
+    public DisplayMode getDisplayMode() {
+        return displayMode;
+    }
 }

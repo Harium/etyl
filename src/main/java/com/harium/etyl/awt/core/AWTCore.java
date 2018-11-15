@@ -82,14 +82,17 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
 
             for (int i = 0; i < devices.length; i++) {
 
-                Rectangle gcBounds = devices[i].getDefaultConfiguration().getBounds();
+                GraphicsDevice device = devices[i];
+
+                Rectangle gcBounds = device.getDefaultConfiguration().getBounds();
 
                 int x = gcBounds.x;
                 int y = gcBounds.y;
                 int w = gcBounds.width;
                 int h = gcBounds.height;
 
-                monitors.add(new Monitor(x, y, w, h, devices[i]));
+                Monitor monitor = new Monitor(x, y, w, h, device);
+                monitors.add(monitor);
             }
 
         } else {
@@ -130,7 +133,7 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
         }
     }
 
-    public void enableFullScreen(boolean kioskMode) {
+    public void enableFullScreen() {
         Monitor selectedMonitor = monitors.get(0);
 
         Point p = this.component.getLocation();
@@ -142,20 +145,19 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
         }
 
         if (!isFullScreenEnable()) {
-            fullScreen = FullScreenHelper.enableFullScreen(this, selectedMonitor, kioskMode);
-            setFullScreenEnable(true);
+            GraphicsDevice gd = selectedMonitor.getDevice();
+            if (gd.isFullScreenSupported()) {
+                fullScreen = FullScreenHelper.enableFullScreen(this, selectedMonitor);
+                setFullScreenEnable(true);
+                addEffect(new GenericFullScreenEffect(0, 0, this.width, this.height));
+            }
         }
 
-        addEffect(new GenericFullScreenEffect(0, 0, this.width, height));
-    }
-
-    public void enableFullScreen() {
-        enableFullScreen(false);
     }
 
     public void disableFullScreen() {
         fullScreen.dispose();
-        FullScreenHelper.disableFullScreen();
+        FullScreenHelper.disableFullScreen(fullScreen);
         setFullScreenEnable(false);
     }
 
@@ -352,4 +354,9 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
     public void showCursor() {
         hideCursor = false;
     }
+
+    public boolean isHideCursor() {
+        return hideCursor;
+    }
+
 }
