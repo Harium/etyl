@@ -15,6 +15,8 @@ public interface TextGraphics {
 
     void setFontSize(float size);
 
+    void setFontStyle(int fontStyle);
+
     FontRenderContext getFontRenderContext();
 
     FontMetrics getFontMetrics();

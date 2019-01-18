@@ -601,6 +601,10 @@ public class AWTGraphics implements Graphics {
         screen.setFont(screen.getFont().deriveFont(size));
     }
 
+    public void setFontStyle(int fontStyle) {
+        screen.setFont(screen.getFont().deriveFont(fontStyle));
+    }
+
     /**
      * @param percent
      */

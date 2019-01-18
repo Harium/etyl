@@ -15,4 +15,12 @@ public class Font {
     public java.awt.Font getFont() {
         return font;
     }
+
+    public int getStyle() {
+        return font.getStyle();
+    }
+
+    public float getSize() {
+        return font.getSize();
+    }
 }
