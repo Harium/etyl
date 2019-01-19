@@ -52,6 +52,7 @@ public abstract class BaseCore implements Core, KeyEventListener, Updatable, Loa
     private boolean firstLoad = true;
     private boolean firstDraw = true;
 
+    private boolean allowFullscreen = false;
     private boolean fullScreenEnable = false;
 
     private boolean fixEventPosition = false;
@@ -349,7 +350,8 @@ public abstract class BaseCore implements Core, KeyEventListener, Updatable, Loa
         if (alt && enter) {
             alt = false;
             enter = false;
-            if (!isFullScreenEnable()) {
+
+            if (allowFullscreen && !isFullScreenEnable()) {
                 enableFullScreen = true;
             }
         }
@@ -564,6 +566,14 @@ public abstract class BaseCore implements Core, KeyEventListener, Updatable, Loa
 
     public void setFullScreenEnable(boolean fullScreenEnable) {
         this.fullScreenEnable = fullScreenEnable;
+    }
+
+    public boolean isAllowFullscreen() {
+        return allowFullscreen;
+    }
+
+    public void setAllowFullscreen(boolean allowFullscreen) {
+        this.allowFullscreen = allowFullscreen;
     }
 
     public Mouse getMouse() {

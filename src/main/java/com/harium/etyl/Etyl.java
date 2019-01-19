@@ -26,6 +26,7 @@ public abstract class Etyl extends JFrame implements EtylFrame {
     protected int h = 480;
     protected String icon = "";
     protected boolean customCursor = false;
+    protected boolean allowFullscreen = false;
 
     private Application application;
 
@@ -76,6 +77,7 @@ public abstract class Etyl extends JFrame implements EtylFrame {
         } else {
             core.showCursor();
         }
+        core.setAllowFullscreen(allowFullscreen);
     }
 
     private void startCore() {

@@ -25,6 +25,9 @@ public abstract class EtylApplet extends Applet implements EtylFrame {
     protected int w = 640;
     protected int h = 480;
 
+    protected boolean customCursor = false;
+    protected boolean allowFullscreen = false;
+
     private Application application;
 
     public EtylApplet(int width, int height) {
@@ -66,6 +69,12 @@ public abstract class EtylApplet extends Applet implements EtylFrame {
     private void initCore() {
         core = new AWTCore(this, w, h);
         core.setEngine(this);
+        if (customCursor) {
+            core.hideCursor();
+        } else {
+            core.showCursor();
+        }
+        core.setAllowFullscreen(allowFullscreen);
     }
 
     private void startCore() {
