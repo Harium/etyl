@@ -58,7 +58,7 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
         if (component != null) {
             this.configuration = component.getGraphicsConfiguration();
             initGraphics(width, height);
-            //Core methods
+            // Core methods
             initMonitors(width, height);
             moveToCenter();
 
@@ -287,11 +287,9 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
         this.engine = engine;
     }
 
+    @Override
     public void startEngine() {
-        component.setVisible(true);
 
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute(this);
     }
 
     @Override
@@ -334,7 +332,6 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
         int height = bounds.height;
 
         initGraphics(width, height);
-        //System.out.println("Resized: "+bounds.x+", "+bounds.y+", "+bounds.width+", "+bounds.height);
         resizeApplication(width, height);
     }
 

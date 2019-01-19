@@ -32,27 +32,35 @@ public abstract class EtylApplet extends Applet implements EtylFrame {
 
         this.w = width;
         this.h = height;
+
     }
 
     public void init(String path) {
         initCore();
         addModules();
-        setPath(path);
+        initPath(path);
 
         this.application = startApplication();
 
         startCore();
+        loop();
     }
 
     @Override
     public void init() {
-        initCore();
-        addModules();
-        initialSetup("");
+        init("");
+    }
 
-        this.application = startApplication();
+    private void initPath(String path) {
+        if (path.isEmpty()) {
+            initialSetup("");
+        } else {
+            setPath(path);
+        }
+    }
 
-        startCore();
+    private void loop() {
+        core.run();
     }
 
     private void initCore() {

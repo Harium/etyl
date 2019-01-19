@@ -35,30 +35,37 @@ public abstract class Etyl extends JFrame implements EtylFrame {
         this.w = width;
         this.h = height;
 
+        setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     public void init(String path) {
         initCore();
         addModules();
-        setPath(path);
+        initPath(path);
 
         this.application = startApplication();
 
         startCore();
         updateIcon();
+        loop();
     }
 
     @Override
     public void init() {
-        initCore();
-        addModules();
-        initialSetup("");
+        init("");
+    }
 
-        this.application = startApplication();
+    private void initPath(String path) {
+        if (path.isEmpty()) {
+            initialSetup("");
+        } else {
+            setPath(path);
+        }
+    }
 
-        startCore();
-        updateIcon();
+    private void loop() {
+        core.run();
     }
 
     private void initCore() {
@@ -73,9 +80,9 @@ public abstract class Etyl extends JFrame implements EtylFrame {
 
     private void startCore() {
         core.startCore(application);
-        core.startEngine();
-
         addComponentListener(core);
+
+        this.setVisible(true);
     }
 
     protected void addModule(Module module) {
@@ -88,7 +95,7 @@ public abstract class Etyl extends JFrame implements EtylFrame {
     }
 
     protected void initialSetup(String suffix) {
-        String defaultPath = PathHelper.currentFileDirectory().toString();
+        String defaultPath = PathHelper.currentFileDirectory();
         setPath(defaultPath + suffix);
     }
 
