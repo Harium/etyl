@@ -8,9 +8,12 @@ import javax.swing.event.MouseInputListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.Map;
 
-import static java.awt.event.MouseEvent.BUTTON1;
+import static java.awt.event.MouseEvent.*;
 
 /**
  * @author yuripourre
@@ -26,6 +29,10 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
     Map<Integer, DragEvent> dragged = new HashMap<>();
     Deque<PointerEvent> events = new ArrayDeque<>(8);
 
+    // Move to Etyl Commons
+    private static final int MULTI_TOUCH_4 = 4;
+    private static final int MULTI_TOUCH_5 = 5;
+
     public Mouse(int x, int y) {
         super();
 
@@ -33,8 +40,11 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
         this.y = y;
 
         dragged.put(BUTTON1, new DragEvent());
-        dragged.put(java.awt.event.MouseEvent.BUTTON2, new DragEvent());
-        dragged.put(java.awt.event.MouseEvent.BUTTON3, new DragEvent());
+        dragged.put(BUTTON2, new DragEvent());
+        dragged.put(BUTTON3, new DragEvent());
+        // Prevent exception on multitouch (touchpad)
+        dragged.put(MULTI_TOUCH_4, new DragEvent());
+        dragged.put(MULTI_TOUCH_5, new DragEvent());
     }
 
     public int getX() {
@@ -165,7 +175,7 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
     @Override
     public void mouseDragged(java.awt.event.MouseEvent me) {
         int button = me.getButton();
-        if (button==0) {
+        if (button == 0) {
             button = BUTTON1;
         }
 
