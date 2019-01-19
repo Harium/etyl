@@ -96,10 +96,12 @@ public class MouseTest {
 
     @Test
     public void testInit() {
-        Assert.assertEquals(3, mouse.dragged.size());
+        Assert.assertEquals(5, mouse.dragged.size());
         Assert.assertTrue(mouse.dragged.containsKey(java.awt.event.MouseEvent.BUTTON1));
         Assert.assertTrue(mouse.dragged.containsKey(java.awt.event.MouseEvent.BUTTON2));
         Assert.assertTrue(mouse.dragged.containsKey(java.awt.event.MouseEvent.BUTTON3));
+        Assert.assertTrue(mouse.dragged.containsKey(Mouse.MULTI_TOUCH_4));
+        Assert.assertTrue(mouse.dragged.containsKey(Mouse.MULTI_TOUCH_5));
     }
 
 

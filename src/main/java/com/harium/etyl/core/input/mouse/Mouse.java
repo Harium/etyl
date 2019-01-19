@@ -30,8 +30,8 @@ public class Mouse implements MouseMotionListener, MouseInputListener, MouseWhee
     Deque<PointerEvent> events = new ArrayDeque<>(8);
 
     // Move to Etyl Commons
-    private static final int MULTI_TOUCH_4 = 4;
-    private static final int MULTI_TOUCH_5 = 5;
+    protected static final int MULTI_TOUCH_4 = 4;
+    protected static final int MULTI_TOUCH_5 = 5;
 
     public Mouse(int x, int y) {
         super();
