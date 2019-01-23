@@ -6,4 +6,5 @@ public interface Loader {
 
     void initLoader();
 
+    void dispose();
 }

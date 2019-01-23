@@ -272,4 +272,10 @@ public class ImageLoader extends LoaderImpl {
             return getImage(stream, path);
         }
     }
+
+    @Override
+    public void dispose() {
+        images.clear();
+        animations.clear();
+    }
 }

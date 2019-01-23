@@ -48,6 +48,11 @@ public class LoaderImpl implements Loader {
 
     }
 
+    @Override
+    public void dispose() {
+
+    }
+
     public String fullPath(String path) {
         return fullPath(path, false);
     }
