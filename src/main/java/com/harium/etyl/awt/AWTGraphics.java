@@ -557,9 +557,9 @@ public class AWTGraphics implements Graphics {
     /**
      * @param font
      */
-    /*public void setFont(com.harium.etyl.core.graphics.Font font) {
+    public void setFont(com.harium.etyl.core.graphics.Font font) {
         screen.setFont(font.getFont());
-    }*/
+    }
 
     /**
      * @param font

@@ -7,6 +7,7 @@ import com.harium.etyl.commons.module.Module;
 import com.harium.etyl.core.EtylFrame;
 import com.harium.etyl.core.animation.Animation;
 import com.harium.etyl.i18n.LanguageModule;
+import com.harium.etyl.loader.FontLoader;
 import com.harium.etyl.loader.Loader;
 import com.harium.etyl.loader.image.ImageLoader;
 import com.harium.etyl.util.PathHelper;
@@ -93,7 +94,6 @@ public abstract class EtylApplet extends Applet implements EtylFrame {
     }
 
     protected void initialSetup(String suffix) {
-
         //Load Monitors
         /*GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] gs = ge.getScreenDevices();*/
@@ -111,7 +111,7 @@ public abstract class EtylApplet extends Applet implements EtylFrame {
         core.setPath(path);
         if (core.getLoaders().isEmpty()) {
             addLoader(ImageLoader.getInstance());
-            //addLoader(FontLoader.getInstance());
+            addLoader(FontLoader.getInstance());
         }
         core.initLoaders();
     }
