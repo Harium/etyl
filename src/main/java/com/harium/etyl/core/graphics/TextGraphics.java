@@ -9,7 +9,7 @@ public interface TextGraphics {
 
     void setFont(java.awt.Font font);
 
-    void setFont(com.harium.etyl.core.graphics.Font font);
+    //void setFont(com.harium.etyl.core.graphics.Font font);
 
     java.awt.Font getFont();
 

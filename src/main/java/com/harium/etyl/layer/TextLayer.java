@@ -2,7 +2,6 @@ package com.harium.etyl.layer;
 
 import com.harium.etyl.commons.graphics.Color;
 import com.harium.etyl.core.graphics.Graphics;
-import com.harium.etyl.loader.FontLoader;
 
 import java.awt.*;
 import java.awt.font.FontRenderContext;
@@ -70,7 +69,7 @@ public class TextLayer extends ImageLayer {
 
     public void setFontName(String fontName) {
         this.fontName = fontName;
-        this.font = FontLoader.getInstance().loadFont(fontName).getFont().deriveFont(style, size);
+        //this.font = FontLoader.getInstance().loadFont(fontName).getFont().deriveFont(style, size);
     }
 
     @Override
