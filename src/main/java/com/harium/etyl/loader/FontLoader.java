@@ -4,6 +4,7 @@ import com.harium.etyl.core.graphics.Font;
 import com.harium.etyl.util.io.IOHelper;
 
 import java.awt.*;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -48,7 +49,9 @@ public class FontLoader extends LoaderImpl {
     }
 
     public Font loadFont(String path, boolean absolute) {
-
+        if (path.isEmpty()) {
+           return defaultFont();
+        }
         String fullPath = fullPath(path, absolute);
 
         if (!fonts.containsKey(fullPath)) {
@@ -57,6 +60,11 @@ public class FontLoader extends LoaderImpl {
 
             if (!absolute) {
                 try {
+                    // Local file
+                    File file = new File(fullPath);
+                    if (!file.exists()) {
+                        return defaultFont();
+                    }
                     dir = new URL(url, fullPath);
                 } catch (MalformedURLException e1) {
                     e1.printStackTrace();
@@ -65,6 +73,12 @@ public class FontLoader extends LoaderImpl {
 
                 if (!fullPath.startsWith(IOHelper.FILE_PREFIX)) {
                     fullPath = IOHelper.FILE_PREFIX + fullPath;
+
+                    // Local file
+                    File file = new File(fullPath);
+                    if (!file.exists()) {
+                        return defaultFont();
+                    }
                 }
 
                 try {
@@ -94,8 +108,12 @@ public class FontLoader extends LoaderImpl {
         if (f != null) {
             return f;
         } else {
-            return fonts.get(DEFAULT_FONT);
+            return defaultFont();
         }
+    }
+
+    private Font defaultFont() {
+        return fonts.get(DEFAULT_FONT);
     }
 
     public String[] getSystemFonts() {
@@ -125,7 +143,7 @@ public class FontLoader extends LoaderImpl {
                 return f;
             }
         }
-        return fonts.get(DEFAULT_FONT);
+        return defaultFont();
     }
 }
 
