@@ -15,7 +15,7 @@ The project was modified to handle multiples backends (choose between AWT or Lib
 <dependency>
     <groupId>com.harium.etyl</groupId>
     <artifactId>etyl</artifactId>
-    <version>1.4.0</version>
+    <version>1.4.3</version>
 </dependency>
 ```
 
