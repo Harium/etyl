@@ -54,7 +54,12 @@
         <dependency>
             <groupId>com.harium.etyl</groupId>
             <artifactId>geometry</artifactId>
-            <version>[1.0.3,)</version>
+            <version>[1.0.5,)</version>
+        </dependency>
+        <dependency>
+            <groupId>com.twelvemonkeys.imageio</groupId>
+            <artifactId>imageio-hdr</artifactId>
+            <version>3.4.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -106,6 +111,9 @@
                     <source>1.7</source>
                     <target>1.7</target>
                     <optimize>true</optimize>
+                    <excludes>
+                        <exclude>**/examples/*</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
             <plugin>
