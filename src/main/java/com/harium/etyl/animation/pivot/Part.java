@@ -49,12 +49,12 @@ public class Part extends ImageLayer {
     }
 
     private void movePart(Part part, Point2D point) {
-        part.moveTo(x + point.getX(), y + point.getY());
+        part.moveTo(x + point.x, y + point.y);
     }
 
     public void moveTo(double x, double y) {
         fixed.setLocation(x, y);
-        setLocation((int) (x - anchor.getX()), (int) (y - anchor.getY()));
+        setLocation((int) (x - anchor.x), (int) (y - anchor.y));
 
         Iterator<Map.Entry<Point2D, Set<Part>>> iterator = parts.entrySet().iterator();
         while (iterator.hasNext()) {
@@ -83,8 +83,8 @@ public class Part extends ImageLayer {
     }
 
     private void resetAnchor() {
-        setX((int) (fixed.getX() - anchor.getX()));
-        setY((int) (fixed.getY() - anchor.getY()));
+        setX((int) (fixed.x - anchor.x));
+        setY((int) (fixed.y - anchor.y));
         moveParts();
     }
 
@@ -155,8 +155,8 @@ public class Part extends ImageLayer {
             Entry<Point2D, Set<Part>> entry = iterator.next();
             Point2D point = entry.getKey();
 
-            double dx = point.getX() - center;
-            point.setX(point.getX() - dx * 2);
+            double dx = point.x - center;
+            point.x = (point.x - dx * 2);
 
             Set<Part> ps = entry.getValue();
 

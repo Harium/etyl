@@ -700,7 +700,7 @@ public class AWTGraphics implements Graphics {
      * @param q
      */
     public void drawLine(Point2D p, Point2D q) {
-        screen.drawLine((int) p.getX(), (int) p.getY(), (int) q.getX(), (int) q.getY());
+        screen.drawLine((int) p.x, (int) p.y, (int) q.x, (int) q.y);
     }
 
     /**
@@ -908,7 +908,7 @@ public class AWTGraphics implements Graphics {
      * @param radius
      */
     public void drawCircle(Point2D point, int radius) {
-        screen.drawOval((int) point.getX() - radius, (int) point.getY() - radius, radius * 2, radius * 2);
+        screen.drawOval((int) point.x - radius, (int) point.y - radius, radius * 2, radius * 2);
     }
 
     /**
@@ -943,7 +943,7 @@ public class AWTGraphics implements Graphics {
      * @param radius
      */
     public void fillCircle(Point2D point, int radius) {
-        screen.fillOval((int) point.getX() - radius, (int) point.getY() - radius, radius * 2, radius * 2);
+        screen.fillOval((int) point.x - radius, (int) point.y - radius, radius * 2, radius * 2);
     }
 
     /**
@@ -1074,7 +1074,7 @@ public class AWTGraphics implements Graphics {
         int arrowAngle = 30;
 
         Point2D p1 = p.distantPoint(q, pq + arrowSize);
-        Point2D p2 = new Point2D(p1.getX(), p1.getY());
+        Point2D p2 = new Point2D(p1.x, p1.y);
 
         p1.rotate(q, 180 - arrowAngle);
         p2.rotate(q, 180 + arrowAngle);

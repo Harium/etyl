@@ -33,6 +33,7 @@ public class ImageLoader extends LoaderImpl {
     private final static String JPG = "jpg";
     private final static String JPEG = "jpeg";
     private final static String PCX = "pcx";
+    private final static String HDR = "hdr";
     private final static String PNG = "png";
     private final static String TIF = "tif";
     private final static String TIFF = "tiff";
