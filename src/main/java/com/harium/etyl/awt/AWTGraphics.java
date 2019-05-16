@@ -951,7 +951,7 @@ public class AWTGraphics implements Graphics {
      * @param radius
      */
     public void fillCircle(Vector2i point, int radius) {
-        screen.fillOval(point.getX() - radius, point.getY() - radius, radius * 2, radius * 2);
+        screen.fillOval(point.x - radius, point.y - radius, radius * 2, radius * 2);
     }
 
     /**
