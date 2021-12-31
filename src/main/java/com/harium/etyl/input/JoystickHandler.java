@@ -3,7 +3,7 @@ package com.harium.etyl.input;
 import com.harium.etyl.commons.Updatable;
 import com.harium.etyl.commons.event.KeyEvent;
 import com.harium.etyl.commons.event.KeyEventListener;
-import com.harium.etyl.loader.LoaderImpl;
+import com.harium.etyl.commons.loader.LoaderImpl;
 
 import java.io.FileNotFoundException;
 import java.util.*;

@@ -1,6 +1,6 @@
 package com.harium.etyl.awt.core;
 
-import com.harium.etyl.awt.AWTGraphics;
+import com.harium.etyl.awt.BaseAWTGraphics;
 import com.harium.etyl.awt.AWTWindow;
 import com.harium.etyl.awt.FullScreenWindow;
 import com.harium.etyl.awt.core.input.AWTKeyboard;
@@ -19,8 +19,6 @@ import java.awt.dnd.DropTarget;
 import java.awt.event.ComponentEvent;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.VolatileImage;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * AWTCore is a BaseCore based on AWT
@@ -37,7 +35,7 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
 
     private VolatileImage volatileImage;
 
-    private AWTGraphics graphic;
+    private BaseAWTGraphics graphic;
 
     private FullScreenWindow fullScreen = null;
 
@@ -115,7 +113,7 @@ public class AWTCore extends BaseCore implements Runnable, java.awt.event.Compon
     private void initGraphics(int width, int height) {
         locked = true;
 
-        this.graphic = new AWTGraphics(width, height);
+        this.graphic = new BaseAWTGraphics(width, height);
         defineSize(width, height);
 
         locked = false;

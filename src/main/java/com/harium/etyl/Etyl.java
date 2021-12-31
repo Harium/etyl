@@ -3,12 +3,12 @@ package com.harium.etyl;
 import com.harium.etyl.awt.core.AWTCore;
 import com.harium.etyl.commons.context.Application;
 import com.harium.etyl.commons.event.GUIEvent;
+import com.harium.etyl.commons.loader.Loader;
 import com.harium.etyl.commons.module.Module;
 import com.harium.etyl.core.EtylFrame;
 import com.harium.etyl.core.animation.Animation;
 import com.harium.etyl.i18n.LanguageModule;
 import com.harium.etyl.loader.FontLoader;
-import com.harium.etyl.loader.Loader;
 import com.harium.etyl.loader.image.ImageLoader;
 import com.harium.etyl.util.PathHelper;
 

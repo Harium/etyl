@@ -1,9 +1,10 @@
 package com.harium.etyl.effects;
 
 import com.harium.etyl.commons.graphics.Color;
+import com.harium.etyl.commons.graphics.Graphics;
 import com.harium.etyl.core.animation.script.OpacityAnimation;
 import com.harium.etyl.core.effect.GlobalEffect;
-import com.harium.etyl.core.graphics.Graphics;
+import com.harium.etyl.core.graphics.AWTGraphics;
 import com.harium.etyl.i18n.DefaultDictionary;
 import com.harium.etyl.i18n.Dictionary;
 import com.harium.etyl.i18n.LanguageModule;
@@ -42,11 +43,13 @@ public class GenericFullScreenEffect extends GlobalEffect {
         g.fillArc(RECT_X + RECT_W - RECT_H / 2, RECT_Y, RECT_H, RECT_H, 270, 180);
 
         g.setColor(Color.WHITE);
-        g.setFont(g.getFont().deriveFont(20f));
+
+        AWTGraphics awtGraphics = (AWTGraphics) g;
+        awtGraphics.setFont(awtGraphics.getFont().deriveFont(20f));
 
         String sentence = dictionary.getText(LanguageModule.getInstance().getLanguage(), DefaultDictionary.MESSAGE_FULLSCREEN);
 
-        g.drawStringShadow(sentence, RECT_X, RECT_Y, RECT_W, RECT_H, Color.BLACK);
+        awtGraphics.drawStringShadow(sentence, RECT_X, RECT_Y, RECT_W, RECT_H, Color.BLACK);
 
         g.setOpacity(255);
     }

@@ -5,10 +5,10 @@ import com.harium.etyl.awt.helper.ColorHelper;
 import com.harium.etyl.awt.helper.TransformHelper;
 import com.harium.etyl.commons.layer.GeometricLayer;
 import com.harium.etyl.commons.layer.Layer;
-import com.harium.etyl.commons.math.Vector2i;
-import com.harium.etyl.core.graphics.Graphics;
+import com.harium.etyl.core.graphics.AWTGraphics;
 import com.harium.etyl.geometry.Line2;
 import com.harium.etyl.geometry.Point2D;
+import com.harium.etyl.geometry.math.Vector2i;
 
 import java.awt.*;
 import java.awt.font.FontRenderContext;
@@ -18,7 +18,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
 
-public class AWTGraphics implements Graphics {
+public class BaseAWTGraphics implements AWTGraphics {
 
     protected Graphics2D screen;
 
@@ -34,14 +34,14 @@ public class AWTGraphics implements Graphics {
 
     private float fps = 0;
 
-    public AWTGraphics(int width, int height) {
+    public BaseAWTGraphics(int width, int height) {
         super();
 
         this.width = width;
         this.height = height;
     }
 
-    public AWTGraphics(BufferedImage image) {
+    public BaseAWTGraphics(BufferedImage image) {
         super();
         setImage(image);
     }
@@ -1035,12 +1035,22 @@ public class AWTGraphics implements Graphics {
         screen.rotate(angle);
     }
 
+    @Override
+    public void setBackground(com.harium.etyl.commons.graphics.Color color) {
+        setBackground(convertToAWTColor(color));
+    }
+
     public void setBackground(Color color) {
         screen.setBackground(color);
     }
 
     public void clearRect(int x, int y, int width, int height) {
         screen.clearRect(x, y, width, height);
+    }
+
+    @Override
+    public void setShadowColor(com.harium.etyl.commons.graphics.Color shadowColor) {
+        setBackground(convertToAWTColor(shadowColor));
     }
 
     public void setPaint(Paint paint) {
@@ -1131,6 +1141,10 @@ public class AWTGraphics implements Graphics {
     public void endImageBatch() {
         // TODO Auto-generated method stub
 
+    }
+
+    private Color convertToAWTColor(com.harium.etyl.commons.graphics.Color color) {
+        return new Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
     }
 
 }

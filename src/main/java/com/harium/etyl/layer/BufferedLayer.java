@@ -1,7 +1,8 @@
 package com.harium.etyl.layer;
 
 import com.harium.etyl.awt.helper.ColorHelper;
-import com.harium.etyl.core.graphics.Graphics;
+import com.harium.etyl.commons.graphics.Graphics;
+import com.harium.etyl.core.graphics.AWTGraphics;
 import com.harium.etyl.loader.image.ImageLoader;
 
 import java.awt.*;
@@ -380,8 +381,8 @@ public class BufferedLayer extends ImageLayer {
 
     @Override
     public void simpleDraw(Graphics g, int x, int y) {
-        g.drawImage(buffer, x, y, x + w, y + h,
-                srcX, srcY, srcX + w, srcY + h, null);
+        AWTGraphics awtGraphics = (AWTGraphics) g;
+        awtGraphics.drawImage(buffer, x, y, x + w, y + h, srcX, srcY, srcX + w, srcY + h, null);
     }
 
     public void createBuffer(byte[] imageData) {

@@ -2,13 +2,13 @@ package com.harium.etyl.awt;
 
 import com.harium.etyl.awt.core.AWTCore;
 import com.harium.etyl.commons.context.Application;
-import com.harium.etyl.core.graphics.Graphics;
+import com.harium.etyl.commons.graphics.Graphics;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import java.awt.*;
-
+@Ignore
 public class AWTCoreTest {
 
     private AWTCore innerCore;

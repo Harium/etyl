@@ -1,9 +1,9 @@
 package com.harium.etyl.effects.light;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
+import java.awt.*;
 
-import com.harium.etyl.core.graphics.Graphics;
+import com.harium.etyl.commons.graphics.Graphics;
+import com.harium.etyl.core.graphics.AWTGraphics;
 import com.harium.etyl.layer.BufferedLayer;
 
 public class ShadowLayer extends BufferedLayer {
@@ -19,10 +19,11 @@ public class ShadowLayer extends BufferedLayer {
 		refresh();
 		
 		setColor(color);
-		
-		g.setImage(buffer);
-		
-		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1.0f));
+
+		AWTGraphics awtGraphics = (AWTGraphics) g;
+		awtGraphics.setImage(buffer);
+
+		awtGraphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1.0f));
 		
 		for(LightSpot spot: spots) {
 			spot.drawLight(g);
@@ -31,8 +32,8 @@ public class ShadowLayer extends BufferedLayer {
 		g.resetOpacity();
 		
 		g.resetImage();
-		
-		g.drawImage(buffer, x, y);
+
+		awtGraphics.drawImage(buffer, x, y);
 	}
 	
 	public void setColor(Color color) {

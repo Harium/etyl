@@ -1,7 +1,7 @@
 package com.harium.etyl.effects.particle;
 
 import com.harium.etyl.commons.particle.Particle;
-import com.harium.etyl.core.graphics.Graphics;
+import com.harium.etyl.commons.graphics.Graphics;
 import com.harium.etyl.layer.ImageLayer;
 
 
