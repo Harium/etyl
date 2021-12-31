@@ -1,5 +1,6 @@
 package com.harium.etyl.loader;
 
+import com.harium.etyl.commons.loader.LoaderImpl;
 import com.harium.etyl.core.graphics.Font;
 import com.harium.etyl.util.io.IOHelper;
 

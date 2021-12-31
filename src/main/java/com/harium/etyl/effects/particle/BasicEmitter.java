@@ -1,9 +1,9 @@
 package com.harium.etyl.effects.particle;
 
+import com.harium.etyl.commons.graphics.Color;
+import com.harium.etyl.commons.graphics.Graphics;
 import com.harium.etyl.commons.particle.Emitter;
-import com.harium.etyl.core.graphics.Graphics;
 
-import java.awt.*;
 import java.util.Random;
 
 public class BasicEmitter extends Emitter<BasicParticle> {

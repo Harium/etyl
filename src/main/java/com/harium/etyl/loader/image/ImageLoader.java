@@ -1,8 +1,7 @@
 package com.harium.etyl.loader.image;
 
-
+import com.harium.etyl.commons.loader.LoaderImpl;
 import com.harium.etyl.layer.StaticLayer;
-import com.harium.etyl.loader.LoaderImpl;
 import com.harium.etyl.util.PathHelper;
 import com.harium.etyl.util.StringUtils;
 import com.harium.etyl.util.io.IOHelper;
@@ -16,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 
 public class ImageLoader extends LoaderImpl {
 

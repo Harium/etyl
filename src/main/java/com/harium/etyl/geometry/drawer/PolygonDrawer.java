@@ -1,7 +1,7 @@
 package com.harium.etyl.geometry.drawer;
 
 import com.badlogic.gdx.math.Vector2;
-import com.harium.etyl.core.graphics.Graphics;
+import com.harium.etyl.commons.graphics.Graphics;
 import com.harium.etyl.geometry.Polygon;
 
 public class PolygonDrawer {

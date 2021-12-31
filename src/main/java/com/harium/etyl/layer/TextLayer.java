@@ -1,7 +1,8 @@
 package com.harium.etyl.layer;
 
 import com.harium.etyl.commons.graphics.Color;
-import com.harium.etyl.core.graphics.Graphics;
+import com.harium.etyl.commons.graphics.Graphics;
+import com.harium.etyl.core.graphics.AWTGraphics;
 import com.harium.etyl.loader.FontLoader;
 
 import java.awt.*;
@@ -75,16 +76,16 @@ public class TextLayer extends ImageLayer {
 
     @Override
     public void simpleDraw(Graphics g, int x, int y) {
-
+        AWTGraphics awtGraphics = (AWTGraphics) g;
         if (font == null) {
-            font = g.getFont().deriveFont(style, size);
+            font = awtGraphics.getFont().deriveFont(style, size);
         }
 
-        g.setFont(font);
+        awtGraphics.setFont(font);
 
         if (!border) {
             g.setColor(color);
-            g.drawString(text, x, y);
+            awtGraphics.drawString(text, x, y);
         } else {
 
             FontRenderContext frc = new FontRenderContext(null, antiAliased, fractionalMetrics);
@@ -93,14 +94,14 @@ public class TextLayer extends ImageLayer {
 
             Shape sha = layout.getOutline(AffineTransform.getTranslateInstance(x, y));
 
-            g.getGraphics().setStroke(new BasicStroke(borderWidth));
+            awtGraphics.getGraphics().setStroke(new BasicStroke(borderWidth));
 
             g.setColor(borderColor);
-            g.draw(sha);
+            awtGraphics.draw(sha);
 
             g.setColor(color);
-            g.fill(sha);
-            g.getGraphics().setStroke(new BasicStroke(1));
+            awtGraphics.fill(sha);
+            awtGraphics.getGraphics().setStroke(new BasicStroke(1));
         }
 
     }

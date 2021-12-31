@@ -1,8 +1,9 @@
 package com.harium.etyl.layer;
 
+import com.harium.etyl.commons.graphics.Graphics;
 import com.harium.etyl.commons.layer.Layer;
-import com.harium.etyl.commons.math.EtylMath;
-import com.harium.etyl.core.graphics.Graphics;
+import com.harium.etyl.core.graphics.AWTGraphics;
+import com.harium.etyl.geometry.math.EtylMath;
 import com.harium.etyl.core.input.mouse.Mouse;
 import com.harium.etyl.loader.image.ImageLoader;
 
@@ -242,6 +243,8 @@ public class ImageLayer extends StaticLayer {
             return;
         }
 
+        AWTGraphics awtGraphics = (AWTGraphics) g;
+
         if (opacity < 0xff) {
             if (opacity > 0) {
                 g.setOpacity(opacity);
@@ -251,7 +254,7 @@ public class ImageLayer extends StaticLayer {
             }
         }
 
-        g.setTransform(getTransform(offsetX, offsetY));
+        awtGraphics.setTransform(getTransform(offsetX, offsetY));
         simpleDraw(g);
         g.resetTransform();
 
@@ -273,7 +276,8 @@ public class ImageLayer extends StaticLayer {
         if (path.isEmpty()) {
             return;
         }
-        g.drawImage(ImageLoader.getInstance().getImage(path), x, y, x + w, y + h,
+        AWTGraphics awtGraphics = (AWTGraphics) g;
+        awtGraphics.drawImage(ImageLoader.getInstance().getImage(path), x, y, x + w, y + h,
                 srcX, srcY, srcX + w, srcY + h, null);
     }
 

@@ -1,9 +1,8 @@
 package com.harium.etyl.effects.particle.fireworks;
 
-import com.harium.etyl.core.graphics.Graphics;
+import com.harium.etyl.commons.graphics.Color;
+import com.harium.etyl.commons.graphics.Graphics;
 import com.harium.etyl.effects.particle.BasicEmitter;
-
-import java.awt.*;
 
 public class FireworksEmitter extends BasicEmitter {
 

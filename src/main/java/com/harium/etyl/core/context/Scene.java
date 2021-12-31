@@ -7,12 +7,12 @@ import java.util.Map;
 
 import com.harium.etyl.commons.Drawable;
 import com.harium.etyl.commons.Updatable;
+import com.harium.etyl.commons.graphics.Graphics;
 import com.harium.etyl.core.animation.Animation;
 import com.harium.etyl.core.animation.script.AnimationScript;
 import com.harium.etyl.commons.particle.Emitter;
 import com.harium.etyl.commons.event.KeyEvent;
 import com.harium.etyl.commons.event.PointerEvent;
-import com.harium.etyl.core.graphics.Graphics;
 import com.harium.etyl.commons.ui.UIComponent;
 import com.harium.etyl.commons.layer.Layer;
 

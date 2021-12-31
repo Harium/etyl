@@ -1,7 +1,8 @@
 package com.harium.etyl.effects.light;
 
-import com.harium.etyl.core.graphics.Graphics;
+import com.harium.etyl.commons.graphics.Graphics;
 import com.harium.etyl.commons.layer.GeometricLayer;
+import com.harium.etyl.core.graphics.AWTGraphics;
 
 import java.awt.*;
 
@@ -36,14 +37,15 @@ public class LightSource extends GeometricLayer implements LightSpot {
     }
 
     public void drawLight(Graphics g) {
+        AWTGraphics awtGraphics = (AWTGraphics) g;
 
-        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1.0f));
+        awtGraphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1.0f));
 
-        java.awt.geom.Point2D center = new java.awt.geom.Point2D.Float(x + w / 2, y + h / 2);
+        java.awt.geom.Point2D center = new java.awt.geom.Point2D.Float(x + w / 2f, y + h / 2f);
 
-        rgp = new RadialGradientPaint(center, w / 2, fractions, colors);
+        rgp = new RadialGradientPaint(center, w / 2f, fractions, colors);
 
-        g.setPaint(rgp);
+        awtGraphics.setPaint(rgp);
 
         g.fillOval(x, y, w, h);
     }
