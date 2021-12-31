@@ -1,8 +1,9 @@
 # Etyl [![Build Status](https://travis-ci.org/Harium/etyl.svg?branch=master)](https://travis-ci.org/Harium/etyl) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4fe7372ce73741bf9955eb133e05e85b)](https://www.codacy.com/app/yuripourre/etyl?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Harium/etyl&amp;utm_campaign=Badge_Grade)
 
-Etyl is the newest version of [Etyllica](https://github.com/etyllica/etyllica) (a 2D Game Engine made in Java).
+Etyl is the latest version of [Etyllica](https://github.com/etyllica/etyllica) (a 2D Game Engine made in Java). It can be used as a Game Engine or simply way to display something on the screen.
 
-The project was modified to handle multiples backends (choose between AWT or LibGDX), now you can run the exactly *SAME* code in Desktop or Android (and possibly HTML5 and iOS in the future, thanks to LibGDX).
+This project was originally built at the top of AWT but was modified to handle multiples backends (choose between AWT or LibGDX). 
+You can run the exact same code on Desktop or Android (and possibly HTML5 and iOS in the future, thanks to LibGDX).
 
 ## How to start
 
@@ -15,7 +16,7 @@ The project was modified to handle multiples backends (choose between AWT or Lib
 <dependency>
     <groupId>com.harium.etyl</groupId>
     <artifactId>etyl</artifactId>
-    <version>1.4.6</version>
+    <version>1.5.0</version>
 </dependency>
 ```
 
@@ -27,7 +28,7 @@ Can't use maven? No problem, [build a local jar](https://github.com/Harium/etyl/
 import com.harium.etyl.Etyl;
 import com.harium.etyl.commons.context.Application;
 import com.harium.etyl.commons.graphics.Color;
-import com.harium.etyl.core.graphics.Graphics;
+import com.harium.etyl.commons.graphics.Graphics;
 
 public class Main extends Etyl {
 
