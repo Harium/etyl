@@ -1,4 +1,4 @@
-# Etyl [![Build Status](https://travis-ci.org/Harium/etyl.svg?branch=master)](https://travis-ci.org/Harium/etyl) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4fe7372ce73741bf9955eb133e05e85b)](https://www.codacy.com/app/yuripourre/etyl?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Harium/etyl&amp;utm_campaign=Badge_Grade)
+# Etyl [![CircleCI](https://circleci.com/gh/Harium/etyl.svg?style=svg)](https://circleci.com/gh/Harium/etyl) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4fe7372ce73741bf9955eb133e05e85b)](https://www.codacy.com/app/yuripourre/etyl?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Harium/etyl&amp;utm_campaign=Badge_Grade)
 
 Etyl is the latest version of [Etyllica](https://github.com/etyllica/etyllica) (a 2D Game Engine made in Java). It can be used as a Game Engine or simply way to display something on the screen.
 
