@@ -3,10 +3,8 @@ package com.harium.etyl.core.graphics;
 import com.harium.etyl.commons.graphics.Color;
 import com.harium.etyl.commons.layer.GeometricLayer;
 
-// TODO Move this class to etyl-commons
+// TODO Delete this class when upgrade Etyl Commons
 public interface TextGraphics {
-
-    void setFont(Font font);
 
     void setFontSize(float size);
 

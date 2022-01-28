@@ -5,7 +5,9 @@ import java.awt.font.FontRenderContext;
 
 public interface AWTTextGraphics extends TextGraphics {
 
-    java.awt.Font getFont();
+    void setFont(Font font);
+
+    Font getFont();
 
     FontRenderContext getFontRenderContext();
 
