@@ -7,7 +7,7 @@ public interface AWTTextGraphics extends TextGraphics {
 
     void setFont(Font font);
 
-    Font getFont();
+    java.awt.Font getFont();
 
     FontRenderContext getFontRenderContext();
 

@@ -20,7 +20,6 @@ public interface AWTGraphics extends Graphics, AWTTextGraphics {
 
     void setImage(BufferedImage image);
 
-
     /**
      *
      * @param img
