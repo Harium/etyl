@@ -1,25 +1,16 @@
 package com.harium.etyl.core.graphics;
 
+import com.harium.etyl.commons.graphics.Color;
 import com.harium.etyl.commons.layer.GeometricLayer;
 
-import java.awt.*;
-import java.awt.font.FontRenderContext;
-
+// TODO Move this class to etyl-commons
 public interface TextGraphics {
 
-    void setFont(java.awt.Font font);
-
-    void setFont(com.harium.etyl.core.graphics.Font font);
-
-    java.awt.Font getFont();
+    void setFont(Font font);
 
     void setFontSize(float size);
 
     void setFontStyle(int fontStyle);
-
-    FontRenderContext getFontRenderContext();
-
-    FontMetrics getFontMetrics();
 
     int textWidth(String text);
 
@@ -43,11 +34,7 @@ public interface TextGraphics {
 
     void drawStringShadow(String text, int x, int y, int w, int h, Color shadowColor);
 
-    void drawStringShadow(String text, int x, int y, int w, int h, com.harium.etyl.commons.graphics.Color shadowColor);
-
     void drawStringShadow(String text, float x, float y, float w, float h, Color shadowColor);
-
-    void drawStringShadow(String text, float x, float y, float w, float h, com.harium.etyl.commons.graphics.Color shadowColor);
 
     void drawStringBorder(String text, float x, float y);
 
@@ -63,11 +50,7 @@ public interface TextGraphics {
 
     void drawStringShadow(String text, int x, int y, Color shadowColor);
 
-    void drawStringShadow(String text, int x, int y, com.harium.etyl.commons.graphics.Color shadowColor);
-
     void drawStringShadow(String text, float x, float y, Color shadowColor);
-
-    void drawStringShadow(String text, float x, float y, com.harium.etyl.commons.graphics.Color shadowColor);
 
     void drawStringShadowX(String text, int y);
 

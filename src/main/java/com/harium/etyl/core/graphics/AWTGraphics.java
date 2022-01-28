@@ -14,7 +14,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
-public interface AWTGraphics extends Graphics, TextGraphics {
+public interface AWTGraphics extends Graphics, AWTTextGraphics {
 
     void setFastImage(BufferedImage image);
 
